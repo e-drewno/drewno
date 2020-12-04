@@ -18,8 +18,9 @@ fetch('./drewno.json')
   .then(() => toogleLogin())
   .then(() => createTable())
   .then(() => addSortable())
-  .then(() => showRegionAuctions(1))
+  .then(() => showRegionAuctions('Region 1'))
   .then(() => addOptionsToFilters())
+  .then(() => slideFilter())
   .then(() => showPage())
   .then(() => observedSearch());
 
@@ -41,11 +42,18 @@ let showRegionAuctions = (region) => {
   
   tableContent.innerHTML = '';
 
-  baza["Regions"][region - 1].forEach(auction => {
+  baza["Regions"].forEach(auction => {
+    if(auction[0] !== region){
+      return
+    }
     let row = document.createElement('div');
     row.classList.add('row');
     auction.forEach((col, i) => {
       if(i == 0){
+        row.setAttribute('data-region', col);
+        return
+      }
+      else if(i == 1){
         row.setAttribute('data-id', col);
         if(observed.length && observed.includes(col)){
           row.classList.add('observed');
@@ -239,37 +247,57 @@ let addOptionsToFilters = () => {
   filterType.innerText = '';
   filterAssortment.innerText = '';
   // get values from pseudo database
-  baza["Regions"].forEach((region, index) => {
-    regionsOptions.push(index + 1);
-    region.forEach(auction => {
-      auction.forEach((el, i) => {
-        if(i == 1){
-          rdlpOptions.push(el);
-        }
-        else if(i == 2){
-          inspectoratesOptions.push(el);
-        }
-        else if(i == 3){
-          typeOptions.push(el);
-        }
-        else if(i == 4){
-          assortmentOptions.push(el);
-        }
-      });
+  baza["Regions"].forEach(region => {
+    region.forEach((column, i) => {
+      if(i == 0){
+        regionsOptions.push(column);
+      }
+      else if(i == 2){
+        rdlpOptions.push(column);
+      }
+      else if(i == 3){
+        inspectoratesOptions.push(column);
+      }
+      else if(i == 4){
+        typeOptions.push(column);
+      }
+      else if(i == 5){
+        assortmentOptions.push(column);
+      }
     })
   });
   // get unique values
+  regionsOptions = [...new Set(regionsOptions)].sort();
   rdlpOptions = [...new Set(rdlpOptions)].sort();
   inspectoratesOptions = [...new Set(inspectoratesOptions)].sort();
   typeOptions = [...new Set(typeOptions)].sort();
   assortmentOptions = [...new Set(assortmentOptions)].sort();
 
-  rdlpOptions.forEach(element => {
-    let option = document.createElement('option');
-    option.value = element;
-    option.innerText = element;
-    filterRegion.appendChild(option);
-  });
+  regionsOptions.forEach((region, index) => {
+    let container = document.createElement('div');
+    container.classList.add('region');
+    index = index+1;
+    let label = document.createElement('label');
+    label.setAttribute('for', 'Region ' + index);
+    label.classList.add('heading');
+    let checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    label.innerText = 'Region ' + index;
+    container.appendChild(label);
+    label.appendChild(checkbox);
+    rdlpOptions.forEach(element => {
+      let label = document.createElement('label');
+      label.setAttribute('for', element);
+      let checkbox = document.createElement('input');
+      checkbox.value = element;
+      checkbox.type = 'checkbox';
+      label.innerText = element;
+      container.appendChild(label);
+      label.appendChild(checkbox);
+    });
+    filterRegion.appendChild(container);
+  })
+  
 
   inspectoratesOptions.forEach(element => {
     let option = document.createElement('option');
@@ -292,4 +320,17 @@ let addOptionsToFilters = () => {
     filterAssortment.appendChild(option);
   })
   
+}
+
+let slideFilter = () => {
+  let filterLabels = document.querySelectorAll("#Filters .filter > label");
+  filterLabels.forEach(label => {
+    label.addEventListener('click', function(){
+      if(label.parentNode.classList.contains('active')){
+        return
+      }
+      document.querySelector("#Filters .filter.active").classList.remove('active');
+      label.parentNode.classList.add('active');
+    })
+  })
 }
