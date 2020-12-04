@@ -6,6 +6,7 @@ const tableContent = document.getElementById('Auctions');
 let baza = {};
 let user = {};
 let regionsOptions = [];
+let rdlpOptions = [];
 let inspectoratesOptions = [];
 let typeOptions = [];
 let assortmentOptions = [];
@@ -27,7 +28,9 @@ let createTable = () => {
   baza["SortLabels"].forEach(label => {
     let column = document.createElement('div');
     column.classList.add('column');
-    column.innerHTML = label;
+    let span = document.createElement('span');
+    span.innerHTML = label;
+    column.appendChild(span);
     tableHeader.appendChild(column);
   });
 }
@@ -55,12 +58,15 @@ let showRegionAuctions = (region) => {
       
       let column = document.createElement('div');
       column.classList.add('column');
+      let span = document.createElement('span');
       if(i == auction.length - 1){
-        column.innerHTML = `<a href="${col}" target="_blank">Link</a>`;
+        span.innerHTML = `<a href="${col}" target="_blank">Link</a>`;
       }
       else{
-        column.innerHTML = col;
+        span.innerHTML = col;
       }
+      
+      column.appendChild(span);
       row.appendChild(column);
     });
     let observe = document.createElement('button');
@@ -233,11 +239,12 @@ let addOptionsToFilters = () => {
   filterType.innerText = '';
   filterAssortment.innerText = '';
   // get values from pseudo database
-  baza["Regions"].forEach(region => {
+  baza["Regions"].forEach((region, index) => {
+    regionsOptions.push(index + 1);
     region.forEach(auction => {
       auction.forEach((el, i) => {
         if(i == 1){
-          regionsOptions.push(el);
+          rdlpOptions.push(el);
         }
         else if(i == 2){
           inspectoratesOptions.push(el);
@@ -252,12 +259,12 @@ let addOptionsToFilters = () => {
     })
   });
   // get unique values
-  regionsOptions = [...new Set(regionsOptions)].sort();
+  rdlpOptions = [...new Set(rdlpOptions)].sort();
   inspectoratesOptions = [...new Set(inspectoratesOptions)].sort();
   typeOptions = [...new Set(typeOptions)].sort();
   assortmentOptions = [...new Set(assortmentOptions)].sort();
 
-  regionsOptions.forEach(element => {
+  rdlpOptions.forEach(element => {
     let option = document.createElement('option');
     option.value = element;
     option.innerText = element;

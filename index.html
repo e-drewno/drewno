@@ -35,76 +35,102 @@
                 <a href="#">Obserwowane wyszukiwania</a>
                 <a href="#">Obserwowane aukcje</a>
             </div>
-            <form action="javascript:alert()" method="get" id="Filters">
+            <form action="" method="get" id="Filters">
                 <h2>Filtruj</h2>
-                <div class="filter">
+                <div class="filter active">
                     <label for="FilterRegion">Region</label>
-                    <select name="FilterRegion" id="FilterRegion">
-                        <option value="Opcja1">Opcja1</option>
-                        <option value="Opcja2">Opcja2</option>
-                    </select>
+                    <div class="filter-content">
+                        <div class="region">Region 1</div>
+                    </div>
                 </div>
 
                 <div class="filter">
                     <label for="FilterInspectorate">Nadleśnictwo</label>
-                    <select name="FilterInspectorate" id="FilterInspectorate">
-                        <option value="Opcja1">Opcja1</option>
-                        <option value="Opcja2">Opcja2</option>
-                    </select>
+                    <div class="filter-content">
+                        <select name="FilterInspectorate" id="FilterInspectorate">
+                            <option value="Opcja1">Opcja1</option>
+                            <option value="Opcja2">Opcja2</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="filter">
                     <label for="FilterType">Wybierz gatunek</label>
-                    <select name="FilterType" id="FilterType">
-                        <option value="Opcja1">Opcja1</option>
-                        <option value="Opcja2">Opcja2</option>
-                    </select>
+                    <div class="filter-content">
+                        <select name="FilterType" id="FilterType">
+                            <option value="Opcja1">Opcja1</option>
+                            <option value="Opcja2">Opcja2</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="filter">
                     <label for="FilterAssortment">Wybierz asortyment</label>
-                    <select name="FilterAssortment" id="FilterAssortment">
-                        <option value="Opcja1">Opcja1</option>
-                        <option value="Opcja2">Opcja2</option>
-                    </select>
+                    <div class="filter-content">
+                        <select name="FilterAssortment" id="FilterAssortment">
+                            <option value="Opcja1">Opcja1</option>
+                            <option value="Opcja2">Opcja2</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="filter">
                     <label for="FilterDate">Zakres dat (według zakończenia)</label>
-                    <input type="date" id="FilterStart" name="FilterStart" value="2020-12-04" min="2020-12-04"
-                        max="2020-12-31">
-                    <input type="date" id="FilterEnd" name="FilterEnd" value="2020-12-31" min="2020-12-04"
-                        max="2020-12-31">
+                    <div class="filter-content">
+                        <input type="date" id="FilterStart" name="FilterStart" value="2020-12-04" min="2020-12-04">
+                        <input type="date" id="FilterEnd" name="FilterEnd" value="2020-12-31" min="2020-12-04">
+                    </div>
                 </div>
 
                 <div class="filter">
                     <label for="FilterQuantity">Ilość m<sup>3</sup></label>
-                    <input type="number" id="FilterMinQuantity" name="FilterMinQuantity" value="" min="0" placeholder="Od">
-                    <input type="number" id="FilterMaxQuantity" name="FilterMaxQuantity" value="" min="0" placeholder="Do">
+                    <div class="filter-content">
+                        <input type="number" id="FilterMinQuantity" name="FilterMinQuantity" value="" min="0"
+                            placeholder="Od">
+                        <input type="number" id="FilterMaxQuantity" name="FilterMaxQuantity" value="" min="0"
+                            placeholder="Do">
+                    </div>
                 </div>
 
                 <div class="filter">
                     <label for="FilterStartPrice">Cena otwarcia netto</label>
-                    <input type="number" id="FilterMinStartPrice" name="FilterMinStartPrice" value="" min="0" placeholder="Od">
-                    <input type="number" id="FilterMaxStartPrice" name="FilterMaxStartPrice" value="" min="0" placeholder="Do">
+                    <div class="filter-content">
+                        <input type="number" id="FilterMinStartPrice" name="FilterMinStartPrice" value="" min="0"
+                            placeholder="Od">
+                        <input type="number" id="FilterMaxStartPrice" name="FilterMaxStartPrice" value="" min="0"
+                            placeholder="Do">
+                    </div>
                 </div>
 
                 <div class="filter">
                     <label for="FilterPrice">Aktualna cena</label>
-                    <input type="number" id="FilterMinPrice" name="FilterMinPrice" value="" min="0" placeholder="Od">
-                    <input type="number" id="FilterMaxPrice" name="FilterMaxPrice" value="" min="0" placeholder="Do">
+                    <div class="filter-content">
+                        <input type="number" id="FilterMinPrice" name="FilterMinPrice" value="" min="0"
+                            placeholder="Od">
+                        <input type="number" id="FilterMaxPrice" name="FilterMaxPrice" value="" min="0"
+                            placeholder="Do">
+                    </div>
                 </div>
 
                 <div class="filter">
                     <label for="FilterQtyMin">Minimalna ilość zakupu</label>
-                    <input type="number" id="FilterMinQtyMin" name="FilterMinQtyMin" value="" min="0" placeholder="Od">
-                    <input type="number" id="FilterMaxQtyMin" name="FilterMaxQtyMin" value="" min="0" placeholder="Do">
+                    <div class="filter-content">
+                        <input type="number" id="FilterMinQtyMin" name="FilterMinQtyMin" value="" min="0"
+                            placeholder="Od">
+                        <input type="number" id="FilterMaxQtyMin" name="FilterMaxQtyMin" value="" min="0"
+                            placeholder="Do">
+                    </div>
                 </div>
 
                 <div class="filter">
                     <label for="FilterReceiptDate">Termin odbioru</label>
-                    <input type="number" id="FilterMinReceiptDate" name="FilterMinReceiptDate" value="" min="0" placeholder="Od">
-                    <input type="number" id="FilterMaxReceiptDate" name="FilterMaxReceiptDate" value="" min="0" placeholder="Do">
+                    <div class="filter-content">
+                        <input type="date" id="FilterMinReceiptDate" name="FilterMinReceiptDate" value="2020-12-04"
+                            min="2020-12-04">
+                        <input type="date" id="FilterMaxReceiptDate" name="FilterMaxReceiptDate" value="2020-12-04"
+                            min="2020-12-04">
+                    </div>
+
                 </div>
                 <input type="submit" hidden="true" />
             </form>
