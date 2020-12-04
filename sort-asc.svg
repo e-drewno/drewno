@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Svg Vector Icons : http://www.onlinewebfonts.com/icon -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 1000 1000"
+   enable-background="new 0 0 1000 1000"
+   xml:space="preserve"
+   id="svg8"
+   sodipodi:docname="sort-asc.svg"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"><defs
+   id="defs12" /><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1920"
+   inkscape:window-height="1017"
+   id="namedview10"
+   showgrid="false"
+   inkscape:zoom="0.236"
+   inkscape:cx="-27.542373"
+   inkscape:cy="500"
+   inkscape:window-x="-8"
+   inkscape:window-y="-8"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="svg8" />
+<metadata
+   id="metadata2"> Svg Vector Icons : http://www.onlinewebfonts.com/icon <rdf:RDF><cc:Work
+     rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+       rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata>
+<g
+   id="g6"
+   transform="matrix(1,0,0,-1,0,1000)"><path
+     d="m 669.4,874 v 106.9 c 0,5.2 -1.7,9.5 -5,12.8 -3.3,3.3 -7.6,5 -12.8,5 H 509.1 c -5.2,0 -9.5,-1.7 -12.8,-5 -3.3,-3.3 -5,-7.6 -5,-12.8 V 874 c 0,-5.2 1.7,-9.5 5,-12.8 3.3,-3.3 7.6,-5 12.8,-5 h 142.5 c 5.2,0 9.5,1.7 12.8,5 3.3,3.4 5,7.6 5,12.8 z M 402.3,802.8 c 0,4.5 -1.9,8.9 -5.6,13.4 L 219.1,993.7 c -3.7,3.3 -8,5 -12.8,5 -4.5,0 -8.7,-1.7 -12.8,-5 L 15.4,815.6 C 9.8,809.7 8.5,803.2 11.5,796.1 14.5,788.7 20,785 28.2,785 H 135.1 V 19.1 c 0,-5.2 1.7,-9.5 5,-12.8 3.3,-3.3 7.6,-5 12.8,-5 h 106.9 c 5.2,0 9.5,1.7 12.8,5 3.3,3.3 5,7.6 5,12.8 V 785 h 106.9 c 5.2,0 9.5,1.7 12.8,5 3.3,3.3 5,7.6 5,12.8 z m 374,-213.7 V 696 c 0,5.2 -1.7,9.5 -5,12.8 -3.3,3.3 -7.6,5 -12.8,5 H 509.1 c -5.2,0 -9.5,-1.7 -12.8,-5 -3.3,-3.3 -5,-7.6 -5,-12.8 V 589.1 c 0,-5.2 1.7,-9.5 5,-12.8 3.3,-3.3 7.6,-5 12.8,-5 h 249.3 c 5.2,0 9.5,1.7 12.8,5 3.4,3.3 5.1,7.6 5.1,12.8 z m 106.8,-285 V 411 c 0,5.2 -1.7,9.5 -5,12.8 -3.3,3.3 -7.6,5 -12.8,5 H 509.1 c -5.2,0 -9.5,-1.7 -12.8,-5 -3.3,-3.3 -5,-7.6 -5,-12.8 V 304.1 c 0,-5.2 1.7,-9.5 5,-12.8 3.3,-3.3 7.6,-5 12.8,-5 h 356.2 c 5.2,0 9.5,1.7 12.8,5 3.3,3.3 5,7.6 5,12.8 z M 990,19.1 V 126 c 0,5.2 -1.7,9.5 -5,12.8 -3.3,3.3 -7.6,5 -12.8,5 H 509.1 c -5.2,0 -9.5,-1.7 -12.8,-5 -3.3,-3.3 -5,-7.6 -5,-12.8 V 19.1 c 0,-5.2 1.7,-9.5 5,-12.8 3.3,-3.3 7.6,-5 12.8,-5 h 463.1 c 5.2,0 9.5,1.7 12.8,5 3.3,3.4 5,7.6 5,12.8 z"
+     id="path4"
+     inkscape:connector-curvature="0" /></g>
+</svg>

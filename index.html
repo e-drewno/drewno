@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drewno</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/fontawesome.min.css"
+        integrity="sha512-kJ30H6g4NGhWopgdseRb8wTsyllFUYIx3hiUwmGAkgA9B/JbzUBDQVr2VVlWGde6sdBVOG7oU8AL35ORDuMm8g=="
+        crossorigin="anonymous" />
+</head>
+
+<body>
+    <header>
+        <nav id="MainMenu">
+            <a href="#" id="Logo">Logo</a>
+            <ul id="TopMenu">
+                <li class="item-menu"><a href="#">Strona główna</a></li>
+                <li class="item-menu"><a href="#">O nas</a></li>
+                <li class="item-menu"><a href="#">Kontakt</a></li>
+                <li class="item-menu"><a href="#">Logowanie / Rejestracja</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div id="Content">
+        <div id="SearchObserve">
+            <span>Zapisz kryteria wyszukiwania do obserwowanych. Każdego dnia będziemy Cię informować emailowo o nowych
+                aukcjach spełniających wybrane wyniki wyszukiwania</span>
+            <button id="SafeSearch">Obserwuj wyszukiwanie</button>
+        </div>
+        <div id="Sidebar">
+            <div id="UserPanel">
+                <h2></h2>
+                <a href="#">Obserwowane wyszukiwania</a>
+                <a href="#">Obserwowane aukcje</a>
+            </div>
+            <form action="javascript:alert()" method="get" id="Filters">
+                <h2>Filtruj</h2>
+                <div class="filter">
+                    <label for="FilterRegion">Region</label>
+                    <select name="FilterRegion" id="FilterRegion">
+                        <option value="Opcja1">Opcja1</option>
+                        <option value="Opcja2">Opcja2</option>
+                    </select>
+                </div>
+
+                <div class="filter">
+                    <label for="FilterInspectorate">Nadleśnictwo</label>
+                    <select name="FilterInspectorate" id="FilterInspectorate">
+                        <option value="Opcja1">Opcja1</option>
+                        <option value="Opcja2">Opcja2</option>
+                    </select>
+                </div>
+
+                <div class="filter">
+                    <label for="FilterType">Wybierz gatunek</label>
+                    <select name="FilterType" id="FilterType">
+                        <option value="Opcja1">Opcja1</option>
+                        <option value="Opcja2">Opcja2</option>
+                    </select>
+                </div>
+
+                <div class="filter">
+                    <label for="FilterAssortment">Wybierz asortyment</label>
+                    <select name="FilterAssortment" id="FilterAssortment">
+                        <option value="Opcja1">Opcja1</option>
+                        <option value="Opcja2">Opcja2</option>
+                    </select>
+                </div>
+
+                <div class="filter">
+                    <label for="FilterDate">Zakres dat (według zakończenia)</label>
+                    <input type="date" id="FilterStart" name="FilterStart" value="2020-12-04" min="2020-12-04"
+                        max="2020-12-31">
+                    <input type="date" id="FilterEnd" name="FilterEnd" value="2020-12-31" min="2020-12-04"
+                        max="2020-12-31">
+                </div>
+
+                <div class="filter">
+                    <label for="FilterQuantity">Ilość m<sup>3</sup></label>
+                    <input type="number" id="FilterMinQuantity" name="FilterMinQuantity" value="" min="0" placeholder="Od">
+                    <input type="number" id="FilterMaxQuantity" name="FilterMaxQuantity" value="" min="0" placeholder="Do">
+                </div>
+
+                <div class="filter">
+                    <label for="FilterStartPrice">Cena otwarcia netto</label>
+                    <input type="number" id="FilterMinStartPrice" name="FilterMinStartPrice" value="" min="0" placeholder="Od">
+                    <input type="number" id="FilterMaxStartPrice" name="FilterMaxStartPrice" value="" min="0" placeholder="Do">
+                </div>
+
+                <div class="filter">
+                    <label for="FilterPrice">Aktualna cena</label>
+                    <input type="number" id="FilterMinPrice" name="FilterMinPrice" value="" min="0" placeholder="Od">
+                    <input type="number" id="FilterMaxPrice" name="FilterMaxPrice" value="" min="0" placeholder="Do">
+                </div>
+
+                <div class="filter">
+                    <label for="FilterQtyMin">Minimalna ilość zakupu</label>
+                    <input type="number" id="FilterMinQtyMin" name="FilterMinQtyMin" value="" min="0" placeholder="Od">
+                    <input type="number" id="FilterMaxQtyMin" name="FilterMaxQtyMin" value="" min="0" placeholder="Do">
+                </div>
+
+                <div class="filter">
+                    <label for="FilterReceiptDate">Termin odbioru</label>
+                    <input type="number" id="FilterMinReceiptDate" name="FilterMinReceiptDate" value="" min="0" placeholder="Od">
+                    <input type="number" id="FilterMaxReceiptDate" name="FilterMaxReceiptDate" value="" min="0" placeholder="Do">
+                </div>
+                <input type="submit" hidden="true" />
+            </form>
+        </div>
+
+        <div id="Main">
+            <div id="TableAuctions">
+                <div id="SortAuctions"></div>
+                <div id="Auctions">
+                    <div class="row" data-id="1">
+                        <div class="column">Szczecinek</div>
+                        <div class="column">Zespół Składnic Lasów Państwowych w Białogardzie</div>
+                        <div class="column">1175201350</div>
+                        <div class="column">W_STANDARD DB</div>
+                        <div class="column">2020-12-03
+                            07:01:00</div>
+                        <div class="column">30</div>
+                        <div class="column">0/0</div>
+                        <div class="column">1314</div>
+                        <div class="column"></div>
+                        <div class="column">13 godz</div>
+                        <div class="column"><a
+                                href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                target="_blank">Link</a></div><button class="observe"></button>
+                    </div>
+                    <div class="row" data-id="2">
+                        <div class="column">Szczecinek</div>
+                        <div class="column">Zespół Składnic Lasów Państwowych w Białogardzie</div>
+                        <div class="column">1175201351</div>
+                        <div class="column">W_STANDARD DB</div>
+                        <div class="column">2020-12-03
+                            07:23:00</div>
+                        <div class="column">17</div>
+                        <div class="column">0/0</div>
+                        <div class="column">1247</div>
+                        <div class="column"></div>
+                        <div class="column">14 godz</div>
+                        <div class="column"><a
+                                href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                target="_blank">Link</a></div><button class="observe"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="Pagination">
+            <ul>
+                <li><a class="active" href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+            </ul>
+        </div>
+    </div>
+    <footer>Designed by Ferdynand</footer>
+    <script src="main.js"></script>
+</body>
+
+</html>
