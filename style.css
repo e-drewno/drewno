@@ -104,22 +104,18 @@ a, button, input{
 }
 
 body:not(.logged) #UserPanel{
-    display:  none;
+    display: none;
 }
 
 #Filters .filter, #UserPanel{
     background-color: #fff;
     margin: 10px 0;
     padding: 10px;
+    font-size: 14px;
 }
 
-#Filters .filter:not(.active) .filter-content{
+#Filters .filter .filter-content{
     display: none;
-}
-
-#Filters .filter.active .filter-content{
-    display: block;
-    margin: 10px 0;
 }
 
 #Filters .filter .filter-content label{
@@ -127,6 +123,10 @@ body:not(.logged) #UserPanel{
     width: 100%;
     display: block;
     margin-bottom: 5px;
+}
+
+#Filters .filter .filter-content label:not(.heading){
+    padding-left: 25px;
 }
 
 #Filters .filter > label {
@@ -141,9 +141,8 @@ body:not(.logged) #UserPanel{
 }
 
 #Filters .filter .heading {
-    display: block;
     font-weight: bold;
-    margin-bottom: 15px;
+    margin-top: 15px;
 }
 
 #Filters .filter select, #Filters .filter input{
@@ -154,12 +153,20 @@ body:not(.logged) #UserPanel{
 
 #Filters .filter input[type="checkbox"] {
     width: auto !important;
-    float: right;
 }
 
-#Filters .filter input[type="date"], #Filters .filter input[type="number"]{
+#Filters .filter input[type="checkbox"] + span{
+    font-size: 12px;
+    vertical-align: top;
+}
+
+#Filters .filter input[type="number"]{
     width: 48%;
     display: inline-block;
+}
+
+#Filters .filter input[type="number"], #Filters .filter input[type="date"]{
+    margin: 5px 0;
 }
 
 #Main {
@@ -194,7 +201,7 @@ body:not(.logged) #UserPanel{
 }
 
 #SortAuctions .column.active-sort span:after{
-    position: absolute;
+    display: inline-block;
     width: 12px;
     height: 12px;
     margin-left: 10px;
@@ -283,13 +290,13 @@ body:not(.logged) #UserPanel{
 
 #Popup {
     position: fixed;
-    top: 50%;
-    left: 50%;
+    top: 100px;
     width: calc(60vw - 80px);
-    height: calc(60vh - 80px);
+    left: 50%;
+    min-height: auto;
     z-index: 999;
     background: #fff;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     padding: 40px;
     box-shadow: 2px 2px 5px 2px rgba(0,0,0,.3);
 }

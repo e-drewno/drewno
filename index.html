@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drewno</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/fontawesome.min.css"
-        integrity="sha512-kJ30H6g4NGhWopgdseRb8wTsyllFUYIx3hiUwmGAkgA9B/JbzUBDQVr2VVlWGde6sdBVOG7oU8AL35ORDuMm8g=="
-        crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -31,16 +30,91 @@
         </div>
         <div id="Sidebar">
             <div id="UserPanel">
-                <h2></h2>
+                <h2>Witaj, Eustachy!</h2>
                 <a href="#">Obserwowane wyszukiwania</a>
                 <a href="#">Obserwowane aukcje</a>
             </div>
             <form action="" method="get" id="Filters">
                 <h2>Filtruj</h2>
-                <div class="filter active">
+                <div class="filter">
                     <label for="FilterRegion">Region</label>
-                    <div id="FilterRegion" class="filter-content">
-                        <div class="region">Region 1</div>
+                    <div id="FilterRegion" class="filter-content" style="display: block">
+                        <div class="region">
+                            <label class="heading" for="Region 1">
+                                <input type="checkbox" id="Region 1" value="Region 1">
+                                <span>Region 1</span>
+                            </label>
+                            <label for="Szczecin">
+                                <input type="checkbox" id="Szczecin" value="Szczecin">
+                                <span>Szczecin</span>
+                            </label>
+                            <label for="Szczecinek">
+                                <input type="checkbox" id="Szczecinek" value="Szczecinek">
+                                <span>Szczecinek</span>
+                            </label>
+                            <label for="Toruń">
+                                <input type="checkbox" id="Toruń" value="Toruń">
+                                <span>Toruń</span>
+                            </label>
+                        </div>
+                        <div class="region">
+                            <label class="heading" for="Region 2">
+                                <input type="checkbox" id="Region 2" value="Region 2">
+                                <span>Region 2</span>
+                            </label>
+                            <label for="Białystok">
+                                <input type="checkbox" id="Białystok" value="Białystok">
+                                <span>Białystok</span>
+                            </label>
+                            <label for="Gdańsk">
+                                <input type="checkbox" id="Gdańsk" value="Gdańsk">
+                                <span>Gdańsk</span>
+                            </label>
+                            <label for="Warszawa">
+                                <input type="checkbox" id="Warszawa" value="Warszawa">
+                                <span>Warszawa</span>
+                            </label>
+                        </div>
+                        <div class="region">
+                            <label class="heading" for="Region 3">
+                                <input type="checkbox" id="Region 3" value="Region 3">
+                                <span>Region 3</span>
+                            </label>
+                            <label for="Kraków">
+                                <input type="checkbox" id="Kraków" value="Kraków">
+                                <span>Kraków</span>
+                            </label>
+                            <label for="Krosno">
+                                <input type="checkbox" id="Krosno" value="Krosno">
+                                <span>Krosno</span>
+                            </label>
+                            <label for="Lublin">
+                                <input type="checkbox" id="Lublin" value="Lublin">
+                                <span>Lublin</span>
+                            </label>
+                            <label for="Radom">
+                                <input type="checkbox" id="Radom" value="Radom">
+                                <span>Radom</span>
+                            </label>
+                            <label for="Łódź">
+                                <input type="checkbox" id="Łódź" value="Łódź">
+                                <span>Łódź</span>
+                            </label>
+                        </div>
+                        <div class="region">
+                            <label class="heading" for="Region 4">
+                                <input type="checkbox" id="Region 4" value="Region 4">
+                                <span>Region 4</span>
+                            </label>
+                            <label for="Katowice">
+                                <input type="checkbox" id="Katowice" value="Katowice">
+                                <span>Katowice</span>
+                            </label>
+                            <label for="Wrocław">
+                                <input type="checkbox" id="Wrocław" value="Wrocław">
+                                <span>Wrocław</span>
+                            </label>
+                        </div>
                     </div>
                 </div>
 
@@ -48,8 +122,27 @@
                     <label for="FilterInspectorate">Nadleśnictwo</label>
                     <div class="filter-content">
                         <select name="FilterInspectorate" id="FilterInspectorate">
-                            <option value="Opcja1">Opcja1</option>
-                            <option value="Opcja2">Opcja2</option>
+                            <option value="Nadleśnictwo Augustów">Nadleśnictwo Augustów</option>
+                            <option value="Nadleśnictwo Głogów Małopolski">Nadleśnictwo Głogów Małopolski</option>
+                            <option value="Nadleśnictwo Kolbuszowa">Nadleśnictwo Kolbuszowa</option>
+                            <option value="Nadleśnictwo Kwidzyn">Nadleśnictwo Kwidzyn</option>
+                            <option value="Nadleśnictwo Lubliniec">Nadleśnictwo Lubliniec</option>
+                            <option value="Nadleśnictwo Mircze">Nadleśnictwo Mircze</option>
+                            <option value="Nadleśnictwo Międzylesie">Nadleśnictwo Międzylesie</option>
+                            <option value="Nadleśnictwo Nowy Targ">Nadleśnictwo Nowy Targ</option>
+                            <option value="Nadleśnictwo Pisz">Nadleśnictwo Pisz</option>
+                            <option value="Nadleśnictwo Radziwiłłów">Nadleśnictwo Radziwiłłów</option>
+                            <option value="Nadleśnictwo Sarnaki">Nadleśnictwo Sarnaki</option>
+                            <option value="Nadleśnictwo Starachowice">Nadleśnictwo Starachowice</option>
+                            <option value="Nadleśnictwo Strzebielino">Nadleśnictwo Strzebielino</option>
+                            <option value="Nadleśnictwo Szczebra">Nadleśnictwo Szczebra</option>
+                            <option value="Nadleśnictwo Trzebciny">Nadleśnictwo Trzebciny</option>
+                            <option value="Nadleśnictwo Trzebież">Nadleśnictwo Trzebież</option>
+                            <option value="Nadleśnictwo Wejherowo">Nadleśnictwo Wejherowo</option>
+                            <option value="Nadleśnictwo Łochów">Nadleśnictwo Łochów</option>
+                            <option value="Nadleśnictwo Żednia">Nadleśnictwo Żednia</option>
+                            <option value="Zespół Składnic Lasów Państwowych w Białogardzie">Zespół Składnic Lasów
+                                Państwowych w Białogardzie</option>
                         </select>
                     </div>
                 </div>
@@ -58,8 +151,66 @@
                     <label for="FilterType">Wybierz gatunek</label>
                     <div class="filter-content">
                         <select name="FilterType" id="FilterType">
-                            <option value="Opcja1">Opcja1</option>
-                            <option value="Opcja2">Opcja2</option>
+                            <option value="0101201522">0101201522</option>
+                            <option value="0120200594">0120200594</option>
+                            <option value="0120200595">0120200595</option>
+                            <option value="0127201112">0127201112</option>
+                            <option value="0127201113">0127201113</option>
+                            <option value="0127201114">0127201114</option>
+                            <option value="0127201115">0127201115</option>
+                            <option value="0130201645">0130201645</option>
+                            <option value="0219201310">0219201310</option>
+                            <option value="0219201311">0219201311</option>
+                            <option value="0219201312">0219201312</option>
+                            <option value="0219201313">0219201313</option>
+                            <option value="0219201314">0219201314</option>
+                            <option value="0219201315">0219201315</option>
+                            <option value="0318200394">0318200394</option>
+                            <option value="0408201147">0408201147</option>
+                            <option value="0408201148">0408201148</option>
+                            <option value="0410201001">0410201001</option>
+                            <option value="0410201002">0410201002</option>
+                            <option value="0410201003">0410201003</option>
+                            <option value="0517201228">0517201228</option>
+                            <option value="0522201251">0522201251</option>
+                            <option value="0522201252">0522201252</option>
+                            <option value="0522201253">0522201253</option>
+                            <option value="0614202487">0614202487</option>
+                            <option value="1030200577">1030200577</option>
+                            <option value="1175201350">1175201350</option>
+                            <option value="1175201351">1175201351</option>
+                            <option value="1175201352">1175201352</option>
+                            <option value="1175201353">1175201353</option>
+                            <option value="1175201354">1175201354</option>
+                            <option value="1175201355">1175201355</option>
+                            <option value="1175201356">1175201356</option>
+                            <option value="1175201357">1175201357</option>
+                            <option value="1175201358">1175201358</option>
+                            <option value="1228200994">1228200994</option>
+                            <option value="1228200995">1228200995</option>
+                            <option value="1228200996">1228200996</option>
+                            <option value="1228200997">1228200997</option>
+                            <option value="1228200998">1228200998</option>
+                            <option value="1316201367">1316201367</option>
+                            <option value="1316201368">1316201368</option>
+                            <option value="1316201369">1316201369</option>
+                            <option value="1316201370">1316201370</option>
+                            <option value="1316201371">1316201371</option>
+                            <option value="1316201372">1316201372</option>
+                            <option value="1316201373">1316201373</option>
+                            <option value="1316201374">1316201374</option>
+                            <option value="1316201375">1316201375</option>
+                            <option value="1508201255">1508201255</option>
+                            <option value="1513201167">1513201167</option>
+                            <option value="1514201240">1514201240</option>
+                            <option value="1514201241">1514201241</option>
+                            <option value="1514201242">1514201242</option>
+                            <option value="1614201809">1614201809</option>
+                            <option value="1614201813">1614201813</option>
+                            <option value="1614201814">1614201814</option>
+                            <option value="1614201817">1614201817</option>
+                            <option value="1706202425">1706202425</option>
+                            <option value="1706202426">1706202426</option>
                         </select>
                     </div>
                 </div>
@@ -68,8 +219,39 @@
                     <label for="FilterAssortment">Wybierz asortyment</label>
                     <div class="filter-content">
                         <select name="FilterAssortment" id="FilterAssortment">
-                            <option value="Opcja1">Opcja1</option>
-                            <option value="Opcja2">Opcja2</option>
+                            <option value="M2E IGLAS/LISC">M2E IGLAS/LISC</option>
+                            <option value="S_S2A BK">S_S2A BK</option>
+                            <option value="S_S2A BRZ">S_S2A BRZ</option>
+                            <option value="S_S2A DB">S_S2A DB</option>
+                            <option value="S_S2A DBC">S_S2A DBC</option>
+                            <option value="S_S2A JD">S_S2A JD</option>
+                            <option value="S_S2A LP">S_S2A LP</option>
+                            <option value="S_S2A MD">S_S2A MD</option>
+                            <option value="S_S2A OL">S_S2A OL</option>
+                            <option value="S_S2A OS">S_S2A OS</option>
+                            <option value="S_S2A SO">S_S2A SO</option>
+                            <option value="S_S2A SW">S_S2A SW</option>
+                            <option value="S_S2A_OP MD">S_S2A_OP MD</option>
+                            <option value="S_S2A_OP SO">S_S2A_OP SO</option>
+                            <option value="S_S2A_OP SW">S_S2A_OP SW</option>
+                            <option value="S_S2B_CD SO">S_S2B_CD SO</option>
+                            <option value="S_S2B_GD SO">S_S2B_GD SO</option>
+                            <option value="S_S2B_GK BK">S_S2B_GK BK</option>
+                            <option value="WK_STANDARD JD">WK_STANDARD JD</option>
+                            <option value="WK_STANDARD_K SO">WK_STANDARD_K SO</option>
+                            <option value="W_STANDARD BK">W_STANDARD BK</option>
+                            <option value="W_STANDARD DB">W_STANDARD DB</option>
+                            <option value="W_STANDARD DBC">W_STANDARD DBC</option>
+                            <option value="W_STANDARD JD">W_STANDARD JD</option>
+                            <option value="W_STANDARD JS">W_STANDARD JS</option>
+                            <option value="W_STANDARD JW">W_STANDARD JW</option>
+                            <option value="W_STANDARD LP">W_STANDARD LP</option>
+                            <option value="W_STANDARD MD">W_STANDARD MD</option>
+                            <option value="W_STANDARD OL">W_STANDARD OL</option>
+                            <option value="W_STANDARD SO">W_STANDARD SO</option>
+                            <option value="W_STANDARD SW">W_STANDARD SW</option>
+                            <option value="W_WDP BK">W_WDP BK</option>
+                            <option value="W_WDP OL">W_WDP OL</option>
                         </select>
                     </div>
                 </div>
@@ -132,45 +314,267 @@
                     </div>
 
                 </div>
-                <input type="submit" hidden="true" />
+                <input type="submit" hidden="true">
             </form>
         </div>
 
         <div id="Main">
             <div id="TableAuctions">
-                <div id="SortAuctions"></div>
+                <div id="SortAuctions">
+                    <div class="column"><span>RDLP</span></div>
+                    <div class="column"><span>Nadleśnictwo</span></div>
+                    <div class="column"><span>Nr aukcji</span></div>
+                    <div class="column"><span>Gr. handlowo/gatunkowa</span></div>
+                    <div class="column"><span>Zakończenie licytacji</span></div>
+                    <div class="column"><span>Ilość m<sup>3</sup></span></div>
+                    <div class="column"><span>Ilość ofert</span></div>
+                    <div class="column"><span>Cena otwarcia netto</span></div>
+                    <div class="column"><span>Teraz wygrywa</span></div>
+                    <div class="column"><span>Do końca pozostało</span></div>
+                    <div class="column"><span>Link e-drewno</span></div>
+                    <div class="column"><span>Obserwuj</span></div>
+                </div>
                 <div id="Auctions">
-                    <div class="row" data-id="1">
-                        <div class="column">Szczecinek</div>
-                        <div class="column">Zespół Składnic Lasów Państwowych w Białogardzie</div>
-                        <div class="column">1175201350</div>
-                        <div class="column">W_STANDARD DB</div>
-                        <div class="column">2020-12-03
-                            07:01:00</div>
-                        <div class="column">30</div>
-                        <div class="column">0/0</div>
-                        <div class="column">1314</div>
-                        <div class="column"></div>
-                        <div class="column">13 godz</div>
-                        <div class="column"><a
-                                href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
-                                target="_blank">Link</a></div><button class="observe"></button>
+                    <div class="row" data-region="Region 1" data-id="1">
+                        <div class="column"><span>Szczecinek</span></div>
+                        <div class="column"><span>Zespół Składnic Lasów Państwowych w Białogardzie</span></div>
+                        <div class="column"><span>1175201350</span></div>
+                        <div class="column"><span>W_STANDARD DB</span></div>
+                        <div class="column"><span>2020-12-03
+                                07:01:00</span></div>
+                        <div class="column"><span>30</span></div>
+                        <div class="column"><span>0/0</span></div>
+                        <div class="column"><span>1314</span></div>
+                        <div class="column"><span></span></div>
+                        <div class="column"><span>13 godz</span></div>
+                        <div class="column"><span><a
+                                    href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                    target="_blank">Link</a></span></div>
+                        <button class="observe"></button>
                     </div>
-                    <div class="row" data-id="2">
-                        <div class="column">Szczecinek</div>
-                        <div class="column">Zespół Składnic Lasów Państwowych w Białogardzie</div>
-                        <div class="column">1175201351</div>
-                        <div class="column">W_STANDARD DB</div>
-                        <div class="column">2020-12-03
-                            07:23:00</div>
-                        <div class="column">17</div>
-                        <div class="column">0/0</div>
-                        <div class="column">1247</div>
-                        <div class="column"></div>
-                        <div class="column">14 godz</div>
-                        <div class="column"><a
-                                href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
-                                target="_blank">Link</a></div><button class="observe"></button>
+                    <div class="row" data-region="Region 1" data-id="2">
+                        <div class="column"><span>Szczecinek</span></div>
+                        <div class="column"><span>Zespół Składnic Lasów Państwowych w Białogardzie</span></div>
+                        <div class="column"><span>1175201351</span></div>
+                        <div class="column"><span>W_STANDARD DB</span></div>
+                        <div class="column"><span>2020-12-03
+                                07:23:00</span></div>
+                        <div class="column"><span>17</span></div>
+                        <div class="column"><span>0/0</span></div>
+                        <div class="column"><span>1247</span></div>
+                        <div class="column"><span></span></div>
+                        <div class="column"><span>14 godz</span></div>
+                        <div class="column"><span><a
+                                    href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                    target="_blank">Link</a></span></div><button class="observe"></button>
+                    </div>
+                    <div class="row" data-region="Region 1" data-id="3">
+                        <div class="column"><span>Szczecinek</span></div>
+                        <div class="column"><span>Zespół Składnic Lasów Państwowych w Białogardzie</span></div>
+                        <div class="column"><span>1175201352</span></div>
+                        <div class="column"><span>W_STANDARD DB</span></div>
+                        <div class="column"><span>2020-12-03
+                                07:27:00</span></div>
+                        <div class="column"><span>18</span></div>
+                        <div class="column"><span>0/0</span></div>
+                        <div class="column"><span>1128</span></div>
+                        <div class="column"><span></span></div>
+                        <div class="column"><span>14 godz</span></div>
+                        <div class="column"><span><a
+                                    href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                    target="_blank">Link</a></span></div><button class="observe"></button>
+                    </div>
+                    <div class="row" data-region="Region 1" data-id="4">
+                        <div class="column"><span>Szczecinek</span></div>
+                        <div class="column"><span>Zespół Składnic Lasów Państwowych w Białogardzie</span></div>
+                        <div class="column"><span>1175201353</span></div>
+                        <div class="column"><span>W_STANDARD DB</span></div>
+                        <div class="column"><span>2020-12-03
+                                07:45:00</span></div>
+                        <div class="column"><span>20</span></div>
+                        <div class="column"><span>0/0</span></div>
+                        <div class="column"><span>877</span></div>
+                        <div class="column"><span></span></div>
+                        <div class="column"><span>14 godz</span></div>
+                        <div class="column"><span><a
+                                    href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                    target="_blank">Link</a></span></div><button class="observe"></button>
+                    </div>
+                    <div class="row" data-region="Region 1" data-id="5">
+                        <div class="column"><span>Szczecinek</span></div>
+                        <div class="column"><span>Zespół Składnic Lasów Państwowych w Białogardzie</span></div>
+                        <div class="column"><span>1175201354</span></div>
+                        <div class="column"><span>W_STANDARD DB</span></div>
+                        <div class="column"><span>2020-12-03
+                                07:51:00</span></div>
+                        <div class="column"><span>10</span></div>
+                        <div class="column"><span>0/0</span></div>
+                        <div class="column"><span>1083</span></div>
+                        <div class="column"><span></span></div>
+                        <div class="column"><span>14 godz</span></div>
+                        <div class="column"><span><a
+                                    href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                    target="_blank">Link</a></span></div><button class="observe"></button>
+                    </div>
+                    <div class="row" data-region="Region 1" data-id="6">
+                        <div class="column"><span>Szczecinek</span></div>
+                        <div class="column"><span>Zespół Składnic Lasów Państwowych w Białogardzie</span></div>
+                        <div class="column"><span>1175201355</span></div>
+                        <div class="column"><span>W_STANDARD DB</span></div>
+                        <div class="column"><span>2020-12-03
+                                08:01:00</span></div>
+                        <div class="column"><span>12</span></div>
+                        <div class="column"><span>0/0</span></div>
+                        <div class="column"><span>1155</span></div>
+                        <div class="column"><span></span></div>
+                        <div class="column"><span>14 godz</span></div>
+                        <div class="column"><span><a
+                                    href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                    target="_blank">Link</a></span></div><button class="observe"></button>
+                    </div>
+                    <div class="row" data-region="Region 1" data-id="7">
+                        <div class="column"><span>Szczecinek</span></div>
+                        <div class="column"><span>Zespół Składnic Lasów Państwowych w Białogardzie</span></div>
+                        <div class="column"><span>1175201356</span></div>
+                        <div class="column"><span>W_STANDARD DB</span></div>
+                        <div class="column"><span>2020-12-03
+                                08:05:00</span></div>
+                        <div class="column"><span>20</span></div>
+                        <div class="column"><span>0/0</span></div>
+                        <div class="column"><span>1169</span></div>
+                        <div class="column"><span></span></div>
+                        <div class="column"><span>14 godz</span></div>
+                        <div class="column"><span><a
+                                    href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                    target="_blank">Link</a></span></div><button class="observe"></button>
+                    </div>
+                    <div class="row" data-region="Region 1" data-id="8">
+                        <div class="column"><span>Szczecinek</span></div>
+                        <div class="column"><span>Zespół Składnic Lasów Państwowych w Białogardzie</span></div>
+                        <div class="column"><span>1175201357</span></div>
+                        <div class="column"><span>W_STANDARD DB</span></div>
+                        <div class="column"><span>2020-12-03
+                                08:11:00</span></div>
+                        <div class="column"><span>21</span></div>
+                        <div class="column"><span>0/0</span></div>
+                        <div class="column"><span>1212</span></div>
+                        <div class="column"><span></span></div>
+                        <div class="column"><span>14 godz</span></div>
+                        <div class="column"><span><a
+                                    href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                    target="_blank">Link</a></span></div><button class="observe"></button>
+                    </div>
+                    <div class="row" data-region="Region 1" data-id="9">
+                        <div class="column"><span>Szczecinek</span></div>
+                        <div class="column"><span>Zespół Składnic Lasów Państwowych w Białogardzie</span></div>
+                        <div class="column"><span>1175201358</span></div>
+                        <div class="column"><span>W_STANDARD DB</span></div>
+                        <div class="column"><span>2020-12-03
+                                08:17:00</span></div>
+                        <div class="column"><span>20</span></div>
+                        <div class="column"><span>0/0</span></div>
+                        <div class="column"><span>1202</span></div>
+                        <div class="column"><span></span></div>
+                        <div class="column"><span>14 godz</span></div>
+                        <div class="column"><span><a
+                                    href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                    target="_blank">Link</a></span></div><button class="observe"></button>
+                    </div>
+                    <div class="row" data-region="Region 1" data-id="10">
+                        <div class="column"><span>Toruń</span></div>
+                        <div class="column"><span>Nadleśnictwo Trzebciny</span></div>
+                        <div class="column"><span>1228200994</span></div>
+                        <div class="column"><span>S_S2A SW</span></div>
+                        <div class="column"><span>2020-12-03
+                                09:01:00</span></div>
+                        <div class="column"><span>115</span></div>
+                        <div class="column"><span>0/0</span></div>
+                        <div class="column"><span>153</span></div>
+                        <div class="column"><span></span></div>
+                        <div class="column"><span>15 godz</span></div>
+                        <div class="column"><span><a
+                                    href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                    target="_blank">Link</a></span></div><button class="observe"></button>
+                    </div>
+                    <div class="row" data-region="Region 1" data-id="11">
+                        <div class="column"><span>Toruń</span></div>
+                        <div class="column"><span>Nadleśnictwo Trzebciny</span></div>
+                        <div class="column"><span>1228200995</span></div>
+                        <div class="column"><span>S_S2A LP</span></div>
+                        <div class="column"><span>2020-12-03
+                                09:03:00</span></div>
+                        <div class="column"><span>7</span></div>
+                        <div class="column"><span>0/0</span></div>
+                        <div class="column"><span>103</span></div>
+                        <div class="column"><span></span></div>
+                        <div class="column"><span>15 godz</span></div>
+                        <div class="column"><span><a
+                                    href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                    target="_blank">Link</a></span></div><button class="observe"></button>
+                    </div>
+                    <div class="row" data-region="Region 1" data-id="12">
+                        <div class="column"><span>Toruń</span></div>
+                        <div class="column"><span>Nadleśnictwo Trzebciny</span></div>
+                        <div class="column"><span>1228200996</span></div>
+                        <div class="column"><span>W_WDP BK</span></div>
+                        <div class="column"><span>2020-12-03
+                                09:05:00</span></div>
+                        <div class="column"><span>3</span></div>
+                        <div class="column"><span>1/1</span></div>
+                        <div class="column"><span>132</span></div>
+                        <div class="column"><span>132</span></div>
+                        <div class="column"><span>15 godz</span></div>
+                        <div class="column"><span><a
+                                    href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                    target="_blank">Link</a></span></div><button class="observe"></button>
+                    </div>
+                    <div class="row" data-region="Region 1" data-id="13">
+                        <div class="column"><span>Toruń</span></div>
+                        <div class="column"><span>Nadleśnictwo Trzebciny</span></div>
+                        <div class="column"><span>1228200997</span></div>
+                        <div class="column"><span>W_STANDARD DBC</span></div>
+                        <div class="column"><span>2020-12-03
+                                09:07:00</span></div>
+                        <div class="column"><span>5</span></div>
+                        <div class="column"><span>0/0</span></div>
+                        <div class="column"><span>322</span></div>
+                        <div class="column"><span></span></div>
+                        <div class="column"><span>15 godz</span></div>
+                        <div class="column"><span><a
+                                    href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                    target="_blank">Link</a></span></div><button class="observe"></button>
+                    </div>
+                    <div class="row" data-region="Region 1" data-id="14">
+                        <div class="column"><span>Toruń</span></div>
+                        <div class="column"><span>Nadleśnictwo Trzebciny</span></div>
+                        <div class="column"><span>1228200998</span></div>
+                        <div class="column"><span>W_STANDARD OL</span></div>
+                        <div class="column"><span>2020-12-03
+                                09:11:00</span></div>
+                        <div class="column"><span>3</span></div>
+                        <div class="column"><span>1/1</span></div>
+                        <div class="column"><span>185</span></div>
+                        <div class="column"><span>185</span></div>
+                        <div class="column"><span>15 godz</span></div>
+                        <div class="column"><span><a
+                                    href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                    target="_blank">Link</a></span></div><button class="observe"></button>
+                    </div>
+                    <div class="row" data-region="Region 1" data-id="15">
+                        <div class="column"><span>Szczecin</span></div>
+                        <div class="column"><span>Nadleśnictwo Trzebież</span></div>
+                        <div class="column"><span>1030200577</span></div>
+                        <div class="column"><span>S_S2A_OP SO</span></div>
+                        <div class="column"><span>2020-12-03
+                                09:59:00</span></div>
+                        <div class="column"><span>25</span></div>
+                        <div class="column"><span>1/1</span></div>
+                        <div class="column"><span>125</span></div>
+                        <div class="column"><span>125</span></div>
+                        <div class="column"><span>16 godz</span></div>
+                        <div class="column"><span><a
+                                    href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                    target="_blank">Link</a></span></div><button class="observe"></button>
                     </div>
                 </div>
             </div>
