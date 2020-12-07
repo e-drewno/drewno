@@ -18,6 +18,9 @@ $(document).ready(function() {
   
   let observeAndPopup = function(el, type){
     let element = $(el.target);
+    if($('#Popup').length){
+      $('#Popup').remove();
+    }
     let popup = $(document.createElement('div'));
     popup.attr('id', 'Popup');
     if($('.logged').length){
@@ -33,8 +36,6 @@ $(document).ready(function() {
       }
       else if(type === 'auction'){
         let parent = element.parent();
-        console.log(parent);
-        console.log(parent.hasClass('observed'));
         if (parent.hasClass('observed')) {
           parent.removeClass('observed');
           popup.html("Usunięto z obserwowanych");
@@ -111,8 +112,6 @@ $(document).ready(function() {
   $('label.heading').on('click', function(e){
     let label = $(e.currentTarget.control.checked);
     let inputs = $(e.currentTarget).parent().children().find('input');
-    console.log(label);
-    console.log(inputs);
     if(label[0] === true){ 
       inputs.each(function(){
         $(this)[0].checked = true;
