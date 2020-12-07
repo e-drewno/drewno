@@ -116,6 +116,7 @@ body:not(.logged) #UserPanel{
 
 #Filters .filter .filter-content{
     display: none;
+    margin-top: 15px;
 }
 
 #Filters .filter .filter-content label{
@@ -123,9 +124,20 @@ body:not(.logged) #UserPanel{
     width: 100%;
     display: block;
     margin-bottom: 5px;
+    font-size: 12px;
 }
 
-#Filters .filter .filter-content label:not(.heading){
+#Filters .filter .filter-content.numbers label {
+    width: 48%;
+    display: inline-block;
+}
+
+#Filters .filter .filter-content.numbers label span, #Filters .filter .filter-content.numbers label input {
+    width: 100%;
+    display: block;
+}
+
+#Filters .filter .filter-content .filter-group label:not(.heading){
     padding-left: 25px;
 }
 
@@ -142,7 +154,7 @@ body:not(.logged) #UserPanel{
 
 #Filters .filter .heading {
     font-weight: bold;
-    margin-top: 15px;
+    padding-left: 0;
 }
 
 #Filters .filter select, #Filters .filter input{

@@ -108,4 +108,21 @@ $(document).ready(function() {
     }
   });
 
+  $('label.heading').on('click', function(e){
+    let label = $(e.currentTarget.control.checked);
+    let inputs = $(e.currentTarget).parent().children().find('input');
+    console.log(label);
+    console.log(inputs);
+    if(label[0] === true){ 
+      inputs.each(function(){
+        $(this)[0].checked = true;
+      });
+    }
+    else{
+      inputs.each(function(){
+        $(this)[0].checked = false;
+      });
+    }
+  })
+
 });
