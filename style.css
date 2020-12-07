@@ -161,6 +161,13 @@ body:not(.logged) #UserPanel{
     width: 100%;
     padding: 5px;
     cursor: pointer;
+    border-radius: 3px;
+    border: 1px solid #d2d8dd;
+}
+
+#Filters .filter input:focus{
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
 }
 
 #Filters .filter input[type="checkbox"] {
@@ -172,13 +179,9 @@ body:not(.logged) #UserPanel{
     vertical-align: top;
 }
 
-#Filters .filter input[type="number"]{
-    width: 48%;
-    display: inline-block;
-}
-
 #Filters .filter input[type="number"], #Filters .filter input[type="date"]{
     margin: 5px 0;
+    height: calc(2.55rem + 2px);
 }
 
 #Main {
