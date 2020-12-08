@@ -36,7 +36,7 @@ $(document).ready(function() {
           }
         }
         else if(type === 'auction'){
-          let parent = element.parent();
+          let parent = element.parent().parent();
           if (parent.hasClass('observed')) {
             parent.removeClass('observed');
             popup.html("Usunięto z obserwowanych");
