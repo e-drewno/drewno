@@ -21,6 +21,7 @@ html{
 body{
     min-height: 100%;
     background-color: #f8f9fa;
+    display: grid;
 }
 
 a, button{
@@ -58,6 +59,9 @@ a, button, input{
 
 #Content {
     display: grid;
+}
+
+.home #Content {
     grid-template-columns: 300px calc(100% - 300px);
     margin-top: 60px;
 }
@@ -157,7 +161,7 @@ body:not(.logged) #UserPanel{
     padding-left: 0;
 }
 
-#Filters .filter select, #Filters .filter input{
+input{
     width: 100%;
     padding: 5px;
     cursor: pointer;
@@ -165,21 +169,21 @@ body:not(.logged) #UserPanel{
     border: 1px solid #d2d8dd;
 }
 
-#Filters .filter input:focus{
+input:focus{
     border-color: #80bdff;
     box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
 }
 
-#Filters .filter input[type="checkbox"] {
+input[type="checkbox"] {
     width: auto !important;
 }
 
-#Filters .filter input[type="checkbox"] + span{
+input[type="checkbox"] + span{
     font-size: 12px;
     vertical-align: top;
 }
 
-#Filters .filter input[type="number"], #Filters .filter input[type="date"]{
+input[type="number"], input[type="date"]{
     margin: 5px 0;
     height: calc(2.55rem + 2px);
 }
@@ -334,4 +338,19 @@ footer {
     color: #fff;
     padding: 10px;
     text-align: center;
+    align-self: end;
+}
+
+/* login page */
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+form{
+    background-color: #fff;
+    box-shadow: 0 3px 3px rgba(0,0,0,.075);
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 3px;
+    padding: 40px;
 }
