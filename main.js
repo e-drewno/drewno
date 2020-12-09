@@ -1,8 +1,8 @@
-let db = [];
-fetch('./drewno.json')
-      .then(response => response.json())
-      .then(arr => db = arr);
-
+let db = [],
+    regions = [],
+    rdlps = [],
+    inspectorates = [];
+      
 $(document).ready(function() {
 
   if($('.home'.length)){
@@ -121,7 +121,15 @@ $(document).ready(function() {
       }
     });
   
-    $('label.heading').on('click', function(e){
+    //$('label.heading')
+
+    // $('#FilterRegion label').on('click', function(e){
+    //   let checkedInputs = $('#FilterRegion input:checked');
+    //   showInspectorates(checkedInputs);
+
+    // })
+
+    let clickHeading = (e) => {
       let label = $(e.currentTarget.control.checked);
       let inputs = $(e.currentTarget).parent().children().find('input');
       if(label[0] === true){ 
@@ -134,7 +142,83 @@ $(document).ready(function() {
           $(this)[0].checked = false;
         });
       }
-    })
+    }
+
+    let showInspectorates = (checkedInputs) => {
+      const inspectoratesContainer = $('#FilterInspectorate');
+      inspectoratesContainer.html('');
+      if(checkedInputs.length){
+        checkedInputs.each((index, inspectorate) => {
+          let labelName = inspectorate.id;
+          let filterGroup = $(document.createElement('div'));
+          filterGroup.addClass('filter-group hidden');
+          let rdlpLabel = $(document.createElement('label'));
+          if(!$(inspectorate).parent().hasClass('heading')){
+            rdlpLabel.attr({
+              'for': labelName,
+              'class': 'heading' 
+            });
+            rdlpLabel.on('click', function(e){
+              clickHeading(e);
+            });
+          }
+          else{
+            return
+          }
+
+          let filterInput = $(document.createElement('input'));
+          filterInput.attr({
+            'id': labelName,
+            'type': 'checkbox',
+            'value': labelName
+          });
+          filterInput.appendTo(rdlpLabel);
+          let spanLabel = $(document.createElement('span'));
+          spanLabel.html(labelName);
+          spanLabel.appendTo(rdlpLabel);
+          rdlpLabel.appendTo(filterGroup);
+          let showMoreButton = $(document.createElement('button'));
+          let buttonText = 'Pokaż wszystkie';
+          showMoreButton.text(buttonText);
+          showMoreButton.on('click', function(e){
+            e.preventDefault();
+            filterGroup.toggleClass('hidden');
+            showMoreButton.text(showMoreButton.text() == 'Pokaż wszystkie' ? 'Ukryj' : 'Pokaż wszystkie');
+          })
+          
+          $(db).each((index, region) => {
+            region['RDLPs'].forEach(rdlp => {
+              console.log(rdlp['RDLP']);
+              console.log(labelName);
+              if(rdlp['RDLP'] === labelName){
+                rdlp['Inspectorates'].forEach(insp => {
+                  let inspLabel = $(document.createElement('label'));
+                  let inspectorate = insp;
+                  inspLabel.attr('for', inspectorate);
+                
+                  let filterInput = $(document.createElement('input'));
+                  filterInput.attr({
+                    'id': inspectorate,
+                    'type': 'checkbox',
+                    'value': inspectorate
+                  });
+                  filterInput.appendTo(inspLabel);
+                  let spanLabel = $(document.createElement('span'));
+                  spanLabel.html(inspectorate);
+                  spanLabel.appendTo(inspLabel);
+                  inspLabel.on('click', function(e){
+                    alert(inspectorate);
+                  });
+                  inspLabel.appendTo(filterGroup);
+                })
+              }
+            })
+          });
+          showMoreButton.appendTo(filterGroup);
+          filterGroup.appendTo(inspectoratesContainer);
+        })
+      }
+    }
 
     
     $(window).on('scroll', function(){
@@ -153,11 +237,90 @@ $(document).ready(function() {
         sortHeader.removeClass('fixed');
       }
     }
+  
+  
+    fetch('./drewno.json')
+    .then(response => response.json())
+    .then(arr => db = arr)
+    .then(() => createTables())
+    .then(() => fillRegionFilter());
+
+    let fillRegionFilter = () => {
+    let filterRegion = document.getElementById('FilterRegion');
+
+    filterRegion.innerText = '';
+   
+    $(db).each((index, region) => {
+      let filterGroup = $(document.createElement('div'));
+      filterGroup.addClass('filter-group');
+      const regionNumber = region['Region'];
+      let regionLabel = $(document.createElement('label'));
+      regionLabel.attr({
+        'class': 'heading', 
+        'for': 'Region' + regionNumber
+      });
+      let filterInput = $(document.createElement('input'));
+        filterInput.attr({
+          'id': 'Region'+ regionNumber,
+          'type': 'checkbox',
+          'value': 'Region'+ regionNumber
+        });
+        filterInput.appendTo(regionLabel);
+        let spanLabel = $(document.createElement('span'));
+        spanLabel.html('Region ' + regionNumber);
+        spanLabel.appendTo(regionLabel);
+        regionLabel.on('click', function(e){
+          clickHeading(e);
+          let checkedInputs = $('#FilterRegion input:checked');
+          showInspectorates(checkedInputs);
+        });
+        regionLabel.appendTo(filterGroup);
+        filterGroup.appendTo(filterRegion);
+        let rdlps = region['RDLPs'];
+
+        if(rdlps.length){
+          rdlps.forEach(rdlp => {
+            let rdlpLabel = $(document.createElement('label'));
+            let rdlpName = rdlp['RDLP'];
+            rdlpLabel.attr('for', rdlpName);
+          
+            let filterInput = $(document.createElement('input'));
+            filterInput.attr({
+              'id': rdlpName,
+              'type': 'checkbox',
+              'value': rdlpName
+            });
+            filterInput.appendTo(rdlpLabel);
+            let spanLabel = $(document.createElement('span'));
+            spanLabel.html(rdlpName);
+            spanLabel.appendTo(rdlpLabel);
+            rdlpLabel.on('click', function(e){
+              let checkedInputs = $('#FilterRegion input:checked');
+              showInspectorates(checkedInputs);
+            });
+            rdlpLabel.appendTo(filterGroup);
+          })
+        };
+      });
+    }
+
+    //arrays for quick search
+    let createTables = () => {
+      db.forEach(region => {
+        regions.push(region['Region']);
+        region['RDLPs'].forEach(rs => {
+          rdlps.push(rs['RDLP']);
+          rs['Inspectorates'].forEach(insp => {
+            inspectorates.push(insp);
+          })
+        })
+      })
+    }
   }
 });  
       
   let findInDB = (text) => {
-    auctions.forEach((arr, index) => {
+    auctions.forEach(arr => {
       if(arr.includes(text)){
         console.log(arr);
       }

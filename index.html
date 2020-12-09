@@ -41,8 +41,8 @@
                     <label for="FilterRegion">Region</label>
                     <div id="FilterRegion" class="filter-content" style="display: block">
                         <div class="filter-group">
-                            <label class="heading" for="Region 1">
-                                <input type="checkbox" id="Region 1" value="Region 1">
+                            <label class="heading" for="Region1">
+                                <input type="checkbox" id="Region1" value="Region1" class="region">
                                 <span>Region 1</span>
                             </label>
                             <label for="Szczecin">
@@ -60,7 +60,7 @@
                         </div>
                         <div class="filter-group">
                             <label class="heading" for="Region 2">
-                                <input type="checkbox" id="Region 2" value="Region 2">
+                                <input type="checkbox" id="Region 2" value="Region2" class="region">
                                 <span>Region 2</span>
                             </label>
                             <label for="Białystok">
@@ -77,8 +77,8 @@
                             </label>
                         </div>
                         <div class="filter-group">
-                            <label class="heading" for="Region 3">
-                                <input type="checkbox" id="Region 3" value="Region 3">
+                            <label class="heading" for="Region3">
+                                <input type="checkbox" id="Region3" value="Region3" class="region">
                                 <span>Region 3</span>
                             </label>
                             <label for="Kraków">
@@ -103,8 +103,8 @@
                             </label>
                         </div>
                         <div class="filter-group">
-                            <label class="heading" for="Region 4">
-                                <input type="checkbox" id="Region 4" value="Region 4">
+                            <label class="heading" for="Region4">
+                                <input type="checkbox" id="Region4" value="Region4" class="region">
                                 <span>Region 4</span>
                             </label>
                             <label for="Katowice">
@@ -121,7 +121,7 @@
 
                 <div class="filter">
                     <label for="FilterInspectorate">Nadleśnictwo</label>
-                    <div class="filter-content" style="display: block">
+                    <div id="FilterInspectorate" class="filter-content" style="display: block">
                         <div class="filter-group">
                             <label class="heading" for="RDLP Piła">
                                 <input type="checkbox" id="RDLP Piła" value="RDLP Piła">
@@ -162,7 +162,7 @@
 
                 <div class="filter">
                     <label for="FilterType">Wybierz gatunek</label>
-                    <div class="filter-content" style="display: block">
+                    <div id="FilterType" class="filter-content" style="display: block">
                         <label for="LabelAll" class="heading">
                             <input type="checkbox" id="LabelAll" value="Aktualne gatunki">
                             Aktualne gatunki
@@ -217,7 +217,7 @@
 
                 <div class="filter">
                     <label for="FilterAssortment">Wybierz sortyment</label>
-                    <div class="filter-content">
+                    <div id="FilterAssortment" class="filter-content">
                         <label for="KO">
                             <input type="checkbox" id="KO" value="KO">
                             <span>KO</span>
@@ -247,7 +247,7 @@
 
                 <div class="filter">
                     <label for="FilterDate">Zakres dat (według zakończenia)</label>
-                    <div class="filter-content">
+                    <div id="FilterDate" class="filter-content">
                         <label for="FilterStart">
                             <span>Data zakończenia od</span>
                             <input type="date" id="FilterStart" name="FilterStart" value="2020-12-04" min="2020-12-04">
@@ -261,7 +261,7 @@
 
                 <div class="filter">
                     <label for="FilterQuantity">Ilość m<sup>3</sup></label>
-                    <div class="filter-content numbers">
+                    <div id="FilterQuantity" class="filter-content numbers">
                         <label for="FilterMinQuantity">
                             <span>Ilość od</span>
                             <input type="number" id="FilterMinQuantity" name="FilterMinQuantity" value="" min="0"
@@ -278,7 +278,7 @@
 
                 <div class="filter">
                     <label for="FilterStartPrice">Cena otwarcia netto</label>
-                    <div class="filter-content numbers">
+                    <div id="FilterStartPrice" class="filter-content numbers">
                         <label for="FilterMinStartPrice">
                             <span>Cena od</span>
                             <input type="number" id="FilterMinStartPrice" name="FilterMinStartPrice" value="" min="0"
@@ -294,7 +294,7 @@
 
                 <div class="filter">
                     <label for="FilterPrice">Aktualna cena</label>
-                    <div class="filter-content numbers">
+                    <div id="FilterPrice" class="filter-content numbers">
                         <label for="FilterMinPrice">
                             <span>Cena od</span>
                             <input type="number" id="FilterMinPrice" name="FilterMinPrice" value="" min="0"
@@ -310,7 +310,7 @@
 
                 <div class="filter">
                     <label for="FilterQtyMin">Minimalna ilość zakupu</label>
-                    <div class="filter-content numbers">
+                    <div id="FilterQtyMin" class="filter-content numbers">
                         <label for="FilterMinQtyMin">
                             <span>Ilość od</span>
                             <input type="number" id="FilterMinQtyMin" name="FilterMinQtyMin" value="" min="0"
@@ -326,7 +326,7 @@
 
                 <div class="filter">
                     <label for="FilterReceiptDate">Termin odbioru</label>
-                    <div class="filter-content">
+                    <div id="FilterReceiptDate" class="filter-content">
                         <label for="FilterReceiptDate">
                             <span>Termin odbioru od</span>
                             <input type="date" id="FilterReceiptDate" name="FilterReceiptDate" value="2020-12-04"

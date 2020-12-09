@@ -1,6 +1,6 @@
 [
     {
-        "Region": "Region 1",
+        "Region": "1",
         "RDLPs": [
             {
                 "RDLP": "RDLP Piła",
@@ -140,7 +140,7 @@
         ]
     },
     {
-        "Region": "Region 2",
+        "Region": "2",
         "RDLPs": [
             {
                 "RDLP": "RDLP Białystok",
@@ -266,7 +266,7 @@
         ]
     },
     {
-        "Region": "Region 3",
+        "Region": "3",
         "RDLPs": [
             {
                 "RDLP": "RDLP Kraków",
@@ -409,7 +409,7 @@
         ]
     },
     {
-        "Region": "Region 4",
+        "Region": "4",
         "RDLPs": [
             {
                 "RDLP": "RDLP Katowice",
