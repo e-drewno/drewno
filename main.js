@@ -1,8 +1,12 @@
 let db = [];
+fetch('./drewno.json')
+      .then(response => response.json())
+      .then(arr => db = arr);
 
 $(document).ready(function() {
 
   if($('.home'.length)){
+
     $('#SortAuctions > .column').on('click', (function() {
       if ($('.active-sort').length) {
         $('.active-sort').removeClass('active-sort');
@@ -149,12 +153,7 @@ $(document).ready(function() {
       }
     }
   }
-});
-
-fetch('./drewno.json')
-      .then(response => response.json())
-      .then(arr => db = arr);
-  
+});  
       
   let findInDB = (text) => {
     auctions.forEach((arr, index) => {
