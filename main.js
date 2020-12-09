@@ -1,3 +1,5 @@
+let db = [];
+
 $(document).ready(function() {
 
   if($('.home'.length)){
@@ -125,6 +127,39 @@ $(document).ready(function() {
       }
     })
   
+    const sortHeader = $('#SortAuctions');
+    const auctions = $('#Auctions');
+    const tableAuctions = $('#TableAuctions');
+
+    
+    $(window).on('scroll', function(){
+      fixedSortHeader();
+    });
+
+    $(window).on('load resize', function(){
+      sortHeader.width(auctions.width());
+    })
+
+    let fixedSortHeader = () => {
+      if(window.scrollY >= tableAuctions.position().top){
+        sortHeader.addClass('fixed');
+      }
+      else{
+        sortHeader.removeClass('fixed');
+      }
+    }
   }
-  
 });
+
+fetch('./drewno.json')
+      .then(response => response.json())
+      .then(arr => db = arr);
+  
+      
+  let findInDB = (text) => {
+    auctions.forEach((arr, index) => {
+      if(arr.includes(text)){
+        console.log(arr);
+      }
+    });
+  }

@@ -193,7 +193,7 @@ input[type="number"], input[type="date"]{
 }
 
 #SortAuctions {
-    margin: 10px 0;
+    margin: 0 0 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
 }
@@ -201,7 +201,7 @@ input[type="number"], input[type="date"]{
 #SortAuctions .column {
     position: relative;
     cursor: pointer;
-    font-size: 12px;
+    font-size: .6vw;
     color: #666;
     font-weight: 600;
     text-align: center;
@@ -221,9 +221,9 @@ input[type="number"], input[type="date"]{
 
 #SortAuctions .column.active-sort span:after{
     display: inline-block;
-    width: 12px;
-    height: 12px;
-    margin-left: 10px;
+    width: .6vw;
+    height: .6vw;
+    margin-left: .6vw;
     top: 8px;
 }
 
@@ -240,12 +240,12 @@ input[type="number"], input[type="date"]{
 }
 
 #Auctions{
-    font-size: 13px;
+    font-size: .65vw;
 }
 
 #Auctions .row{
     transition: background-color 0.3s ease-in-out;
-    margin-bottom: 6px;
+    margin-bottom: .3vw;
     border: 1px solid #eee;
     border-radius: 2px;
 }
@@ -256,7 +256,7 @@ input[type="number"], input[type="date"]{
 }
 
 #SortAuctions .column, #Auctions .column{
-    padding: 8px 4px;
+    padding: .5vw .2vw;
     text-align: center;
     position: relative;
     width: 100%;
@@ -269,8 +269,8 @@ input[type="number"], input[type="date"]{
 }
 
 #Auctions button.observe {
-    width: 30px;
-    height: 30px;
+    width: 1vw;
+    height: 1vw;
     align-self: center;
     justify-self: center;
     background-color: transparent;
@@ -339,6 +339,12 @@ footer {
     padding: 10px;
     text-align: center;
     align-self: end;
+}
+
+.fixed{
+    top: 0;
+    position: fixed;
+    z-index: 9;
 }
 
 /* login page */
