@@ -156,12 +156,16 @@ body:not(.logged) #UserPanel{
     cursor: pointer;
 }
 
+#FilterInspectorate .filter-group{
+    margin: 10px 0;
+}
+
 #FilterInspectorate .filter-group.hidden label:nth-child(n+7) {
     display: none;
 }
 
 #FilterInspectorate .filter-group button{
-    float: right;
+    width: 100%;
 }
 
 #Filters .filter .heading {
