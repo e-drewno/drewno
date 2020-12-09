@@ -7,6 +7,11 @@ $(document).ready(function() {
 
   if($('.home'.length)){
 
+    const sortHeader = $('#SortAuctions');
+    const auctions = $('#Auctions');
+    const tableAuctions = $('#TableAuctions');
+    sortHeader.width(auctions.width());
+
     $('#SortAuctions > .column').on('click', (function() {
       if ($('.active-sort').length) {
         $('.active-sort').removeClass('active-sort');
@@ -130,17 +135,13 @@ $(document).ready(function() {
         });
       }
     })
-  
-    const sortHeader = $('#SortAuctions');
-    const auctions = $('#Auctions');
-    const tableAuctions = $('#TableAuctions');
 
     
     $(window).on('scroll', function(){
       fixedSortHeader();
     });
 
-    $(window).on('load resize', function(){
+    $(window).on('resize', function(){
       sortHeader.width(auctions.width());
     })
 
