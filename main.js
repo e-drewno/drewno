@@ -120,14 +120,6 @@ $(document).ready(function() {
         $('body').addClass('logged');
       }
     });
-  
-    //$('label.heading')
-
-    // $('#FilterRegion label').on('click', function(e){
-    //   let checkedInputs = $('#FilterRegion input:checked');
-    //   showInspectorates(checkedInputs);
-
-    // })
 
     let clickHeading = (e) => {
       let label = $(e.currentTarget.control.checked);
@@ -143,83 +135,6 @@ $(document).ready(function() {
         });
       }
     }
-
-    let showInspectorates = (checkedInputs) => {
-      const inspectoratesContainer = $('#FilterInspectorate');
-      inspectoratesContainer.html('');
-      if(checkedInputs.length){
-        checkedInputs.each((index, inspectorate) => {
-          let labelName = inspectorate.id;
-          let filterGroup = $(document.createElement('div'));
-          filterGroup.addClass('filter-group hidden');
-          let rdlpLabel = $(document.createElement('label'));
-          if(!$(inspectorate).parent().hasClass('heading')){
-            rdlpLabel.attr({
-              'for': labelName,
-              'class': 'heading' 
-            });
-            rdlpLabel.on('click', function(e){
-              clickHeading(e);
-            });
-          }
-          else{
-            return
-          }
-
-          let filterInput = $(document.createElement('input'));
-          filterInput.attr({
-            'id': labelName,
-            'type': 'checkbox',
-            'value': labelName
-          });
-          filterInput.appendTo(rdlpLabel);
-          let spanLabel = $(document.createElement('span'));
-          spanLabel.html(labelName);
-          spanLabel.appendTo(rdlpLabel);
-          rdlpLabel.appendTo(filterGroup);
-          let showMoreButton = $(document.createElement('button'));
-          let buttonText = 'Pokaż wszystkie';
-          showMoreButton.text(buttonText);
-          showMoreButton.on('click', function(e){
-            e.preventDefault();
-            filterGroup.toggleClass('hidden');
-            showMoreButton.text(showMoreButton.text() == 'Pokaż wszystkie' ? 'Ukryj' : 'Pokaż wszystkie');
-          })
-          
-          $(db).each((index, region) => {
-            region['RDLPs'].forEach(rdlp => {
-              console.log(rdlp['RDLP']);
-              console.log(labelName);
-              if(rdlp['RDLP'] === labelName){
-                rdlp['Inspectorates'].forEach(insp => {
-                  let inspLabel = $(document.createElement('label'));
-                  let inspectorate = insp;
-                  inspLabel.attr('for', inspectorate);
-                
-                  let filterInput = $(document.createElement('input'));
-                  filterInput.attr({
-                    'id': inspectorate,
-                    'type': 'checkbox',
-                    'value': inspectorate
-                  });
-                  filterInput.appendTo(inspLabel);
-                  let spanLabel = $(document.createElement('span'));
-                  spanLabel.html(inspectorate);
-                  spanLabel.appendTo(inspLabel);
-                  inspLabel.on('click', function(e){
-                    alert(inspectorate);
-                  });
-                  inspLabel.appendTo(filterGroup);
-                })
-              }
-            })
-          });
-          showMoreButton.appendTo(filterGroup);
-          filterGroup.appendTo(inspectoratesContainer);
-        })
-      }
-    }
-
     
     $(window).on('scroll', function(){
       fixedSortHeader();
@@ -237,13 +152,119 @@ $(document).ready(function() {
         sortHeader.removeClass('fixed');
       }
     }
+
+    let createInspectoratesSearch = () => {
+      let searchContainer = $('#FilterInspectorate');
+      let filterGroup = $(document.createElement('div'));
+      filterGroup.addClass('filter-group');
+      let search = $(document.createElement('input'));
+      search.attr({
+        "id": "Search",
+        "list": "SearchResults",
+        "type": "search", 
+        "name": "Search",
+        "placeholder": "Wyszukaj Nadleśnictwo"
+      });
+      let results = $(document.createElement('datalist'));
+      results.attr('id', 'SearchResults');
+      inspectorates.forEach(insp => {
+        let option = $(document.createElement('option'));
+        option.val(insp)
+        option.appendTo(results);
+        console.log(insp);
+      });
+      search.appendTo(filterGroup);
+      results.appendTo(filterGroup);
+      filterGroup.appendTo(searchContainer);
+   }
+
+   let showInspectorates = (checkedInputs) => {
+    const inspectoratesContainer = $('#FilterInspectorate');
+    inspectoratesContainer.html('');
+    console.log(checkedInputs.length);
+    if(checkedInputs.length){
+      checkedInputs.each((index, inspectorate) => {
+        let labelName = inspectorate.id;
+        let filterGroup = $(document.createElement('div'));
+        filterGroup.addClass('filter-group hidden');
+        let rdlpLabel = $(document.createElement('label'));
+        if(!$(inspectorate).parent().hasClass('heading')){
+          rdlpLabel.attr({
+            'for': labelName,
+            'class': 'heading' 
+          });
+          rdlpLabel.on('click', function(e){
+            clickHeading(e);
+          });
+        }
+        else{
+          return
+        }
+
+        let filterInput = $(document.createElement('input'));
+        filterInput.attr({
+          'id': labelName,
+          'type': 'checkbox',
+          'value': labelName
+        });
+        filterInput.appendTo(rdlpLabel);
+        let spanLabel = $(document.createElement('span'));
+        spanLabel.html(labelName);
+        spanLabel.appendTo(rdlpLabel);
+        rdlpLabel.appendTo(filterGroup);
+        let showMoreButton = $(document.createElement('button'));
+        let buttonText = 'Pokaż wszystkie';
+        showMoreButton.text(buttonText);
+        showMoreButton.on('click', function(e){
+          e.preventDefault();
+          filterGroup.toggleClass('hidden');
+          showMoreButton.text(showMoreButton.text() == 'Pokaż wszystkie' ? 'Ukryj' : 'Pokaż wszystkie');
+        })
+        
+        $(db).each((index, region) => {
+          region['RDLPs'].forEach(rdlp => {
+            console.log(rdlp['RDLP']);
+            console.log(labelName);
+            if(rdlp['RDLP'] === labelName){
+              rdlp['Inspectorates'].forEach(insp => {
+                let inspLabel = $(document.createElement('label'));
+                let inspectorate = insp;
+                inspLabel.attr('for', inspectorate);
+              
+                let filterInput = $(document.createElement('input'));
+                filterInput.attr({
+                  'id': inspectorate,
+                  'type': 'checkbox',
+                  'value': inspectorate
+                });
+                filterInput.appendTo(inspLabel);
+                let spanLabel = $(document.createElement('span'));
+                spanLabel.html(inspectorate);
+                spanLabel.appendTo(inspLabel);
+                inspLabel.on('click', function(e){
+                  alert(inspectorate);
+                });
+                inspLabel.appendTo(filterGroup);
+              })
+            }
+          })
+        });
+        showMoreButton.appendTo(filterGroup);
+        filterGroup.appendTo(inspectoratesContainer);
+      })
+    }
+    else{
+      createInspectoratesSearch();
+    }
+  }
   
   
     fetch('./drewno.json')
     .then(response => response.json())
     .then(arr => db = arr)
     .then(() => createTables())
-    .then(() => fillRegionFilter());
+    .then(() => fillRegionFilter())
+    .then(() => createInspectoratesSearch());
 
     let fillRegionFilter = () => {
     let filterRegion = document.getElementById('FilterRegion');
@@ -317,6 +338,7 @@ $(document).ready(function() {
       })
     }
   }
+
 });  
       
   let findInDB = (text) => {
