@@ -109,6 +109,7 @@ $(document).ready(function() {
   
     // akcja dla kliknięcia w zapis wyników wyszukiwania
     $('#SafeSearch').bind('click', function(e) {
+      showResults();
       observeAndPopup(e, 'search');
     });
   

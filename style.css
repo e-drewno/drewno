@@ -76,30 +76,6 @@ a, button, input{
     margin-bottom: 20px;
 }
 
-#SearchObserve button {
-    border: 1px solid #bbb;
-    border-radius: 3px;
-    padding: 10px 60px 10px 10px;
-    cursor: pointer;
-    text-transform: uppercase;
-    font-weight: bold;
-    background-image: url(star-empty.svg);
-    background-size: 20px;
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    background-color: #ddd;
-}
-
-#SearchObserve button.observed {
-    border: none;
-    border-radius: 3px;
-    padding: 10px 60px 10px 10px;
-    cursor: pointer;
-    text-transform: uppercase;
-    font-weight: bold;
-    background-image: url(star.svg);
-}
-
 #Sidebar {
     background-color: #fff;
     padding: 20px 20px 15px 20px;
@@ -226,7 +202,32 @@ input[type="number"], input[type="date"]{
 }
 
 #Main {
-    padding: 40px;
+    padding: 0 40px 40px;
+}
+
+#SafeSearch {
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    padding: 10px 60px 10px 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    background-image: url(star-empty.svg);
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-color: #ddd;
+    margin-bottom: 10px;
+}
+
+#SafeSearch.observed {
+    border: none;
+    border-radius: 3px;
+    padding: 10px 60px 10px 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    background-image: url(star.svg);
 }
 
 #SortAuctions {
