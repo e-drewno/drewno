@@ -17,7 +17,7 @@ $(document).ready(function() {
     let form = $('#Filters');
 
     // sortowanie wyników kolumnami
-    $('#SortAuctions > .column').bind('click', (function() {
+    $('#SortAuctions > .column').bind('click', (function(e) {
       if ($('.active-sort').length) {
         $('.active-sort').removeClass('active-sort');
       }
@@ -88,7 +88,7 @@ $(document).ready(function() {
         }
         let button = $(document.createElement('button'));
         popup.append(button);
-        button.bind('click', function() {
+        button.bind('click', function(e) {
           $('#Popup').fadeOut(function(){
             $(this).remove();
           });
@@ -119,7 +119,7 @@ $(document).ready(function() {
     });
   
     //tymczasowe do testów logowania się
-    $('.item-menu a:contains("Logowanie / Rejestracja")').bind('click', function(){
+    $('.item-menu a:contains("Logowanie / Rejestracja")').bind('click', function(e){
       if($('.logged').length){
         $(this).text('Logowanie / Rejestracja');
         $('body').removeClass('logged');
@@ -142,7 +142,7 @@ $(document).ready(function() {
           resetButton = $(document.createElement('a'));
           resetButton.attr('id', 'ResetButton');
           resetButton.text('Wyczyść');
-          resetButton.bind('click', function(){
+          resetButton.bind('click', function(e){
             form[0].reset();
             resetButton.remove();
           })
@@ -174,20 +174,23 @@ $(document).ready(function() {
     //zaznaczanie wszystkich checkboksów z grupy
     let clickHeading = (e) => {
       // sprawdzanie czy nie kliknięty span
-      if(e.target.type != 'checkbox'){
-        return false;
-      }
-      let label = $(e.currentTarget.control.checked);
-      let inputs = $(e.currentTarget).parent().children().find('input');
-      if(label[0] === true){ 
-        inputs.each(function(){
-          $(this)[0].checked = true;
-        });
+      if(e.target.type == 'checkbox'){
+        let label = $(e.currentTarget.control.checked);
+        let inputs = $(e.currentTarget).parent().children().find('input');
+        if(label[0] === true){ 
+          inputs.each(function(){
+            $(this)[0].checked = true;
+          });
+        }
+        else{
+          inputs.each(function(){
+            $(this)[0].checked = false;
+          });
+        }
+        showResults();
       }
       else{
-        inputs.each(function(){
-          $(this)[0].checked = false;
-        });
+        return false;
       }
     }
 
@@ -203,21 +206,24 @@ $(document).ready(function() {
     });
 
     // zbindowane akcje do filtrów niegenerowanych w trakcie
-    $('input:not([type="checkbox"])').bind('input', function(){
+    $('input[type="text"], input[type="number"], input[type="date"]').bind('input', function(e){
       showResults();
     });
 
-    $('input[type="checkbox"]').bind('click', function(){
-      showResults();
+    $('input[type="checkbox"]').bind('click', function(e){
+      if(!$(e.currentTarget).parent().hasClass('heading') && !$(e.currentTarget).parent().hasClass('double-heading')){
+        showResults();
+      }
+     
     });
 
     // przyklejanie sortowalnego nagłówka do górnej krawędzi
-    $(window).bind('scroll', function(){
+    $(window).bind('scroll', function(e){
       fixedSortHeader();
     });
 
     // ustawianie szerokości sortowalnego nagłówka
-    $(window).bind('resize', function(){
+    $(window).bind('resize', function(e){
       sortHeader.width(auctions.width());
     })
 
@@ -248,23 +254,45 @@ $(document).ready(function() {
         "placeholder": "Wyszukaj Nadleśnictwo"
       });
       let results = $(document.createElement('datalist'));
+      let lowerCaseArray = [];
       results.attr('id', 'SearchResults');
       inspectorates.forEach(insp => {
         let option = $(document.createElement('option'));
         option.val(insp);
         option.appendTo(results);
+        lowerCaseArray.push(insp.toLowerCase());
       });
       search.appendTo(filterGroup);
       search.bind('input', function(e){
         let value = e.target.value;
         let waitAMoment = setTimeout(function(){
           if(value == e.target.value){
-            showResults();
+            if(lowerCaseArray.includes(value.toLowerCase()) || !value.length){
+              
+              let searchLabel = $(document.createElement('label'));
+              searchLabel.attr('for', value);
+              let searchInput = $(document.createElement('input'));
+              searchInput.attr({
+                'id': value,
+                'type': 'checkbox', 
+                'name': value,
+                'checked':'checked'
+              });
+              searchLabel.text(value);
+              searchInput.prependTo(searchLabel);
+              searchLabel.appendTo(searchContainer);
+              searchLabel.bind('click', function(e){
+                $(e.currentTarget).remove();
+                showResults();
+              })
+              e.target.value = '';
+              showResults();
+            }
           }
           else{
             clearTimeout(waitAMoment);
           }
-        }, 2000);
+        }, 300);
       });
       results.appendTo(filterGroup);
       filterGroup.appendTo(searchContainer);
@@ -331,7 +359,7 @@ $(document).ready(function() {
                     'value': inspectorate
                   });
                   filterInput.appendTo(inspLabel);
-                  inspLabel.bind('click', function(){
+                  inspLabel.bind('click', function(e){
                     showResults();
                   })
                   let spanLabel = $(document.createElement('span'));
@@ -408,7 +436,7 @@ $(document).ready(function() {
             let spanLabel = $(document.createElement('span'));
             spanLabel.html(rdlpName);
             spanLabel.appendTo(rdlpLabel);
-            rdlpLabel.bind('click', function(){
+            rdlpLabel.bind('click', function(e){
               let checkedInputs = $('#FilterRegion input:checked');
               showInspectorates(checkedInputs);
               showResults();
