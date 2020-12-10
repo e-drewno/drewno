@@ -1,3 +1,4 @@
+// pseudo baza
 let db = [],
     regions = [],
     rdlps = [],
@@ -5,14 +6,18 @@ let db = [],
       
 $(document).ready(function() {
 
+  // skrypt strony głównej - można rozdzielić na poszczególne podstrony
   if($('.home'.length)){
 
     const sortHeader = $('#SortAuctions');
     const auctions = $('#Auctions');
     const tableAuctions = $('#TableAuctions');
+    // wymiar dla nagłówka sortującego
     sortHeader.width(auctions.width());
+    let form = $('#Filters');
 
-    $('#SortAuctions > .column').on('click', (function() {
+    // sortowanie wyników kolumnami
+    $('#SortAuctions > .column').bind('click', (function() {
       if ($('.active-sort').length) {
         $('.active-sort').removeClass('active-sort');
       }
@@ -27,7 +32,7 @@ $(document).ready(function() {
       }
     }));
   
-    
+    // popup-y do obserwowanych aukcji i do zapisywania parametrów wyszukiwania
     let observeAndPopup = function(el, type){
       let element = $(el.target);
       if($('#Popup').length){
@@ -35,6 +40,7 @@ $(document).ready(function() {
       }
       let popup = $(document.createElement('div'));
       popup.attr('id', 'Popup');
+      // popup wyświetlany tylko dla zalogowanych z automatycznym znikaniem
       if($('.logged').length){
         if(type === 'search'){
           if (element.hasClass('observed')) {
@@ -57,7 +63,8 @@ $(document).ready(function() {
             popup.html("<p>Dodano aukcję do obserwowanych.</p><p>Zarządzanie obserwowanymi aukcjami znajduje się w panelu użytkownika w zakładce <a href=\"#\">OBSERWOWANE AUKCJE</a>.");
           }
         }
-  
+        
+        // animacja popupa
         $(popup).hide().appendTo('body').css('opacity', 0)
         .slideDown('slow')
         .animate(
@@ -71,6 +78,7 @@ $(document).ready(function() {
           });
         }, 5000);
       }
+      // popup dla niezalogowanych
       else{
         if(type === 'search'){
           popup.html("Aby dodać do obserwowanych <a href=\"#\">zaloguj się</a>. Nie masz konta? <a href=\"#\">Zarejestruj się</a>.");
@@ -80,7 +88,7 @@ $(document).ready(function() {
         }
         let button = $(document.createElement('button'));
         popup.append(button);
-        button.on('click', function() {
+        button.bind('click', function() {
           $('#Popup').fadeOut(function(){
             $(this).remove();
           });
@@ -94,23 +102,24 @@ $(document).ready(function() {
       }
     }
   
-  
-    $('.observe').on('click', function(e) {
+    // akcja dla kliknięcia gwiazdki obserwowanych aukcji
+    $('.observe').bind('click', function(e) {
       observeAndPopup(e, 'auction');
     });
   
-  
-    $('#SafeSearch').on('click', function(e) {
+    // akcja dla kliknięcia w zapis wyników wyszukiwania
+    $('#SafeSearch').bind('click', function(e) {
       observeAndPopup(e, 'search');
     });
   
-  
-    $('.filter > label').on('click', function (e) {
+    // zwijanie/rozwijanie filtra + ikona
+    $('.filter > label').bind('click', function (e) {
+      $(this).parent().toggleClass('open');
       $(this).next('.filter-content').slideToggle('slow');
     });
   
-  
-    $('.item-menu a:contains("Logowanie / Rejestracja")').on('click', function(){
+    //tymczasowe do testów logowania się
+    $('.item-menu a:contains("Logowanie / Rejestracja")').bind('click', function(){
       if($('.logged').length){
         $(this).text('Logowanie / Rejestracja');
         $('body').removeClass('logged');
@@ -121,7 +130,53 @@ $(document).ready(function() {
       }
     });
 
+    // wyświetlanie wyników
+    let showResults = () => {
+      // json do symulowania pobierania danych
+      fetch('./test-auctions.json')
+      .then(response => response.json())
+      .then(() => {
+        let formElements = form[0].elements; 
+        let resetButton = $('#ResetButton');
+        if(!resetButton.length){
+          resetButton = $(document.createElement('a'));
+          resetButton.attr('id', 'ResetButton');
+          resetButton.text('Wyczyść');
+          resetButton.bind('click', function(){
+            form[0].reset();
+            resetButton.remove();
+          })
+          $('.form-header').append(resetButton);
+        }
+        let filters = [];
+        for (let i=0; i<formElements.length; i++){
+          let el = formElements[i];
+          if( (el.checked && (el.type == 'checkbox' || el.type == 'radio')) ||
+            ( el.value && (el.type == 'number' || el.type == 'text' || el.type == 'date' || el.type == 'search')) ){
+            if(el.parentNode.classList.value !== 'heading'){
+              filters.push(`{${el.id}: ${el.value}}`);
+            };
+          }
+        }
+
+        if(filters.length){
+          // zapytanie do bazy
+          console.log(filters);
+        }
+        else{
+          // zapytanie do bazy
+          console.log('Pokaż najnowsze');
+          resetButton.remove();
+        }        
+      })   
+    }
+
+    //zaznaczanie wszystkich checkboksów z grupy
     let clickHeading = (e) => {
+      // sprawdzanie czy nie kliknięty span
+      if(e.target.type != 'checkbox'){
+        return false;
+      }
       let label = $(e.currentTarget.control.checked);
       let inputs = $(e.currentTarget).parent().children().find('input');
       if(label[0] === true){ 
@@ -135,15 +190,38 @@ $(document).ready(function() {
         });
       }
     }
-    
-    $(window).on('scroll', function(){
+
+    // zaznaczanie wszystkich checkboksów z kilku podgrup (w stylu wszystkie aktualnie dostępne) lub z jednej podgrupy
+    $('.double-heading, .heading').bind('click', function(e){
+      clickHeading(e);
+    });
+
+    // wyłączone wysyłanie formularza
+    form.bind('submit' ,function(e){
+      e.preventDefault();
+      showResults();
+    });
+
+    // zbindowane akcje do filtrów niegenerowanych w trakcie
+    $('input:not([type="checkbox"])').bind('input', function(){
+      showResults();
+    });
+
+    $('input[type="checkbox"]').bind('click', function(){
+      showResults();
+    });
+
+    // przyklejanie sortowalnego nagłówka do górnej krawędzi
+    $(window).bind('scroll', function(){
       fixedSortHeader();
     });
 
-    $(window).on('resize', function(){
+    // ustawianie szerokości sortowalnego nagłówka
+    $(window).bind('resize', function(){
       sortHeader.width(auctions.width());
     })
 
+    // przyklejanie sortowalnego nagłówka do górnej krawędzi
     let fixedSortHeader = () => {
       if(window.scrollY >= tableAuctions.position().top){
         sortHeader.addClass('fixed');
@@ -153,8 +231,12 @@ $(document).ready(function() {
       }
     }
 
+    // wyszukiwarka nadleśnictw jeśli nie wybrany region/rdlp
     let createInspectoratesSearch = () => {
       let searchContainer = $('#FilterInspectorate');
+      if($('#FilterInspectorate .filter-group').length){
+        $(this).html('');
+      }
       let filterGroup = $(document.createElement('div'));
       filterGroup.addClass('filter-group');
       let search = $(document.createElement('input'));
@@ -169,96 +251,105 @@ $(document).ready(function() {
       results.attr('id', 'SearchResults');
       inspectorates.forEach(insp => {
         let option = $(document.createElement('option'));
-        option.val(insp)
+        option.val(insp);
         option.appendTo(results);
-        console.log(insp);
       });
       search.appendTo(filterGroup);
+      search.bind('input', function(e){
+        let value = e.target.value;
+        let waitAMoment = setTimeout(function(){
+          if(value == e.target.value){
+            showResults();
+          }
+          else{
+            clearTimeout(waitAMoment);
+          }
+        }, 2000);
+      });
       results.appendTo(filterGroup);
       filterGroup.appendTo(searchContainer);
    }
 
-   let showInspectorates = (checkedInputs) => {
-    const inspectoratesContainer = $('#FilterInspectorate');
-    inspectoratesContainer.html('');
-    console.log(checkedInputs.length);
-    if(checkedInputs.length){
-      checkedInputs.each((index, inspectorate) => {
-        let labelName = inspectorate.id;
-        let filterGroup = $(document.createElement('div'));
-        filterGroup.addClass('filter-group hidden');
-        let rdlpLabel = $(document.createElement('label'));
-        if(!$(inspectorate).parent().hasClass('heading')){
-          rdlpLabel.attr({
-            'for': labelName,
-            'class': 'heading' 
-          });
-          rdlpLabel.on('click', function(e){
-            clickHeading(e);
-          });
-        }
-        else{
-          return
-        }
+   // generowanie nadleśnictw po wybraniu rdlp
+    let showInspectorates = (checkedInputs) => {
+      const inspectoratesContainer = $('#FilterInspectorate');
+      inspectoratesContainer.html('');
+      if(checkedInputs.length){
+        checkedInputs.each((index, inspectorate) => {
+          let labelName = inspectorate.id;
+          let filterGroup = $(document.createElement('div'));
+          filterGroup.addClass('filter-group hidden');
+          let rdlpLabel = $(document.createElement('label'));
+          if(!$(inspectorate).parent().hasClass('heading')){
+            rdlpLabel.attr({
+              'for': labelName,
+              'class': 'heading' 
+            });
+            rdlpLabel.bind('click', function(e){
+              clickHeading(e);
+            });
+          }
+          else{
+            return
+          }
 
-        let filterInput = $(document.createElement('input'));
-        filterInput.attr({
-          'id': labelName,
-          'type': 'checkbox',
-          'value': labelName
-        });
-        filterInput.appendTo(rdlpLabel);
-        let spanLabel = $(document.createElement('span'));
-        spanLabel.html(labelName);
-        spanLabel.appendTo(rdlpLabel);
-        rdlpLabel.appendTo(filterGroup);
-        let showMoreButton = $(document.createElement('button'));
-        let buttonText = 'Pokaż wszystkie';
-        showMoreButton.text(buttonText);
-        showMoreButton.on('click', function(e){
-          e.preventDefault();
-          filterGroup.toggleClass('hidden');
-          showMoreButton.text(showMoreButton.text() == 'Pokaż wszystkie' ? 'Ukryj' : 'Pokaż wszystkie');
-        })
-        
-        $(db).each((index, region) => {
-          region['RDLPs'].forEach(rdlp => {
-            console.log(rdlp['RDLP']);
-            console.log(labelName);
-            if(rdlp['RDLP'] === labelName){
-              rdlp['Inspectorates'].forEach(insp => {
-                let inspLabel = $(document.createElement('label'));
-                let inspectorate = insp;
-                inspLabel.attr('for', inspectorate);
-              
-                let filterInput = $(document.createElement('input'));
-                filterInput.attr({
-                  'id': inspectorate,
-                  'type': 'checkbox',
-                  'value': inspectorate
-                });
-                filterInput.appendTo(inspLabel);
-                let spanLabel = $(document.createElement('span'));
-                spanLabel.html(inspectorate);
-                spanLabel.appendTo(inspLabel);
-                inspLabel.on('click', function(e){
-                  alert(inspectorate);
-                });
-                inspLabel.appendTo(filterGroup);
-              })
-            }
+          let filterInput = $(document.createElement('input'));
+          filterInput.attr({
+            'id': labelName,
+            'type': 'checkbox',
+            'value': labelName
+          });
+          filterInput.appendTo(rdlpLabel);
+          let spanLabel = $(document.createElement('span'));
+          spanLabel.html(labelName);
+          spanLabel.appendTo(rdlpLabel);
+          rdlpLabel.appendTo(filterGroup);
+          let showMoreButton = $(document.createElement('a'));
+          let buttonText = '+ więcej';
+          showMoreButton.text(buttonText);
+          showMoreButton.addClass('show-more');
+          showMoreButton.bind('click', function(e){
+            e.preventDefault();
+            filterGroup.toggleClass('hidden');
+            showMoreButton.text(showMoreButton.text() == '+ więcej' ? '- mniej' : '+ więcej');
           })
-        });
-        showMoreButton.appendTo(filterGroup);
-        filterGroup.appendTo(inspectoratesContainer);
-      })
+          
+          $(db).each((index, region) => {
+            region['RDLPs'].forEach(rdlp => {
+              if(rdlp['RDLP'] === labelName){
+                rdlp['Inspectorates'].forEach(insp => {
+                  let inspLabel = $(document.createElement('label'));
+                  let inspectorate = insp;
+                  inspLabel.attr('for', inspectorate);
+                  
+                  let filterInput = $(document.createElement('input'));
+                  filterInput.attr({
+                    'id': inspectorate,
+                    'type': 'checkbox',
+                    'value': inspectorate
+                  });
+                  filterInput.appendTo(inspLabel);
+                  inspLabel.bind('click', function(){
+                    showResults();
+                  })
+                  let spanLabel = $(document.createElement('span'));
+                  spanLabel.html(inspectorate);
+                  spanLabel.appendTo(inspLabel);
+                  inspLabel.appendTo(filterGroup);
+                })
+              }
+            })
+          });
+          showMoreButton.appendTo(filterGroup);
+          filterGroup.appendTo(inspectoratesContainer);
+        })
+      }
+      else{
+        createInspectoratesSearch();
+      }
     }
-    else{
-      createInspectoratesSearch();
-    }
-  }
   
-  
+    // pobieranie pseudobazy
     fetch('./drewno.json')
     .then(response => response.json())
     .then(arr => db = arr)
@@ -267,20 +358,20 @@ $(document).ready(function() {
     .then(() => createInspectoratesSearch());
 
     let fillRegionFilter = () => {
-    let filterRegion = document.getElementById('FilterRegion');
+      let filterRegion = document.getElementById('FilterRegion');
 
-    filterRegion.innerText = '';
-   
-    $(db).each((index, region) => {
-      let filterGroup = $(document.createElement('div'));
-      filterGroup.addClass('filter-group');
-      const regionNumber = region['Region'];
-      let regionLabel = $(document.createElement('label'));
-      regionLabel.attr({
-        'class': 'heading', 
-        'for': 'Region' + regionNumber
-      });
-      let filterInput = $(document.createElement('input'));
+      filterRegion.innerText = '';
+    
+      $(db).each((index, region) => {
+        let filterGroup = $(document.createElement('div'));
+        filterGroup.addClass('filter-group');
+        const regionNumber = region['Region'];
+        let regionLabel = $(document.createElement('label'));
+        regionLabel.attr({
+          'class': 'heading', 
+          'for': 'Region' + regionNumber
+        });
+        let filterInput = $(document.createElement('input'));
         filterInput.attr({
           'id': 'Region'+ regionNumber,
           'type': 'checkbox',
@@ -290,7 +381,7 @@ $(document).ready(function() {
         let spanLabel = $(document.createElement('span'));
         spanLabel.html('Region ' + regionNumber);
         spanLabel.appendTo(regionLabel);
-        regionLabel.on('click', function(e){
+        regionLabel.bind('click', function(e){
           clickHeading(e);
           let checkedInputs = $('#FilterRegion input:checked');
           showInspectorates(checkedInputs);
@@ -315,9 +406,10 @@ $(document).ready(function() {
             let spanLabel = $(document.createElement('span'));
             spanLabel.html(rdlpName);
             spanLabel.appendTo(rdlpLabel);
-            rdlpLabel.on('click', function(e){
+            rdlpLabel.bind('click', function(){
               let checkedInputs = $('#FilterRegion input:checked');
               showInspectorates(checkedInputs);
+              showResults();
             });
             rdlpLabel.appendTo(filterGroup);
           })
@@ -325,7 +417,7 @@ $(document).ready(function() {
       });
     }
 
-    //arrays for quick search
+    //tablice do szybszego wyszukiwania - póki co wyszukiwanie zrobione na html datalist
     let createTables = () => {
       db.forEach(region => {
         regions.push(region['Region']);
@@ -338,13 +430,4 @@ $(document).ready(function() {
       })
     }
   }
-
 });  
-      
-  let findInDB = (text) => {
-    auctions.forEach(arr => {
-      if(arr.includes(text)){
-        console.log(arr);
-      }
-    });
-  }

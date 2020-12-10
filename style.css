@@ -118,6 +118,23 @@ body:not(.logged) #UserPanel{
     font-size: 14px;
 }
 
+#ResetButton{
+    display: block;
+    float: right;
+    font-size: 12px;
+}
+
+#Filters .filter > label:after{
+    content: url(close-icon.svg);
+    width: 12px;
+    height: 12px;
+    float: right;
+}
+
+#Filters .filter:not(.open) > label:after{
+    transform: rotate(180deg);
+}
+
 #Filters .filter .filter-content{
     display: none;
     margin-top: 15px;
@@ -164,11 +181,14 @@ body:not(.logged) #UserPanel{
     display: none;
 }
 
-#FilterInspectorate .filter-group button{
-    width: 100%;
+#FilterInspectorate .filter-group .show-more{
+    color: #000;
+    float: right;
+    display: block;
+    font-size: 12px;
 }
 
-#Filters .filter .heading {
+#Filters .filter .heading, #Filters .filter .double-heading {
     font-weight: bold;
     padding-left: 0;
 }
@@ -317,6 +337,11 @@ input[type="number"], input[type="date"]{
 
 #Pagination ul li a{
     color: #666;
+}
+
+#Pagination ul li a.active{
+    cursor: default;
+    font-weight: bold;
 }
 
 #Popup {

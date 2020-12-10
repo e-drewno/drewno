@@ -35,14 +35,16 @@
                 <a href="#">Obserwowane wyszukiwania</a>
                 <a href="#">Obserwowane aukcje</a>
             </div>
-            <form action="" method="get" id="Filters">
-                <h2>Filtruj</h2>
-                <div class="filter">
+            <form action="" method="post" id="Filters">
+                <div class="form-header">
+                    <h2>Filtruj</h2>
+                </div>
+                <div class="filter open">
                     <label for="FilterRegion">Region</label>
-                    <div id="FilterRegion" class="filter-content" style="display: block">
+                    <div id="FilterRegion" class="filter-content" style="display: block;">
                         <div class="filter-group">
                             <label class="heading" for="Region1">
-                                <input type="checkbox" id="Region1" value="Region1" class="region">
+                                <input type="checkbox" id="Region1" value="Region1">
                                 <span>Region 1</span>
                             </label>
                             <label for="Szczecin">
@@ -60,7 +62,7 @@
                         </div>
                         <div class="filter-group">
                             <label class="heading" for="Region 2">
-                                <input type="checkbox" id="Region 2" value="Region2" class="region">
+                                <input type="checkbox" id="Region 2" value="Region2">
                                 <span>Region 2</span>
                             </label>
                             <label for="Białystok">
@@ -78,7 +80,7 @@
                         </div>
                         <div class="filter-group">
                             <label class="heading" for="Region3">
-                                <input type="checkbox" id="Region3" value="Region3" class="region">
+                                <input type="checkbox" id="Region3" value="Region3">
                                 <span>Region 3</span>
                             </label>
                             <label for="Kraków">
@@ -104,7 +106,7 @@
                         </div>
                         <div class="filter-group">
                             <label class="heading" for="Region4">
-                                <input type="checkbox" id="Region4" value="Region4" class="region">
+                                <input type="checkbox" id="Region4" value="Region4">
                                 <span>Region 4</span>
                             </label>
                             <label for="Katowice">
@@ -119,18 +121,18 @@
                     </div>
                 </div>
 
-                <div class="filter">
+                <div class="filter open">
                     <label for="FilterInspectorate">Nadleśnictwo</label>
-                    <div id="FilterInspectorate" class="filter-content" style="display: block">
+                    <div id="FilterInspectorate" class="filter-content" style="display: block;">
                         <div class="filter-group">
                         </div>
                     </div>
                 </div>
 
-                <div class="filter">
+                <div class="filter open">
                     <label for="FilterType">Wybierz gatunek</label>
-                    <div id="FilterType" class="filter-content" style="display: block">
-                        <label for="LabelAll" class="heading">
+                    <div id="FilterType" class="filter-content" style="display: block;">
+                        <label for="LabelAll" class="double-heading">
                             <input type="checkbox" id="LabelAll" value="Aktualne gatunki">
                             Aktualne gatunki
                         </label>
@@ -183,6 +185,73 @@
                 </div>
 
                 <div class="filter">
+                    <label for="FilterComercialGroup">Wybierz grupy handlowe</label>
+                    <div id="FilterComercialGroup" class="filter-content">
+                        <label for="LabelCommercialAll" class="double-heading">
+                            <input type="checkbox" id="LabelCommercialAll" value="Aktualne grupy handlowe">
+                            Aktualne grupy handlowe
+                        </label>
+                        <div class="filter-group">
+                            <label class="heading" for="Wielkowymiarowe dluzyce">
+                                <input type="checkbox" id="Wielkowymiarowe dluzyce" value="Wielkowymiarowe dluzyce">
+                                <span>Drewno wielkowymiarowe - dłużyce</span>
+                            </label>
+                            <label for="W_OKLEINA">
+                                <input type="checkbox" id="W_OKLEINA" value="W_OKLEINA">
+                                <span>W_OKLEINA</span>
+                            </label>
+                            <label for="W_SKLEJKA">
+                                <input type="checkbox" id="W_SKLEJKA"
+                                    value="W_SKLEJKA">
+                                <span>W_SKLEJKA</span>
+                            </label>
+                            <label for="W_SLUPY">
+                                <input type="checkbox" id="W_SLUPY" value="W_SLUPY">
+                                <span>W_SLUPY</span>
+                            </label>
+                            <label for="W_STANDARD">
+                                <input type="checkbox" id="W_STANDARD" value="W_STANDARD">
+                                <span>W_STANDARD</span>
+                            </label>
+                        </div>
+                        <div class="filter-group">
+                            <label class="heading" for="Wielkowymiarowe klody">
+                                <input type="checkbox" id="Wielkowymiarowe klody" value="Wielkowymiarowe klody">
+                                <span>Drewno wielkowymiarowe - kłody</span>
+                            </label>
+                            <label for="WK_STANDARD">
+                                <input type="checkbox" id="WK_STANDARD" value="WK_STANDARD">
+                                <span>WK_STANDARD</span>
+                            </label>
+                            <label for="WK_WABK_23">
+                                <input type="checkbox" id="WK_WABK_23" value="WK_WABK_23">
+                                <span>WK_WABK_23</span>
+                            </label>
+                            <label for="WK_BC">
+                                <input type="checkbox" id="WK_BC" value="WK_BC">
+                                <span>WK_BC</span>
+                            </label>
+                            <label for="WK_BC_K">
+                                <input type="checkbox" id="WK_BC_K" value="WK_BC_K">
+                                <span>WK_BC_K</span>
+                            </label>
+                            <label for="W_WBCK_3">
+                                <input type="checkbox" id="W_WBCK_3" value="W_WBCK_3">
+                                <span>W_WBCK_3</span>
+                            </label>
+                            <label for="W_WCK">
+                                <input type="checkbox" id="W_WCK" value="W_WCK">
+                                <span>W_WCK</span>
+                            </label>
+                            <label for="W_WCK_1">
+                                <input type="checkbox" id="W_WCK_1" value="W_WCK_1">
+                                <span>W_WCK_1</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter">
                     <label for="FilterAssortment">Wybierz sortyment</label>
                     <div id="FilterAssortment" class="filter-content">
                         <label for="KO">
@@ -217,11 +286,11 @@
                     <div id="FilterDate" class="filter-content">
                         <label for="FilterStart">
                             <span>Data zakończenia od</span>
-                            <input type="date" id="FilterStart" name="FilterStart" value="2020-12-04" min="2020-12-04">
+                            <input type="date" id="FilterStart" name="FilterStart" value="" min="2020-12-04">
                         </label>
                         <label for="FilterEnd">
                             <span>Data zakończenia do</span>
-                            <input type="date" id="FilterEnd" name="FilterEnd" value="2020-12-31" min="2020-12-04">
+                            <input type="date" id="FilterEnd" name="FilterEnd" value="" min="2020-12-04">
                         </label>
                     </div>
                 </div>
@@ -296,12 +365,12 @@
                     <div id="FilterReceiptDate" class="filter-content">
                         <label for="FilterReceiptDate">
                             <span>Termin odbioru od</span>
-                            <input type="date" id="FilterReceiptDate" name="FilterReceiptDate" value="2020-12-04"
+                            <input type="date" id="FilterReceiptDate" name="FilterReceiptDate" value=""
                                 min="2020-12-04">
                         </label>
                         <label for="FilterMaxReceiptDate">
                             <span>Termin odbioru do</span>
-                            <input type="date" id="FilterMaxReceiptDate" name="FilterMaxReceiptDate" value="2020-12-31"
+                            <input type="date" id="FilterMaxReceiptDate" name="FilterMaxReceiptDate" value=""
                                 min="2020-12-04">
                         </label>
                     </div>
@@ -620,10 +689,19 @@
         </div>
         <div id="Pagination">
             <ul>
-                <li><a class="active" href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
+                <li><a class="first">« Pierwsza</a></li>
+                <li><a class="prev">« Poprzednia</a></li>
+                <li><a>7</a></li>
+                <li><a>8</a></li>
+                <li><a>9</a></li>
+                <li><a>10</a></li>
+                <li><a>11</a></li>
+                <li><a>12</a></li>
+                <li><a>13</a></li>
+                <li><a>14</a></li>
+                <li><a class="active">15 z 17</a></li>
+                <li><a class="next">Następna »</a></li>
+                <li><a class="last">Ostatnia »</a></li>
             </ul>
         </div>
     </div>
