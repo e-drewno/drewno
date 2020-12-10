@@ -270,7 +270,7 @@ $(document).ready(function() {
       filterGroup.appendTo(searchContainer);
    }
 
-   // generowanie nadleśnictw po wybraniu rdlp
+    // generowanie nadleśnictw po wybraniu rdlp
     let showInspectorates = (checkedInputs) => {
       const inspectoratesContainer = $('#FilterInspectorate');
       inspectoratesContainer.html('');
@@ -282,7 +282,8 @@ $(document).ready(function() {
           let rdlpLabel = $(document.createElement('label'));
           if(!$(inspectorate).parent().hasClass('heading')){
             rdlpLabel.attr({
-              'for': labelName,
+              // dodany "Sub-" żeby nie kolidował z rdlp z filtra regiony
+              'for': 'Sub-'+labelName,
               'class': 'heading' 
             });
             rdlpLabel.bind('click', function(e){
@@ -295,7 +296,8 @@ $(document).ready(function() {
 
           let filterInput = $(document.createElement('input'));
           filterInput.attr({
-            'id': labelName,
+            // dodany "Sub-" żeby nie kolidował z rdlp z filtra regiony
+            'id': 'Sub-'+labelName,
             'type': 'checkbox',
             'value': labelName
           });
