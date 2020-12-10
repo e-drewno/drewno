@@ -282,31 +282,15 @@
                 </div>
 
                 <div class="filter">
-                    <label for="FilterDate">Zakres dat (według zakończenia)</label>
-                    <div id="FilterDate" class="filter-content">
-                        <label for="FilterStart">
-                            <span>Data zakończenia od</span>
-                            <input type="date" id="FilterStart" name="FilterStart" value="" min="2020-12-04">
-                        </label>
-                        <label for="FilterEnd">
-                            <span>Data zakończenia do</span>
-                            <input type="date" id="FilterEnd" name="FilterEnd" value="" min="2020-12-04">
-                        </label>
-                    </div>
-                </div>
-
-                <div class="filter">
                     <label for="FilterQuantity">Ilość m<sup>3</sup></label>
                     <div id="FilterQuantity" class="filter-content numbers">
                         <label for="FilterMinQuantity">
                             <span>Ilość od</span>
-                            <input type="number" id="FilterMinQuantity" name="FilterMinQuantity" value="" min="0"
-                                placeholder="0">
+                            <input type="text" id="FilterMinQuantity" name="FilterMinQuantity" value="" min="0>
                         </label>
                         <label for="FilterMaxQuantity">
                             <span>Ilość do</span>
-                            <input type="number" id="FilterMaxQuantity" name="FilterMaxQuantity" value="" min="0"
-                                placeholder="1000">
+                            <input type="text" id="FilterMaxQuantity" name="FilterMaxQuantity" value="" min="0">
                         </label>
 
                     </div>
@@ -317,13 +301,11 @@
                     <div id="FilterStartPrice" class="filter-content numbers">
                         <label for="FilterMinStartPrice">
                             <span>Cena od</span>
-                            <input type="number" id="FilterMinStartPrice" name="FilterMinStartPrice" value="" min="0"
-                                placeholder="Od">
+                            <input type="text" id="FilterMinStartPrice" name="FilterMinStartPrice" value="" min="0">
                         </label>
                         <label for="FilterMaxStartPrice">
                             <span>Cena do</span>
-                            <input type="number" id="FilterMaxStartPrice" name="FilterMaxStartPrice" value="" min="0"
-                                placeholder="Do">
+                            <input type="text" id="FilterMaxStartPrice" name="FilterMaxStartPrice" value="" min="0">
                         </label>
                     </div>
                 </div>
@@ -333,13 +315,11 @@
                     <div id="FilterPrice" class="filter-content numbers">
                         <label for="FilterMinPrice">
                             <span>Cena od</span>
-                            <input type="number" id="FilterMinPrice" name="FilterMinPrice" value="" min="0"
-                                placeholder="Od">
+                            <input type="text" id="FilterMinPrice" name="FilterMinPrice" value="" min="0">
                         </label>
                         <label for="FilterMaxPrice">
                             <span>Cena do</span>
-                            <input type="number" id="FilterMaxPrice" name="FilterMaxPrice" value="" min="0"
-                                placeholder="Do">
+                            <input type="text" id="FilterMaxPrice" name="FilterMaxPrice" value="" min="0">
                         </label>
                     </div>
                 </div>
@@ -349,13 +329,25 @@
                     <div id="FilterQtyMin" class="filter-content numbers">
                         <label for="FilterMinQtyMin">
                             <span>Ilość od</span>
-                            <input type="number" id="FilterMinQtyMin" name="FilterMinQtyMin" value="" min="0"
-                                placeholder="Od">
+                            <input type="text" id="FilterMinQtyMin" name="FilterMinQtyMin" value="" min="0">
                         </label>
                         <label for="FilterMaxQtyMin">
                             <span>Ilość do</span>
-                            <input type="number" id="FilterMaxQtyMin" name="FilterMaxQtyMin" value="" min="0"
-                                placeholder="Do">
+                            <input type="text" id="FilterMaxQtyMin" name="FilterMaxQtyMin" value="" min="0">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="filter">
+                    <label for="FilterDate">Zakres dat (według zakończenia)</label>
+                    <div id="FilterDate" class="filter-content">
+                        <label for="FilterStart">
+                            <span>Data zakończenia od</span>
+                            <input type="date" id="FilterStart" name="FilterStart" value="" min="2020-12-04">
+                        </label>
+                        <label for="FilterEnd">
+                            <span>Data zakończenia do</span>
+                            <input type="date" id="FilterEnd" name="FilterEnd" value="" min="2020-12-04">
                         </label>
                     </div>
                 </div>

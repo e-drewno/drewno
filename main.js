@@ -143,8 +143,7 @@ $(document).ready(function() {
           resetButton.attr('id', 'ResetButton');
           resetButton.text('Wyczyść');
           resetButton.bind('click', function(e){
-            form[0].reset();
-            resetButton.remove();
+            resetForm();
           })
           $('.form-header').append(resetButton);
         }
@@ -169,6 +168,12 @@ $(document).ready(function() {
           resetButton.remove();
         }        
       })   
+    }
+
+    let resetForm = () => {
+      form[0].reset();
+      showResults();
+      createInspectoratesSearch();
     }
 
     //zaznaczanie wszystkich checkboksów z grupy
@@ -241,7 +246,7 @@ $(document).ready(function() {
     let createInspectoratesSearch = () => {
       let searchContainer = $('#FilterInspectorate');
       if($('#FilterInspectorate .filter-group').length){
-        $(this).html('');
+        searchContainer.html('');
       }
       let filterGroup = $(document.createElement('div'));
       filterGroup.addClass('filter-group');
@@ -340,14 +345,33 @@ $(document).ready(function() {
           showMoreButton.addClass('show-more');
           showMoreButton.bind('click', function(e){
             e.preventDefault();
-            filterGroup.toggleClass('hidden');
-            showMoreButton.text(showMoreButton.text() == '+ więcej' ? '- mniej' : '+ więcej');
+            let moreContainer = $(this).prev();
+            if(moreContainer.hasClass('hidden')){
+              moreContainer.toggleClass('hidden').css('opacity', 0)
+              .slideDown('slow')
+              .animate(
+                { opacity: 1 },
+                { queue: false, duration: 'slow' }
+              );
+              showMoreButton.text('- mniej');
+            }
+            else{
+              moreContainer.toggleClass('hidden').css('opacity', 1)
+              .slideUp('slow')
+              .animate(
+                { opacity: 0 },
+                { queue: false, duration: 'slow' }
+              );
+              showMoreButton.text('+ więcej')
+            }
           })
           
           $(db).each((index, region) => {
             region['RDLPs'].forEach(rdlp => {
               if(rdlp['RDLP'] === labelName){
-                rdlp['Inspectorates'].forEach(insp => {
+                let moreContainer = $(document.createElement('div'));
+                moreContainer.addClass('more-container hidden');
+                rdlp['Inspectorates'].forEach((insp, i) => {
                   let inspLabel = $(document.createElement('label'));
                   let inspectorate = insp;
                   inspLabel.attr('for', inspectorate);
@@ -365,8 +389,14 @@ $(document).ready(function() {
                   let spanLabel = $(document.createElement('span'));
                   spanLabel.html(inspectorate);
                   spanLabel.appendTo(inspLabel);
-                  inspLabel.appendTo(filterGroup);
+                  if(i < 5){
+                    inspLabel.appendTo(filterGroup);
+                  }
+                  else{
+                    moreContainer.append(inspLabel);
+                  }
                 })
+                moreContainer.appendTo(filterGroup);
               }
             })
           });

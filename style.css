@@ -137,7 +137,6 @@ body:not(.logged) #UserPanel{
 
 #Filters .filter .filter-content{
     display: none;
-    margin-top: 15px;
 }
 
 #Filters .filter .filter-content label{
@@ -173,11 +172,17 @@ body:not(.logged) #UserPanel{
     cursor: pointer;
 }
 
-#FilterInspectorate .filter-group{
-    margin: 10px 0;
+.filter-group{
+    overflow: hidden;
+    margin: 15px 0 0;
 }
 
+/* 
 #FilterInspectorate .filter-group.hidden label:nth-child(n+7) {
+    display: none;
+} */
+
+#FilterInspectorate .filter-group .more-container{
     display: none;
 }
 
