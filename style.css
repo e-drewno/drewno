@@ -113,6 +113,7 @@ body:not(.logged) #UserPanel{
 
 #Filters .filter .filter-content{
     display: none;
+    margin-top: 15px;
 }
 
 #Filters .filter .filter-content label{
@@ -196,9 +197,13 @@ input[type="checkbox"] + span{
     vertical-align: top;
 }
 
-input[type="number"], input[type="date"]{
+.numbers input[type="text"], input[type="number"], input[type="date"]{
     margin: 5px 0;
     height: calc(2.55rem + 2px);
+}
+
+.numbers label span, .dates label span{
+    font-size: 11px;
 }
 
 #Main {
@@ -239,7 +244,7 @@ input[type="number"], input[type="date"]{
 #SortAuctions .column {
     position: relative;
     cursor: pointer;
-    font-size: .6vw;
+    font-size: 12px;
     color: #666;
     font-weight: 600;
     text-align: center;
@@ -259,9 +264,9 @@ input[type="number"], input[type="date"]{
 
 #SortAuctions .column.active-sort span:after{
     display: inline-block;
-    width: .6vw;
-    height: .6vw;
-    margin-left: .6vw;
+    width: 12px;
+    height: 12px;
+    margin-left: 12px;
     top: 8px;
 }
 
@@ -271,19 +276,19 @@ input[type="number"], input[type="date"]{
 
 #SortAuctions, #Auctions .row {
     display: grid;
-    grid-template-columns: 4% 6% 8% 6% 13% 7% 5% 6% 5% 8% 10% 8% 6% 8%;
+    grid-template-columns: 50px 80px 128px 90px 200px 105px 80px 100px 80px 125px 155px 120px 90px 120px;
     justify-content: space-between;
     align-items: center;
     background-color: #fff;
 }
 
 #Auctions{
-    font-size: .65vw;
+    font-size: 12px;
 }
 
 #Auctions .row{
     transition: background-color 0.3s ease-in-out;
-    margin-bottom: .3vw;
+    margin-bottom: 6px;
     border: 1px solid #eee;
     border-radius: 2px;
 }
@@ -294,7 +299,7 @@ input[type="number"], input[type="date"]{
 }
 
 #SortAuctions .column, #Auctions .column{
-    padding: .5vw .2vw;
+    padding: 12px 4px;
     text-align: center;
     position: relative;
     width: 100%;
@@ -303,12 +308,12 @@ input[type="number"], input[type="date"]{
 
 #SortAuctions .column sup, #Auctions .column sup{
     position: absolute;
-    top: 2px;
+    top: 5px;
 }
 
 #Auctions button.observe {
-    width: 1vw;
-    height: 1vw;
+    width: 20px;
+    height: 20px;
     align-self: center;
     justify-self: center;
     background-color: transparent;
