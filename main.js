@@ -4,6 +4,16 @@ let db = [],
     rdlps = [],
     inspectorates = [],
     manualSearched = [];
+
+let filters = {
+    "rdlps": [], 
+    "inspectorates": [],
+    "types": [],
+    "commercialGroups": [],
+    "assortments": [],
+    "others": [],
+    "actions" : {"page": "", "sort" : {}}
+  }
       
 $(document).ready(function() {
 
@@ -17,21 +27,30 @@ $(document).ready(function() {
     sortHeader.width(auctions.width());
     let form = $('#Filters');
 
+    let sort = (column, order) => {
+      filters['actions']['sort']['column'] = column;
+      filters['actions']['sort']['order'] = order;
+      showResults();
+    }
+
     // sortowanie wyników kolumnami
     $('#SortAuctions > .column').bind('click', (function(e) {
-      console.log(e);
       if ($('.active-sort').length) {
         $('.active-sort').removeClass('active-sort');
       }
+      let order;
+      let type = $(this).attr('data-type');
       $(this).addClass('active-sort');
       if ($('.desc').length) {
         $('.desc').removeClass('desc');
-        $(this).addClass('asc');
+        order = 'asc';
       }
       else {
         $(this).removeClass('asc');
-        $(this).addClass('desc');
+        order = 'desc';
       }
+      $(this).addClass(order);
+        sort(type, order);
     }));
   
     // popup-y do obserwowanych aukcji i do zapisywania parametrów wyszukiwania
@@ -168,16 +187,7 @@ $(document).ready(function() {
             manualSearched = [];
           })
           $('.form-header').append(resetButton);
-        }
-        let filters = {
-          "rdlps": [], 
-          "inspectorates": [],
-          "types": [],
-          "commercialGroups": [],
-          "assortments": [],
-          "others": []
-      }
-          
+        } 
   
         for (let i=0; i<formElements.length; i++){
           let el = formElements[i];
@@ -214,11 +224,15 @@ $(document).ready(function() {
           // zapytanie do bazy
           console.log(filters);
         }
+        else if(filters['actions']['sort']['column'].length || filters['actions']['sort']['order'].length){
+          console.log(filters);
+        }
         else{
           // zapytanie do bazy
           console.log('Pokaż najnowsze');
           resetButton.remove();
-        }        
+        } 
+        console.log(filters);       
       })   
     }
 
