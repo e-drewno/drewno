@@ -91,7 +91,7 @@ body:not(.logged) #UserPanel{
 
 #Filters, #UserPanel{
     background-color: #fff;
-    margin: 10px 0;
+    margin: 0 0 10px;
     padding: 10px 30px 30px; 
     font-size: 14px;
     border: 1px solid #ededed;
@@ -125,7 +125,7 @@ body:not(.logged) #UserPanel{
 #Filters .filter .filter-content label{
     cursor: pointer;
     width: 100%;
-    display: block;
+    display: flex;
     margin-bottom: 5px;
     font-size: 12px;
 }
@@ -141,7 +141,7 @@ body:not(.logged) #UserPanel{
 }
 
 #Filters .filter .filter-content .filter-group label:not(.heading){
-    padding-left: 25px;
+    padding-left: 15px;
 }
 
 #Filters .filter > label {
@@ -157,7 +157,6 @@ body:not(.logged) #UserPanel{
 
 .filter-group{
     overflow: hidden;
-    margin: 15px 0 0;
 }
 
 /* 
