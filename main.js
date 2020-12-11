@@ -2,7 +2,8 @@
 let db = [],
     regions = [],
     rdlps = [],
-    inspectorates = [];
+    inspectorates = [],
+    manualSearched = [];
       
 $(document).ready(function() {
 
@@ -131,6 +132,20 @@ $(document).ready(function() {
       }
     });
 
+    // generowanie datalist bez wcześniej wybranych
+    let generateNewDatalist = () => {
+      if($('#SearchResults').length){
+        $('#SearchResults').html('');
+      }
+      console.log(inspectorates);
+      console.log(manualSearched);
+      inspectorates.filter(x => !manualSearched.includes(x)).forEach(insp => {
+        let option = $(document.createElement('option'));
+        option.val(insp);
+        option.appendTo($('#SearchResults'));
+      });
+    }
+
     // wyświetlanie wyników
     let showResults = () => {
       // json do symulowania pobierania danych
@@ -145,6 +160,7 @@ $(document).ready(function() {
           resetButton.text('Wyczyść');
           resetButton.bind('click', function(e){
             resetForm();
+            manualSearched = [];
           })
           $('.form-header').append(resetButton);
         }
@@ -155,10 +171,14 @@ $(document).ready(function() {
             ( el.value && (el.type == 'number' || el.type == 'text' || el.type == 'date' || el.type == 'search')) ){
             if(el.parentNode.classList.value !== 'heading'){
               filters.push(`{${el.id}: ${el.value}}`);
+              if($(el).hasClass('manual-searched')){
+                console.log(el);
+                manualSearched.push(el.id);
+              }
             };
           }
         }
-
+        generateNewDatalist();
         if(filters.length){
           // zapytanie do bazy
           console.log(filters);
@@ -260,21 +280,18 @@ $(document).ready(function() {
         "placeholder": "Wyszukaj Nadleśnictwo"
       });
       let results = $(document.createElement('datalist'));
-      let lowerCaseArray = [];
       results.attr('id', 'SearchResults');
-      inspectorates.forEach(insp => {
+      inspectorates.filter(x => !manualSearched.includes(x)).forEach(insp => {
         let option = $(document.createElement('option'));
         option.val(insp);
         option.appendTo(results);
-        lowerCaseArray.push(insp.toLowerCase());
       });
       search.appendTo(filterGroup);
       search.bind('input', function(e){
         let value = e.target.value;
         let waitAMoment = setTimeout(function(){
           if(value == e.target.value){
-            if(lowerCaseArray.includes(value.toLowerCase())){
-              
+            if(inspectorates.includes(value)){
               let searchLabel = $(document.createElement('label'));
               searchLabel.attr('for', value);
               let searchInput = $(document.createElement('input'));
@@ -282,12 +299,15 @@ $(document).ready(function() {
                 'id': value,
                 'type': 'checkbox', 
                 'name': value,
-                'checked':'checked'
+                'checked':'checked', 
+                'class': 'manual-searched'
               });
               searchLabel.text(value);
               searchInput.prependTo(searchLabel);
               searchLabel.appendTo(searchContainer);
               searchLabel.bind('click', function(e){
+                // usuwanie z tablicy ręcznych wyszukiwań
+                manualSearched = manualSearched.filter(item => item !== value);
                 $(e.currentTarget).remove();
                 showResults();
               })
