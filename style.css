@@ -77,27 +77,33 @@ a, button, input{
 }
 
 #Sidebar {
-    background-color: #fff;
-    padding: 20px 20px 15px 20px;
     margin: 0 0 25px 20px;
-    border: 1px solid #ededed;
 }
 
 body:not(.logged) #UserPanel{
     display: none;
 }
 
-#Filters .filter, #UserPanel{
+#Filters .form-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+#Filters, #UserPanel{
     background-color: #fff;
     margin: 10px 0;
-    padding: 10px;
+    padding: 10px 30px 30px; 
     font-size: 14px;
+    border: 1px solid #ededed;
 }
 
 #ResetButton{
-    display: block;
-    float: right;
     font-size: 12px;
+    align-self: center;
+}
+
+#Filters .filter{
+    margin-top: 15px;
 }
 
 #Filters .filter > label:after{
@@ -293,6 +299,10 @@ input[type="checkbox"] + span{
     border-radius: 2px;
 }
 
+#Auctions .row:hover{
+    background-color: #fafafa;
+}
+
 #Auctions .column{
     display: grid;
     align-items: center;
@@ -332,14 +342,17 @@ input[type="checkbox"] + span{
 
 #Pagination{
     grid-column: 1 /3;
+    text-align: center;
+    margin: 20px 20px 40px;
 }
 
 #Pagination ul {
     list-style: none;
-    margin: 20px 0;
+    margin: 0;
     text-align: center;
     display: flex;
     justify-content: center;
+    padding: 0;
 }
 
 #Pagination ul li{
@@ -353,6 +366,11 @@ input[type="checkbox"] + span{
 #Pagination ul li a.active{
     cursor: default;
     font-weight: bold;
+}
+
+#Pagination span{
+    font-size: 85%;
+    color: #666;
 }
 
 #Popup {
