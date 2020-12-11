@@ -35,149 +35,70 @@
                 <a href="#">Obserwowane wyszukiwania</a>
                 <a href="#">Obserwowane aukcje</a>
             </div>
-            <form action="" method="post" id="Filters">
+            <form action="" method="get" id="Filters">
                 <div class="form-header">
                     <h2>Filtruj</h2>
                 </div>
+                
                 <div class="filter open">
                     <label for="FilterRegion">Region</label>
-                    <div id="FilterRegion" class="filter-content" style="display: block;">
-                        <div class="filter-group">
-                            <label class="heading" for="Region1">
-                                <input type="checkbox" id="Region1" value="Region1">
-                                <span>Region 1</span>
-                            </label>
-                            <label for="Szczecin">
-                                <input type="checkbox" id="Szczecin" value="Szczecin">
-                                <span>Szczecin</span>
-                            </label>
-                            <label for="Szczecinek">
-                                <input type="checkbox" id="Szczecinek" value="Szczecinek">
-                                <span>Szczecinek</span>
-                            </label>
-                            <label for="Toruń">
-                                <input type="checkbox" id="Toruń" value="Toruń">
-                                <span>Toruń</span>
-                            </label>
-                        </div>
-                        <div class="filter-group">
-                            <label class="heading" for="Region 2">
-                                <input type="checkbox" id="Region 2" value="Region2">
-                                <span>Region 2</span>
-                            </label>
-                            <label for="Białystok">
-                                <input type="checkbox" id="Białystok" value="Białystok">
-                                <span>Białystok</span>
-                            </label>
-                            <label for="Gdańsk">
-                                <input type="checkbox" id="Gdańsk" value="Gdańsk">
-                                <span>Gdańsk</span>
-                            </label>
-                            <label for="Warszawa">
-                                <input type="checkbox" id="Warszawa" value="Warszawa">
-                                <span>Warszawa</span>
-                            </label>
-                        </div>
-                        <div class="filter-group">
-                            <label class="heading" for="Region3">
-                                <input type="checkbox" id="Region3" value="Region3">
-                                <span>Region 3</span>
-                            </label>
-                            <label for="Kraków">
-                                <input type="checkbox" id="Kraków" value="Kraków">
-                                <span>Kraków</span>
-                            </label>
-                            <label for="Krosno">
-                                <input type="checkbox" id="Krosno" value="Krosno">
-                                <span>Krosno</span>
-                            </label>
-                            <label for="Lublin">
-                                <input type="checkbox" id="Lublin" value="Lublin">
-                                <span>Lublin</span>
-                            </label>
-                            <label for="Radom">
-                                <input type="checkbox" id="Radom" value="Radom">
-                                <span>Radom</span>
-                            </label>
-                            <label for="Łódź">
-                                <input type="checkbox" id="Łódź" value="Łódź">
-                                <span>Łódź</span>
-                            </label>
-                        </div>
-                        <div class="filter-group">
-                            <label class="heading" for="Region4">
-                                <input type="checkbox" id="Region4" value="Region4">
-                                <span>Region 4</span>
-                            </label>
-                            <label for="Katowice">
-                                <input type="checkbox" id="Katowice" value="Katowice">
-                                <span>Katowice</span>
-                            </label>
-                            <label for="Wrocław">
-                                <input type="checkbox" id="Wrocław" value="Wrocław">
-                                <span>Wrocław</span>
-                            </label>
-                        </div>
-                    </div>
+                    <div id="FilterRegion" class="filter-content" style="display: block;"><div class="filter-group"><label class="heading" for="Region1"><input id="Region1" type="checkbox" value="Region1"><span>Region 1</span></label><label for="RDLP Piła"><input id="RDLP Piła" type="checkbox" value="RDLP Piła" name="rdlps[]"><span>RDLP Piła</span></label><label for="RDLP Szczecin"><input id="RDLP Szczecin" type="checkbox" value="RDLP Szczecin" name="rdlps[]"><span>RDLP Szczecin</span></label><label for="RDLP Szczecinek"><input id="RDLP Szczecinek" type="checkbox" value="RDLP Szczecinek" name="rdlps[]"><span>RDLP Szczecinek</span></label><label for="RDLP Toruń"><input id="RDLP Toruń" type="checkbox" value="RDLP Toruń" name="rdlps[]"><span>RDLP Toruń</span></label></div><div class="filter-group"><label class="heading" for="Region2"><input id="Region2" type="checkbox" value="Region2"><span>Region 2</span></label><label for="RDLP Białystok"><input id="RDLP Białystok" type="checkbox" value="RDLP Białystok" name="rdlps[]"><span>RDLP Białystok</span></label><label for="RDLP Gdańsk"><input id="RDLP Gdańsk" type="checkbox" value="RDLP Gdańsk" name="rdlps[]"><span>RDLP Gdańsk</span></label><label for="RDLP Olsztyn"><input id="RDLP Olsztyn" type="checkbox" value="RDLP Olsztyn" name="rdlps[]"><span>RDLP Olsztyn</span></label><label for="RDLP Warszawa"><input id="RDLP Warszawa" type="checkbox" value="RDLP Warszawa" name="rdlps[]"><span>RDLP Warszawa</span></label></div><div class="filter-group"><label class="heading" for="Region3"><input id="Region3" type="checkbox" value="Region3"><span>Region 3</span></label><label for="RDLP Kraków"><input id="RDLP Kraków" type="checkbox" value="RDLP Kraków" name="rdlps[]"><span>RDLP Kraków</span></label><label for="RDLP Krosno"><input id="RDLP Krosno" type="checkbox" value="RDLP Krosno" name="rdlps[]"><span>RDLP Krosno</span></label><label for="RDLP Lublin"><input id="RDLP Lublin" type="checkbox" value="RDLP Lublin" name="rdlps[]"><span>RDLP Lublin</span></label><label for="RDLP Łódź"><input id="RDLP Łódź" type="checkbox" value="RDLP Łódź" name="rdlps[]"><span>RDLP Łódź</span></label><label for="RDLP Radom"><input id="RDLP Radom" type="checkbox" value="RDLP Radom" name="rdlps[]"><span>RDLP Radom</span></label></div><div class="filter-group"><label class="heading" for="Region4"><input id="Region4" type="checkbox" value="Region4"><span>Region 4</span></label><label for="RDLP Katowice"><input id="RDLP Katowice" type="checkbox" value="RDLP Katowice" name="rdlps[]"><span>RDLP Katowice</span></label><label for="RDLP Poznań"><input id="RDLP Poznań" type="checkbox" value="RDLP Poznań" name="rdlps[]"><span>RDLP Poznań</span></label><label for="RDLP Wrocław"><input id="RDLP Wrocław" type="checkbox" value="RDLP Wrocław" name="rdlps[]"><span>RDLP Wrocław</span></label><label for="RDLP Zielona Góra"><input id="RDLP Zielona Góra" type="checkbox" value="RDLP Zielona Góra" name="rdlps[]"><span>RDLP Zielona Góra</span></label></div></div>
                 </div>
 
                 <div class="filter open">
                     <label for="FilterInspectorate">Nadleśnictwo</label>
-                    <div id="FilterInspectorate" class="filter-content" style="display: block;">
-                        <div class="filter-group">
-                        </div>
-                    </div>
+                    <div id="FilterInspectorate" class="filter-content" style="display: block;"><div class="filter-group"><input id="Search" list="SearchResults" type="search" name="Search" placeholder="Wyszukaj Nadleśnictwo"><datalist id="SearchResults"><option value="Nadleśnictwo Człopa"></option><option value="Nadleśnictwo Durowo"></option><option value="Nadleśnictwo Jastrowie"></option><option value="Nadleśnictwo Kaczory"></option><option value="Nadleśnictwo Kalisz Pomorski"></option><option value="Nadleśnictwo Krucz"></option><option value="Nadleśnictwo Krzyż"></option><option value="Nadleśnictwo Lipka"></option><option value="Nadleśnictwo Mirosławiec"></option><option value="Nadleśnictwo Okonek"></option><option value="Nadleśnictwo Płytnica"></option><option value="Nadleśnictwo Podanin"></option><option value="Nadleśnictwo Potrzebowice"></option><option value="Nadleśnictwo Sarbia"></option><option value="Nadleśnictwo Trzcianka"></option><option value="Nadleśnictwo Tuczno"></option><option value="Nadleśnictwo Wałcz"></option><option value="Nadleśnictwo Wronki"></option><option value="Nadleśnictwo Zdrojowa Góra"></option><option value="Nadleśnictwo Złotów"></option><option value="Nadleśnictwo Barlinek"></option><option value="Nadleśnictwo Bierzwnik"></option><option value="Nadleśnictwo Bogdaniec"></option><option value="Nadleśnictwo Bolewice"></option><option value="Nadleśnictwo Chojna"></option><option value="Nadleśnictwo Choszczno"></option><option value="Nadleśnictwo Dębno"></option><option value="Nadleśnictwo Dobrzany"></option><option value="Nadleśnictwo Drawno"></option><option value="Nadleśnictwo Głusko"></option><option value="Nadleśnictwo Goleniów"></option><option value="Nadleśnictwo Gryfice"></option><option value="Nadleśnictwo Gryfino"></option><option value="Nadleśnictwo Karwin"></option><option value="Nadleśnictwo Kliniska"></option><option value="Nadleśnictwo Kłodawa"></option><option value="Nadleśnictwo Lubniewice"></option><option value="Nadleśnictwo Łobez"></option><option value="Nadleśnictwo Mieszkowice"></option><option value="Nadleśnictwo Międzychód"></option><option value="Nadleśnictwo Międzyrzecz"></option><option value="Nadleśnictwo Międzyzdroje"></option><option value="Nadleśnictwo Myślibórz"></option><option value="Nadleśnictwo Nowogard"></option><option value="Nadleśnictwo Ośno Lubuskie"></option><option value="Nadleśnictwo Resko"></option><option value="Nadleśnictwo Rokita"></option><option value="Nadleśnictwo Różańsko"></option><option value="Nadleśnictwo Rzepin"></option><option value="Nadleśnictwo Skwierzyna"></option><option value="Nadleśnictwo Smolarz"></option><option value="Nadleśnictwo Strzelce Krajeńskie"></option><option value="Nadleśnictwo Sulęcin"></option><option value="Nadleśnictwo Trzciel"></option><option value="Nadleśnictwo Trzebież"></option><option value="Ośrodek Transportu Leśnego w Gorzowie Wlkp."></option><option value="Zespół Składnic Lasów Państwowych w Gorzowie Wlkp."></option><option value="Zespół Składnic Lasów Państwowych w Stargardzie"></option><option value="Białogard"></option><option value="Bobolice"></option><option value="Borne"></option><option value="Bytów"></option><option value="Czaplinek"></option><option value="Czarne"></option><option value="Czarnobór"></option><option value="Człuchów"></option><option value="Damnica"></option><option value="Drawsko"></option><option value="Dretyń"></option><option value="Gościno"></option><option value="Karnieszewice"></option><option value="Leśny"></option><option value="Łupawa"></option><option value="Manowo"></option><option value="Miastko"></option><option value="Niedźwiady"></option><option value="Osusznica"></option><option value="Polanów"></option><option value="Połczyn"></option><option value="Sławno"></option><option value="Szczecinek"></option><option value="Świdwin"></option><option value="Świerczyna"></option><option value="Trzebielino"></option><option value="Tychowo"></option><option value="Ustka"></option><option value="Warcino"></option><option value="Złocieniec"></option><option value="Nadleśnictwo Brodnica"></option><option value="Nadleśnictwo Bydgoszcz"></option><option value="Nadleśnictwo Cierpiszewo"></option><option value="Nadleśnictwo Czersk"></option><option value="Nadleśnictwo Dąbrowa"></option><option value="Nadleśnictwo Dobrzejewice"></option><option value="Nadleśnictwo Gniewkowo"></option><option value="Nadleśnictwo Golub-Dobrzyń"></option><option value="Nadleśnictwo Gołąbki"></option><option value="Nadleśnictwo Jamy"></option><option value="Nadleśnictwo Lutówko"></option><option value="Nadleśnictwo Miradz"></option><option value="Nadleśnictwo Osie"></option><option value="Nadleśnictwo Przymuszewo"></option><option value="Nadleśnictwo Różanna"></option><option value="Nadleśnictwo Runowo"></option><option value="Nadleśnictwo Rytel"></option><option value="Nadleśnictwo Skrwilno"></option><option value="Nadleśnictwo Solec Kujawski"></option><option value="Nadleśnictwo Szubin"></option><option value="Nadleśnictwo Toruń"></option><option value="Nadleśnictwo Trzebciny"></option><option value="Nadleśnictwo Tuchola"></option><option value="Nadleśnictwo Włocławek"></option><option value="Nadleśnictwo Woziwoda"></option><option value="Nadleśnictwo Zamrzenica"></option><option value="Nadleśnictwo Żołędowo"></option><option value="Nadleśnictwo Augustów"></option><option value="Nadleśnictwo Białowieża"></option><option value="Nadleśnictwo Bielsk"></option><option value="Nadleśnictwo Borki"></option><option value="Nadleśnictwo Browsk"></option><option value="Nadleśnictwo Czarna Białostocka"></option><option value="Nadleśnictwo Czerwony Dwór"></option><option value="Nadleśnictwo Dojlidy"></option><option value="Nadleśnictwo Drygały"></option><option value="Nadleśnictwo Ełk"></option><option value="Nadleśnictwo Giżycko"></option><option value="Nadleśnictwo Głęboki Bród"></option><option value="Nadleśnictwo Gołdap"></option><option value="Nadleśnictwo Hajnówka"></option><option value="Nadleśnictwo Knyszyn"></option><option value="Nadleśnictwo Krynki"></option><option value="Nadleśnictwo Łomża"></option><option value="Nadleśnictwo Maskulińskie"></option><option value="Nadleśnictwo Nowogród"></option><option value="Nadleśnictwo Nurzec"></option><option value="Nadleśnictwo Olecko"></option><option value="Nadleśnictwo Pisz"></option><option value="Nadleśnictwo Płaska"></option><option value="Nadleśnictwo Pomorze"></option><option value="Nadleśnictwo Rajgród"></option><option value="Nadleśnictwo Rudka"></option><option value="Nadleśnictwo Supraśl"></option><option value="Nadleśnictwo Suwałki"></option><option value="Nadleśnictwo Szczebra"></option><option value="Nadleśnictwo Waliły"></option><option value="Nadleśnictwo Żednia"></option><option value="RDLP Białystok"></option><option value="Zakład Transportu i Spedycji Lasów Państwowych w Giżycku"></option><option value="Nadleśnictwo Cewice"></option><option value="Nadleśnictwo Choczewo"></option><option value="Nadleśnictwo Elbląg"></option><option value="Nadleśnictwo Gdańsk"></option><option value="Nadleśnictwo Kaliska"></option><option value="Nadleśnictwo Kartuzy"></option><option value="Nadleśnictwo Kolbudy"></option><option value="Nadleśnictwo Kościerzyna"></option><option value="Nadleśnictwo Kwidzyn"></option><option value="Nadleśnictwo Lębork"></option><option value="Nadleśnictwo Lipusz"></option><option value="Nadleśnictwo Lubichowo"></option><option value="Nadleśnictwo Starogard"></option><option value="Nadleśnictwo Strzebielino"></option><option value="Nadleśnictwo Wejherowo"></option><option value="RDLP Gdańsk"></option><option value="Zakład Przerobu Drewna Lasów Państwowych w Lęborku"></option><option value="Nadleśnictwo Bartoszyce"></option><option value="Nadleśnictwo Ciechanów"></option><option value="Nadleśnictwo Dobrocin"></option><option value="Nadleśnictwo Dwukoły"></option><option value="Nadleśnictwo Górowo Iławeckie"></option><option value="Nadleśnictwo Iława"></option><option value="Nadleśnictwo Jagiełek"></option><option value="Nadleśnictwo Jedwabno"></option><option value="Nadleśnictwo Korpele"></option><option value="Nadleśnictwo Kudypy"></option><option value="Nadleśnictwo Lidzbark"></option><option value="Nadleśnictwo Miłomłyn"></option><option value="Nadleśnictwo Młynary"></option><option value="Nadleśnictwo Mrągowo"></option><option value="Nadleśnictwo Myszyniec"></option><option value="Nadleśnictwo Nidzica"></option><option value="Nadleśnictwo Nowe Ramuki"></option><option value="Nadleśnictwo Olsztyn"></option><option value="Nadleśnictwo Olsztynek"></option><option value="Nadleśnictwo Orneta"></option><option value="Nadleśnictwo Ostrołęka"></option><option value="Nadleśnictwo Parciaki"></option><option value="Nadleśnictwo Przasnysz"></option><option value="Nadleśnictwo Spychowo"></option><option value="Nadleśnictwo Srokowo"></option><option value="Nadleśnictwo Stare Jabłonki"></option><option value="Nadleśnictwo Strzałowo"></option><option value="Nadleśnictwo Susz"></option><option value="Nadleśnictwo Szczytno"></option><option value="Nadleśnictwo Wichrowo"></option><option value="Nadleśnictwo Wielbark"></option><option value="Nadleśnictwo Wipsowo"></option><option value="Nadleśnictwo Zaporowo"></option><option value="RDLP Olsztyn"></option><option value="Zakład Produkcyjno-Usługowo-Handlowy Lasów Państwowych w Olsztyn"></option><option value="Celestynów"></option><option value="Chojnów"></option><option value="Drewnica"></option><option value="Garwolin"></option><option value="Jabłonna"></option><option value="Łochów"></option><option value="Łuków"></option><option value="Mińsk"></option><option value="Ostrów"></option><option value="Płońsk"></option><option value="Pułtusk"></option><option value="Siedlce"></option><option value="Sokołów"></option><option value="Wyszków"></option><option value="Warszawa"></option><option value="Zespół Składnic Lasów Państwowych w Siedlcach"></option><option value="Nadleśnictwo Brzesko"></option><option value="Nadleśnictwo Dąbrowa Tarnowska"></option><option value="Nadleśnictwo Dębica"></option><option value="Nadleśnictwo Gorlice"></option><option value="Nadleśnictwo Gromnik"></option><option value="Nadleśnictwo Krościenko"></option><option value="Nadleśnictwo Krzeszowice"></option><option value="Nadleśnictwo Limanowa"></option><option value="Nadleśnictwo Łosie"></option><option value="Nadleśnictwo Miechów"></option><option value="Nadleśnictwo Myślenice"></option><option value="Nadleśnictwo Nawojowa"></option><option value="Nadleśnictwo Niepołomice"></option><option value="Nadleśnictwo Nowy Targ"></option><option value="Nadleśnictwo Piwniczna"></option><option value="Nadleśnictwo Stary Sącz"></option><option value="Nadleśnictwo Baligród"></option><option value="Nadleśnictwo Bircza"></option><option value="Nadleśnictwo Brzozów"></option><option value="Nadleśnictwo Cisna"></option><option value="Nadleśnictwo Dukla"></option><option value="Nadleśnictwo Dynów"></option><option value="Nadleśnictwo Głogów Małopolski"></option><option value="Nadleśnictwo Jarosław"></option><option value="Nadleśnictwo Kańczuga"></option><option value="Nadleśnictwo Kolbuszowa"></option><option value="Nadleśnictwo Kołaczyce"></option><option value="Nadleśnictwo Komańcza"></option><option value="Nadleśnictwo Krasiczyn"></option><option value="Nadleśnictwo Lesko"></option><option value="Nadleśnictwo Leżajsk"></option><option value="Nadleśnictwo Lubaczów"></option><option value="Nadleśnictwo Lutowiska"></option><option value="Nadleśnictwo Mielec"></option><option value="Nadleśnictwo Narol"></option><option value="Nadleśnictwo Oleszyce"></option><option value="Nadleśnictwo Rymanów"></option><option value="Nadleśnictwo Sieniawa"></option><option value="Nadleśnictwo Strzyżów"></option><option value="Nadleśnictwo Stuposiany"></option><option value="Nadleśnictwo Tuszyma"></option><option value="Nadleśnictwo Ustrzyki Dolne"></option><option value="Nadleśnictwo Wetlina"></option><option value="Nadleśnictwo Biała Podlaska"></option><option value="Nadleśnictwo Biłgoraj"></option><option value="Nadleśnictwo Chełm"></option><option value="Nadleśnictwo Chotyłów"></option><option value="Nadleśnictwo Gościeradów"></option><option value="Nadleśnictwo Janów"></option><option value="Nadleśnictwo Józefów"></option><option value="Nadleśnictwo Krasnystaw"></option><option value="Nadleśnictwo Kraśnik"></option><option value="Nadleśnictwo Lubartów"></option><option value="Nadleśnictwo Międzyrzec"></option><option value="Nadleśnictwo Mircze"></option><option value="Nadleśnictwo Nowa Dęba"></option><option value="Nadleśnictwo Parczew"></option><option value="Nadleśnictwo Puławy"></option><option value="Nadleśnictwo Radzyń Podlaski"></option><option value="Nadleśnictwo Rozwadów"></option><option value="Nadleśnictwo Rudnik"></option><option value="Nadleśnictwo Sarnaki"></option><option value="Nadleśnictwo Sobibór"></option><option value="Nadleśnictwo Strzelce"></option><option value="Nadleśnictwo Świdnik"></option><option value="Nadleśnictwo Tomaszów"></option><option value="Nadleśnictwo Włodawa"></option><option value="Nadleśnictwo Zwierzyniec"></option><option value="Nadleśnictwo Bełchatów"></option><option value="Nadleśnictwo Brzeziny"></option><option value="Nadleśnictwo Gostynin"></option><option value="Nadleśnictwo Grotniki"></option><option value="Nadleśnictwo Kolumna"></option><option value="Nadleśnictwo Kutno"></option><option value="Nadleśnictwo Łąck"></option><option value="Nadleśnictwo Opoczno"></option><option value="Nadleśnictwo Piotrków"></option><option value="Nadleśnictwo Płock"></option><option value="Nadleśnictwo Poddębice"></option><option value="Nadleśnictwo Przedbórz"></option><option value="Nadleśnictwo Radomsko"></option><option value="Nadleśnictwo Radziwiłłów"></option><option value="Nadleśnictwo Skierniewice"></option><option value="Nadleśnictwo Smardzewice"></option><option value="Nadleśnictwo Spała"></option><option value="Nadleśnictwo Wieluń"></option><option value="Nadleśnictwo Złoczew"></option><option value="Zakład Usługowo-Produkcyjny Lasów Państwowych w Łodzi"></option><option value="Nadleśnictwo Barycz"></option><option value="Nadleśnictwo Chmielnik"></option><option value="Nadleśnictwo Daleszyce"></option><option value="Nadleśnictwo Dobieszyn"></option><option value="Nadleśnictwo Grójec"></option><option value="Nadleśnictwo Jędrzejów"></option><option value="Nadleśnictwo Kielce"></option><option value="Nadleśnictwo Kozienice"></option><option value="Nadleśnictwo Łagów"></option><option value="Nadleśnictwo Marcule"></option><option value="Nadleśnictwo Ostrowiec Świętokrzyski"></option><option value="Nadleśnictwo Pińczów"></option><option value="Nadleśnictwo Przysucha"></option><option value="Nadleśnictwo Radom"></option><option value="Nadleśnictwo Ruda Maleniecka"></option><option value="Nadleśnictwo Skarżysko"></option><option value="Nadleśnictwo Starachowice"></option><option value="Nadleśnictwo Staszów"></option><option value="Nadleśnictwo Stąporków"></option><option value="Nadleśnictwo Suchedniów"></option><option value="Nadleśnictwo Włoszczowa"></option><option value="Nadleśnictwo Zagnańsk"></option><option value="Nadleśnictwo Zwoleń"></option><option value="RDLP Radom"></option><option value="Zespół Składnic Lasów Państwowych w Radomiu"></option><option value="Nadleśnictwo Andrychów"></option><option value="Nadleśnictwo Bielsko"></option><option value="Nadleśnictwo Brynek"></option><option value="Nadleśnictwo Brzeg"></option><option value="Nadleśnictwo Chrzanów"></option><option value="Nadleśnictwo Gidle"></option><option value="Nadleśnictwo Herby"></option><option value="Nadleśnictwo Jeleśnia"></option><option value="Nadleśnictwo Katowice"></option><option value="Nadleśnictwo Kędzierzyn"></option><option value="Nadleśnictwo Kluczbork"></option><option value="Nadleśnictwo Kłobuck"></option><option value="Nadleśnictwo Kobiór"></option><option value="Nadleśnictwo Koniecpol"></option><option value="Nadleśnictwo Koszęcin"></option><option value="Nadleśnictwo Kup"></option><option value="Nadleśnictwo Lubliniec"></option><option value="Nadleśnictwo Namysłów"></option><option value="Nadleśnictwo Olesno"></option><option value="Nadleśnictwo Olkusz"></option><option value="Nadleśnictwo Opole"></option><option value="Nadleśnictwo Prószków"></option><option value="Nadleśnictwo Prudnik"></option><option value="Nadleśnictwo Rudy Raciborskie"></option><option value="Nadleśnictwo Rudziniec"></option><option value="Nadleśnictwo Rybnik"></option><option value="Nadleśnictwo Siewierz"></option><option value="Nadleśnictwo Strzelce Opolskie"></option><option value="Nadleśnictwo Sucha"></option><option value="Nadleśnictwo Świerklaniec"></option><option value="Nadleśnictwo Tułowice"></option><option value="Nadleśnictwo Turawa"></option><option value="Nadleśnictwo Ujsoły"></option><option value="Nadleśnictwo Ustroń"></option><option value="Nadleśnictwo Węgierska Górka"></option><option value="Nadleśnictwo Wisła"></option><option value="Nadleśnictwo Zawadzkie"></option><option value="Nadleśnictwo Złoty Potok"></option><option value="PGL LP Gospodarstwo Rybackie Krogulna"></option><option value="PGL LP Gospodarstwo Rybackie Niemodlin"></option><option value="PGL LP Gospodarstwo Rybackie Żory"></option><option value="RDLP Katowice"></option><option value="Zakład Transportu i Spedycji Lasów Państwowych w Świerklańcu"></option><option value="Nadleśnictwo Antonin"></option><option value="Nadleśnictwo Babki"></option><option value="Nadleśnictwo Czerniejewo"></option><option value="Nadleśnictwo Gniezno"></option><option value="Nadleśnictwo Góra Śląska"></option><option value="Nadleśnictwo Grodziec"></option><option value="Nadleśnictwo Grodzisk"></option><option value="Nadleśnictwo Jarocin"></option><option value="Nadleśnictwo Kalisz"></option><option value="Nadleśnictwo Karczma Borowa"></option><option value="Nadleśnictwo Koło"></option><option value="Nadleśnictwo Konin"></option><option value="Nadleśnictwo Konstantynowo"></option><option value="Nadleśnictwo Kościan"></option><option value="Nadleśnictwo Krotoszyn"></option><option value="Nadleśnictwo Łopuchówko"></option><option value="Nadleśnictwo Oborniki"></option><option value="Nadleśnictwo Piaski"></option><option value="Nadleśnictwo Pniewy"></option><option value="Nadleśnictwo Przedborów"></option><option value="Nadleśnictwo Sieraków"></option><option value="Nadleśnictwo Syców"></option><option value="Nadleśnictwo Taczanów"></option><option value="Nadleśnictwo Turek"></option><option value="Nadleśnictwo Włoszakowice"></option><option value="Ośrodek Kultury Leśnej w Gołuchowie"></option><option value="RDLP Poznań"></option><option value="Zespół Składnic Lasów Państwowych w Ostrowie Wlkp."></option><option value="Nadleśnictwo Bardo Śląskie"></option><option value="Nadleśnictwo Bolesławiec"></option><option value="Nadleśnictwo Bystrzyca Kłodzka"></option><option value="Nadleśnictwo Chocianów"></option><option value="Nadleśnictwo Głogów"></option><option value="Nadleśnictwo Henryków"></option><option value="Nadleśnictwo Jawor"></option><option value="Nadleśnictwo Jugów"></option><option value="Nadleśnictwo Kamienna Góra"></option><option value="Nadleśnictwo Lądek Zdrój"></option><option value="Nadleśnictwo Legnica"></option><option value="Nadleśnictwo Lubin"></option><option value="Nadleśnictwo Lwówek Śląski"></option><option value="Nadleśnictwo Międzylesie"></option><option value="Nadleśnictwo Miękinia"></option><option value="Nadleśnictwo Milicz"></option><option value="Nadleśnictwo Oborniki Śląskie"></option><option value="Nadleśnictwo Oleśnica Śląska"></option><option value="Nadleśnictwo Oława"></option><option value="Nadleśnictwo Pieńsk"></option><option value="Nadleśnictwo Przemków"></option><option value="Nadleśnictwo Ruszów"></option><option value="Nadleśnictwo Szklarska Poręba"></option><option value="Nadleśnictwo Śnieżka"></option><option value="Nadleśnictwo Świdnica"></option><option value="Nadleśnictwo Świeradów Zdrój"></option><option value="Nadleśnictwo Świętoszów"></option><option value="Nadleśnictwo Wałbrzych"></option><option value="Nadleśnictwo Węgliniec"></option><option value="Nadleśnictwo Wołów"></option><option value="Nadleśnictwo Zdroje"></option><option value="Nadleśnictwo Złotoryja"></option><option value="Nadleśnictwo Żmigród"></option><option value="RDLP Wrocław"></option><option value="Zakład Usług Leśnych w Bystrzycy Kłodzkiej"></option><option value="Zakład Usług Leśnych we Wrocławiu"></option><option value="Gospodarstwo Rybackie Lasów Państwowych w Żarach"></option><option value="Nadleśnictwo Babimost"></option><option value="Nadleśnictwo Brzózka"></option><option value="Nadleśnictwo Bytnica"></option><option value="Nadleśnictwo Cybinka"></option><option value="Nadleśnictwo Gubin"></option><option value="Nadleśnictwo Krosno"></option><option value="Nadleśnictwo Krzystkowice"></option><option value="Nadleśnictwo Lipinki"></option><option value="Nadleśnictwo Lubsko"></option><option value="Nadleśnictwo Nowa Sól"></option><option value="Nadleśnictwo Przytok"></option><option value="Nadleśnictwo Sława Śląska"></option><option value="Nadleśnictwo Sulechów"></option><option value="Nadleśnictwo Szprotawa"></option><option value="Nadleśnictwo Świebodzin"></option><option value="Nadleśnictwo Torzym"></option><option value="Nadleśnictwo Wolsztyn"></option><option value="Nadleśnictwo Wymiarki"></option><option value="Nadleśnictwo Zielona Góra"></option><option value="Nadleśnictwo Żagań"></option><option value="Ośrodek Transportu Leśnego w Świebodzinie"></option><option value="RDLP Zielona Góra"></option></datalist></div></div>
                 </div>
 
                 <div class="filter open">
                     <label for="FilterType">Wybierz gatunek</label>
                     <div id="FilterType" class="filter-content" style="display: block;">
                         <label for="LabelAll" class="double-heading">
-                            <input type="checkbox" id="LabelAll" value="Aktualne gatunki">
+                            <input type="checkbox" id="LabelAll" value="Aktualne gatunki" name="types[]">
                             Aktualne gatunki
                         </label>
                         <div class="filter-group">
                             <label class="heading" for="Iglaste">
-                                <input type="checkbox" id="Iglaste" value="Iglaste">
+                                <input type="checkbox" id="Iglaste" value="Iglaste" name="types[]">
                                 <span>Iglaste</span>
                             </label>
                             <label for="DG - daglezja">
-                                <input type="checkbox" id="DG - daglezja" value="DG - daglezja">
+                                <input type="checkbox" id="DG - daglezja" value="DG - daglezja" name="types[]">
                                 <span>DG - daglezja</span>
                             </label>
                             <label for="IGLAS/LISC - iglaste/liściaste">
                                 <input type="checkbox" id="IGLAS/LISC - iglaste/liściaste"
-                                    value="IGLAS/LISC - iglaste/liściaste">
+                                    value="IGLAS/LISC - iglaste/liściaste" name="types[]">
                                 <span>IGLAS/LISC - iglaste/liściaste</span>
                             </label>
                             <label for="IGLASTE - drewno iglaste">
-                                <input type="checkbox" id="IGLASTE - drewno iglaste" value="IGLASTE - drewno iglaste">
+                                <input type="checkbox" id="IGLASTE - drewno iglaste" value="IGLASTE - drewno iglaste" name="types[]">
                                 <span>IGLASTE - drewno iglaste</span>
                             </label>
                             <label for="JD - jodła">
-                                <input type="checkbox" id="JD - jodła" value="JD - jodła">
+                                <input type="checkbox" id="JD - jodła" value="JD - jodła" name="types[]">
                                 <span>JD - jodła</span>
                             </label>
                         </div>
                         <div class="filter-group">
                             <label class="heading" for="Liściaste">
-                                <input type="checkbox" id="Liściaste" value="Liściaste">
+                                <input type="checkbox" id="Liściaste" value="Liściaste" name="types[]">
                                 <span>Liściaste</span>
                             </label>
                             <label for="AK - akacja">
-                                <input type="checkbox" id="AK - akacja" value="AK - akacja">
+                                <input type="checkbox" id="AK - akacja" value="AK - akacja" name="types[]">
                                 <span>AK - akacja</span>
                             </label>
                             <label for="BK - buk">
-                                <input type="checkbox" id="BK - buk" value="BK - buk">
+                                <input type="checkbox" id="BK - buk" value="BK - buk" name="types[]">
                                 <span>BK - buk</span>
                             </label>
                             <label for="BRZ - brzoza">
-                                <input type="checkbox" id="BRZ - brzoza" value="BRZ - brzoza">
+                                <input type="checkbox" id="BRZ - brzoza" value="BRZ - brzoza" name="types[]">
                                 <span>BRZ - brzoza</span>
                             </label>
                             <label for="DB - dąb">
-                                <input type="checkbox" id="DB - dąb" value="DB - dąb">
+                                <input type="checkbox" id="DB - dąb" value="DB - dąb" name="types[]">
                                 <span>DB - dąb</span>
                             </label>
                         </div>
@@ -188,63 +109,62 @@
                     <label for="FilterComercialGroup">Wybierz grupy handlowe</label>
                     <div id="FilterComercialGroup" class="filter-content">
                         <label for="LabelCommercialAll" class="double-heading">
-                            <input type="checkbox" id="LabelCommercialAll" value="Aktualne grupy handlowe">
+                            <input type="checkbox" id="LabelCommercialAll" value="Aktualne grupy handlowe" name="commercialGroups[]">
                             Aktualne grupy handlowe
                         </label>
                         <div class="filter-group">
                             <label class="heading" for="Wielkowymiarowe dluzyce">
-                                <input type="checkbox" id="Wielkowymiarowe dluzyce" value="Wielkowymiarowe dluzyce">
+                                <input type="checkbox" id="Wielkowymiarowe dluzyce" value="Wielkowymiarowe dluzyce" name="commercialGroups[]">
                                 <span>Drewno wielkowymiarowe - dłużyce</span>
                             </label>
                             <label for="W_OKLEINA">
-                                <input type="checkbox" id="W_OKLEINA" value="W_OKLEINA">
+                                <input type="checkbox" id="W_OKLEINA" value="W_OKLEINA" name="commercialGroups[]">
                                 <span>W_OKLEINA</span>
                             </label>
                             <label for="W_SKLEJKA">
-                                <input type="checkbox" id="W_SKLEJKA"
-                                    value="W_SKLEJKA">
+                                <input type="checkbox" id="W_SKLEJKA" value="W_SKLEJKA" name="commercialGroups[]">
                                 <span>W_SKLEJKA</span>
                             </label>
                             <label for="W_SLUPY">
-                                <input type="checkbox" id="W_SLUPY" value="W_SLUPY">
+                                <input type="checkbox" id="W_SLUPY" value="W_SLUPY" name="commercialGroups[]">
                                 <span>W_SLUPY</span>
                             </label>
                             <label for="W_STANDARD">
-                                <input type="checkbox" id="W_STANDARD" value="W_STANDARD">
+                                <input type="checkbox" id="W_STANDARD" value="W_STANDARD" name="commercialGroups[]">
                                 <span>W_STANDARD</span>
                             </label>
                         </div>
                         <div class="filter-group">
                             <label class="heading" for="Wielkowymiarowe klody">
-                                <input type="checkbox" id="Wielkowymiarowe klody" value="Wielkowymiarowe klody">
+                                <input type="checkbox" id="Wielkowymiarowe klody" value="Wielkowymiarowe klody" name="commercialGroups[]">
                                 <span>Drewno wielkowymiarowe - kłody</span>
                             </label>
                             <label for="WK_STANDARD">
-                                <input type="checkbox" id="WK_STANDARD" value="WK_STANDARD">
+                                <input type="checkbox" id="WK_STANDARD" value="WK_STANDARD" name="commercialGroups[]">
                                 <span>WK_STANDARD</span>
                             </label>
                             <label for="WK_WABK_23">
-                                <input type="checkbox" id="WK_WABK_23" value="WK_WABK_23">
+                                <input type="checkbox" id="WK_WABK_23" value="WK_WABK_23" name="commercialGroups[]">
                                 <span>WK_WABK_23</span>
                             </label>
                             <label for="WK_BC">
-                                <input type="checkbox" id="WK_BC" value="WK_BC">
+                                <input type="checkbox" id="WK_BC" value="WK_BC" name="commercialGroups[]">
                                 <span>WK_BC</span>
                             </label>
                             <label for="WK_BC_K">
-                                <input type="checkbox" id="WK_BC_K" value="WK_BC_K">
+                                <input type="checkbox" id="WK_BC_K" value="WK_BC_K" name="commercialGroups[]">
                                 <span>WK_BC_K</span>
                             </label>
                             <label for="W_WBCK_3">
-                                <input type="checkbox" id="W_WBCK_3" value="W_WBCK_3">
+                                <input type="checkbox" id="W_WBCK_3" value="W_WBCK_3" name="commercialGroups[]">
                                 <span>W_WBCK_3</span>
                             </label>
                             <label for="W_WCK">
-                                <input type="checkbox" id="W_WCK" value="W_WCK">
+                                <input type="checkbox" id="W_WCK" value="W_WCK" name="commercialGroups[]">
                                 <span>W_WCK</span>
                             </label>
                             <label for="W_WCK_1">
-                                <input type="checkbox" id="W_WCK_1" value="W_WCK_1">
+                                <input type="checkbox" id="W_WCK_1" value="W_WCK_1" name="commercialGroups[]">
                                 <span>W_WCK_1</span>
                             </label>
                         </div>
@@ -255,27 +175,27 @@
                     <label for="FilterAssortment">Wybierz sortyment</label>
                     <div id="FilterAssortment" class="filter-content">
                         <label for="KO">
-                            <input type="checkbox" id="KO" value="KO">
+                            <input type="checkbox" id="KO" value="KO" name="assortments[]">
                             <span>KO</span>
                         </label>
                         <label for="KP">
-                            <input type="checkbox" id="KP" value="KP">
+                            <input type="checkbox" id="KP" value="KP" name="assortments[]">
                             <span>KP</span>
                         </label>
                         <label for="M1">
-                            <input type="checkbox" id="M1" value="M1">
+                            <input type="checkbox" id="M1" value="M1" name="assortments[]">
                             <span>M1</span>
                         </label>
                         <label for="M2E">
-                            <input type="checkbox" id="M2E" value="M2E">
+                            <input type="checkbox" id="M2E" value="M2E" name="assortments[]">
                             <span>M2E</span>
                         </label>
                         <label for="S10">
-                            <input type="checkbox" id="S10" value="S10">
+                            <input type="checkbox" id="S10" value="S10" name="assortments[]">
                             <span>S10</span>
                         </label>
                         <label for="S2A">
-                            <input type="checkbox" id="S2A" value="S2A">
+                            <input type="checkbox" id="S2A" value="S2A" name="assortments[]">
                             <span>S2A</span>
                         </label>
                     </div>
@@ -286,11 +206,11 @@
                     <div id="FilterQuantity" class="filter-content numbers">
                         <label for="FilterMinQuantity">
                             <span>Ilość od</span>
-                            <input type="text" id="FilterMinQuantity" name="FilterMinQuantity" value="" min="0">
+                            <input type="text" id="FilterMinQuantity" name="FilterMinQuantity" value="" min="0" name="FilterMinQuantity">
                         </label>
                         <label for="FilterMaxQuantity">
                             <span>Ilość do</span>
-                            <input type="text" id="FilterMaxQuantity" name="FilterMaxQuantity" value="" min="0">
+                            <input type="text" id="FilterMaxQuantity" name="FilterMaxQuantity" value="" min="0" name="FilterMaxQuantity">
                         </label>
 
                     </div>
@@ -301,11 +221,11 @@
                     <div id="FilterStartPrice" class="filter-content numbers">
                         <label for="FilterMinStartPrice">
                             <span>Cena od</span>
-                            <input type="text" id="FilterMinStartPrice" name="FilterMinStartPrice" value="" min="0">
+                            <input type="text" id="FilterMinStartPrice" name="FilterMinStartPrice" value="" min="0" name="FilterMinStartPrice">
                         </label>
                         <label for="FilterMaxStartPrice">
                             <span>Cena do</span>
-                            <input type="text" id="FilterMaxStartPrice" name="FilterMaxStartPrice" value="" min="0">
+                            <input type="text" id="FilterMaxStartPrice" name="FilterMaxStartPrice" value="" min="0" name="FilterMaxStartPrice">
                         </label>
                     </div>
                 </div>
@@ -315,11 +235,11 @@
                     <div id="FilterPrice" class="filter-content numbers">
                         <label for="FilterMinPrice">
                             <span>Cena od</span>
-                            <input type="text" id="FilterMinPrice" name="FilterMinPrice" value="" min="0">
+                            <input type="text" id="FilterMinPrice" name="FilterMinPrice" value="" min="0" name="FilterMinPrice">
                         </label>
                         <label for="FilterMaxPrice">
                             <span>Cena do</span>
-                            <input type="text" id="FilterMaxPrice" name="FilterMaxPrice" value="" min="0">
+                            <input type="text" id="FilterMaxPrice" name="FilterMaxPrice" value="" min="0" name="FilterMaxPrice">
                         </label>
                     </div>
                 </div>
@@ -329,11 +249,11 @@
                     <div id="FilterQtyMin" class="filter-content numbers">
                         <label for="FilterMinQtyMin">
                             <span>Ilość od</span>
-                            <input type="text" id="FilterMinQtyMin" name="FilterMinQtyMin" value="" min="0">
+                            <input type="text" id="FilterMinQtyMin" name="FilterMinQtyMin" value="" min="0" name="FilterMinQtyMin">
                         </label>
                         <label for="FilterMaxQtyMin">
                             <span>Ilość do</span>
-                            <input type="text" id="FilterMaxQtyMin" name="FilterMaxQtyMin" value="" min="0">
+                            <input type="text" id="FilterMaxQtyMin" name="FilterMaxQtyMin" value="" min="0" name="FilterMaxQtyMin">
                         </label>
                     </div>
                 </div>
@@ -343,11 +263,11 @@
                     <div id="FilterDate" class="filter-content dates">
                         <label for="FilterStart">
                             <span>Data zakończenia od</span>
-                            <input type="date" id="FilterStart" name="FilterStart" value="" min="2020-12-04">
+                            <input type="date" id="FilterStart" name="FilterStart" value="" min="2020-12-04" name="FilterStart">
                         </label>
                         <label for="FilterEnd">
                             <span>Data zakończenia do</span>
-                            <input type="date" id="FilterEnd" name="FilterEnd" value="" min="2020-12-04">
+                            <input type="date" id="FilterEnd" name="FilterEnd" value="" min="2020-12-04" name="FilterEnd">
                         </label>
                     </div>
                 </div>
@@ -357,13 +277,11 @@
                     <div id="FilterReceiptDate" class="filter-content dates">
                         <label for="FilterReceiptDate">
                             <span>Termin odbioru od</span>
-                            <input type="date" id="FilterReceiptDate" name="FilterReceiptDate" value=""
-                                min="2020-12-04">
+                            <input type="date" id="FilterReceiptDate" name="FilterReceiptDate" value="" min="2020-12-04" name="FilterReceiptDate">
                         </label>
                         <label for="FilterMaxReceiptDate">
                             <span>Termin odbioru do</span>
-                            <input type="date" id="FilterMaxReceiptDate" name="FilterMaxReceiptDate" value=""
-                                min="2020-12-04">
+                            <input type="date" id="FilterMaxReceiptDate" name="FilterMaxReceiptDate" value="" min="2020-12-04" name="FilterMaxReceiptDate">
                         </label>
                     </div>
 
@@ -376,20 +294,20 @@
             <div id="TableAuctions">
                 <button id="SafeSearch">Obserwuj wyszukiwanie</button>
                 <div id="SortAuctions">
-                    <div class="column"><span>LP.</span></div>
-                    <div class="column"><span>RDLP</span></div>
-                    <div class="column"><span>Nadleśnictwo</span></div>
-                    <div class="column"><span>Nr aukcji</span></div>
-                    <div class="column"><span>Gr. handlowo / gatunkowa</span></div>
-                    <div class="column"><span>Zakończenie licytacji</span></div>
-                    <div class="column"><span>Ilość m<sup>3</sup></span></div>
-                    <div class="column"><span>Ilość ofert</span></div>
-                    <div class="column"><span>Cena otwarcia netto</span></div>
-                    <div class="column"><span>Teraz wygrywa</span></div>
-                    <div class="column"><span>Do końca pozostało</span></div>
-                    <div class="column"><span>Link e-drewno</span></div>
-                    <div class="column"><span>Obserwuj</span></div>
-                    <div class="column"><span>Czas dodania</span></div>
+                    <div class="column" data-type="LP"><span>LP.</span></div>
+                    <div class="column" data-type="RDLP"><span>RDLP</span></div>
+                    <div class="column" data-type="Inspectorate"><span>Nadleśnictwo</span></div>
+                    <div class="column" data-type="AuctionNumber"><span>Nr aukcji</span></div>
+                    <div class="column" data-type="CommercialGroup"><span>Gr. handlowo / gatunkowa</span></div>
+                    <div class="column" data-type="AuctionEnd"><span>Zakończenie licytacji</span></div>
+                    <div class="column" data-type="QuantityVolume"><span>Ilość m<sup>3</sup></span></div>
+                    <div class="column" data-type="Offers"><span>Ilość ofert</span></div>
+                    <div class="column" data-type="OpenPrice"><span>Cena otwarcia netto</span></div>
+                    <div class="column" data-type="WinNow"><span>Teraz wygrywa</span></div>
+                    <div class="column" data-type="TimeToEnd"><span>Do końca pozostało</span></div>
+                    <div class="column" data-type="Link"><span>Link e-drewno</span></div>
+                    <div class="column" data-type="Observe"><span>Obserwuj</span></div>
+                    <div class="column" data-type="AddedTime"><span>Czas dodania</span></div>
                 </div>
                 <div id="Auctions">
                     <div class="row" data-region="Region 1" data-id="1">

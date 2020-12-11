@@ -19,6 +19,7 @@ $(document).ready(function() {
 
     // sortowanie wyników kolumnami
     $('#SortAuctions > .column').bind('click', (function(e) {
+      console.log(e);
       if ($('.active-sort').length) {
         $('.active-sort').removeClass('active-sort');
       }
@@ -90,6 +91,7 @@ $(document).ready(function() {
         let button = $(document.createElement('button'));
         popup.append(button);
         button.bind('click', function(e) {
+          console.log(e);
           $('#Popup').fadeOut(function(){
             $(this).remove();
           });
@@ -105,23 +107,27 @@ $(document).ready(function() {
   
     // akcja dla kliknięcia gwiazdki obserwowanych aukcji
     $('.observe').bind('click', function(e) {
+      console.log(e);
       observeAndPopup(e, 'auction');
     });
   
     // akcja dla kliknięcia w zapis wyników wyszukiwania
     $('#SafeSearch').bind('click', function(e) {
+      console.log(e);
       showResults();
       observeAndPopup(e, 'search');
     });
   
     // zwijanie/rozwijanie filtra + ikona
     $('.filter > label').bind('click', function (e) {
+      console.log(e);
       $(this).parent().toggleClass('open');
       $(this).next('.filter-content').slideToggle('slow');
     });
   
     //tymczasowe do testów logowania się
     $('.item-menu a:contains("Logowanie / Rejestracja")').bind('click', function(e){
+      console.log(e);
       if($('.logged').length){
         $(this).text('Logowanie / Rejestracja');
         $('body').removeClass('logged');
@@ -157,26 +163,54 @@ $(document).ready(function() {
           resetButton.attr('id', 'ResetButton');
           resetButton.text('Wyczyść');
           resetButton.bind('click', function(e){
+            console.log(e);
             resetForm();
             manualSearched = [];
           })
           $('.form-header').append(resetButton);
         }
-        let filters = [];
+        let filters = {
+          "rdlps": [], 
+          "inspectorates": [],
+          "types": [],
+          "commercialGroups": [],
+          "assortments": [],
+          "others": []
+      }
+          
+  
         for (let i=0; i<formElements.length; i++){
           let el = formElements[i];
           if( (el.checked && (el.type == 'checkbox' || el.type == 'radio')) ||
             ( el.value && (el.type == 'number' || el.type == 'text' || el.type == 'date' || el.type == 'search')) ){
             if(el.parentNode.classList.value !== 'heading'){
-              filters.push(`{${el.id}: ${el.value}}`);
+              if(el.name == 'inspectorates[]'){
+                filters['inspectorates'].push(el.value);
+              }
+              else if(el.name == 'rdlps[]'){    
+                filters['rdlps'].push(el.value);
+              }
+              else if(el.name == 'types[]'){
+                filters['types'].push(el.value);
+              }
+              else if(el.name == 'commercialGroups[]'){
+                filters['commercialGroups'].push(el.value);
+              }
+              else if(el.name == 'assortments[]'){
+                filters['assortments'].push(el.value);
+              }
+              else{
+                filters['others'].push(`{${el.id} : ${el.value}}`);
+              }
               if($(el).hasClass('manual-searched')){
-                manualSearched.push(el.id);
+                manualSearched.push(el.value);
               }
             };
           }
         }
         generateNewDatalist();
-        if(filters.length){
+        if(filters['rdlps'].length || filters['inspectorates'].length || filters['types'].length 
+        || filters['commercialGroups'].length || filters['assortments'].length || filters['others'].length){
           // zapytanie do bazy
           console.log(filters);
         }
@@ -219,21 +253,25 @@ $(document).ready(function() {
 
     // zaznaczanie wszystkich checkboksów z kilku podgrup (w stylu wszystkie aktualnie dostępne) lub z jednej podgrupy
     $('.double-heading, .heading').bind('click', function(e){
+      console.log(e);
       clickHeading(e);
     });
 
     // wyłączone wysyłanie formularza
     form.bind('submit' ,function(e){
+      console.log(e);
       e.preventDefault();
       showResults();
     });
 
     // zbindowane akcje do filtrów niegenerowanych w trakcie
     $('input[type="text"], input[type="number"], input[type="date"]').bind('input', function(e){
+      console.log(e);
       showResults();
     });
 
     $('input[type="checkbox"]').bind('click', function(e){
+      console.log(e);
       if(!$(e.currentTarget).parent().hasClass('heading') && !$(e.currentTarget).parent().hasClass('double-heading')){
         showResults();
       }
@@ -285,6 +323,7 @@ $(document).ready(function() {
       });
       search.appendTo(filterGroup);
       search.bind('input', function(e){
+        console.log(e);
         let value = e.target.value;
         let waitAMoment = setTimeout(function(){
           if(value == e.target.value){
@@ -295,14 +334,16 @@ $(document).ready(function() {
               searchInput.attr({
                 'id': value,
                 'type': 'checkbox', 
-                'name': value,
+                'name': 'inspectorates[]',
                 'checked':'checked', 
-                'class': 'manual-searched'
+                'class': 'manual-searched', 
+                'value': value
               });
               searchLabel.text(value);
               searchInput.prependTo(searchLabel);
               searchLabel.appendTo(searchContainer);
               searchLabel.bind('click', function(e){
+                console.log(e);
                 // usuwanie z tablicy ręcznych wyszukiwań
                 manualSearched = manualSearched.filter(item => item !== value);
                 $(e.currentTarget).remove();
@@ -342,6 +383,7 @@ $(document).ready(function() {
               'class': 'heading' 
             });
             rdlpLabel.bind('click', function(e){
+              console.log(e);
               clickHeading(e);
             });
           }
@@ -354,7 +396,8 @@ $(document).ready(function() {
             // dodany "Sub-" żeby nie kolidował z rdlp z filtra regiony
             'id': 'Sub-'+labelName,
             'type': 'checkbox',
-            'value': labelName
+            'value': labelName,
+            'name': 'rdlpInInspectorates[]'
           });
           filterInput.appendTo(rdlpLabel);
           let spanLabel = $(document.createElement('span'));
@@ -366,6 +409,7 @@ $(document).ready(function() {
           showMoreButton.text(buttonText);
           showMoreButton.addClass('show-more');
           showMoreButton.bind('click', function(e){
+            console.log(e);
             e.preventDefault();
             let moreContainer = $(this).prev();
             if(moreContainer.hasClass('hidden')){
@@ -402,10 +446,12 @@ $(document).ready(function() {
                   filterInput.attr({
                     'id': inspectorate,
                     'type': 'checkbox',
-                    'value': inspectorate
+                    'value': inspectorate,
+                    'name': 'inspectorates[]'
                   });
                   filterInput.appendTo(inspLabel);
                   inspLabel.bind('click', function(e){
+                    console.log(e);
                     showResults();
                   })
                   let spanLabel = $(document.createElement('span'));
@@ -464,6 +510,7 @@ $(document).ready(function() {
         spanLabel.html('Region ' + regionNumber);
         spanLabel.appendTo(regionLabel);
         regionLabel.bind('click', function(e){
+          console.log(e);
           clickHeading(e);
           let checkedInputs = $('#FilterRegion input:checked');
           showInspectorates(checkedInputs);
@@ -482,17 +529,21 @@ $(document).ready(function() {
             filterInput.attr({
               'id': rdlpName,
               'type': 'checkbox',
-              'value': rdlpName
+              'value': rdlpName,
+              'name': 'rdlps[]'
             });
             filterInput.appendTo(rdlpLabel);
+            rdlpLabel.bind('click', function(e){
+              if(e.target.type == 'checkbox'){
+                let checkedInputs = $('#FilterRegion input:checked');
+              showInspectorates(checkedInputs);
+              showResults();
+              }
+              
+            });
             let spanLabel = $(document.createElement('span'));
             spanLabel.html(rdlpName);
             spanLabel.appendTo(rdlpLabel);
-            rdlpLabel.bind('click', function(e){
-              let checkedInputs = $('#FilterRegion input:checked');
-              showInspectorates(checkedInputs);
-              showResults();
-            });
             rdlpLabel.appendTo(filterGroup);
           })
         };
