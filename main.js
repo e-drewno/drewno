@@ -137,8 +137,6 @@ $(document).ready(function() {
       if($('#SearchResults').length){
         $('#SearchResults').html('');
       }
-      console.log(inspectorates);
-      console.log(manualSearched);
       inspectorates.filter(x => !manualSearched.includes(x)).forEach(insp => {
         let option = $(document.createElement('option'));
         option.val(insp);
@@ -172,7 +170,6 @@ $(document).ready(function() {
             if(el.parentNode.classList.value !== 'heading'){
               filters.push(`{${el.id}: ${el.value}}`);
               if($(el).hasClass('manual-searched')){
-                console.log(el);
                 manualSearched.push(el.id);
               }
             };
@@ -515,4 +512,4 @@ $(document).ready(function() {
       })
     }
   }
-});  
+}); 

@@ -157,6 +157,7 @@ body:not(.logged) #UserPanel{
 
 .filter-group{
     overflow: hidden;
+    padding: 10px;
 }
 
 /* 
