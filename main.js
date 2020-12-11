@@ -273,7 +273,7 @@ $(document).ready(function() {
         let value = e.target.value;
         let waitAMoment = setTimeout(function(){
           if(value == e.target.value){
-            if(lowerCaseArray.includes(value.toLowerCase()) || !value.length){
+            if(lowerCaseArray.includes(value.toLowerCase())){
               
               let searchLabel = $(document.createElement('label'));
               searchLabel.attr('for', value);
@@ -294,6 +294,10 @@ $(document).ready(function() {
               e.target.value = '';
               showResults();
             }
+          }
+          else if(!value.length){
+            clearTimeout(waitAMoment);
+            showResults();
           }
           else{
             clearTimeout(waitAMoment);

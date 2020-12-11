@@ -207,7 +207,7 @@ input[type="checkbox"] + span{
 }
 
 #Main {
-    padding: 0 40px 40px;
+    padding: 0 20px 40px;
 }
 
 #SafeSearch {
@@ -238,7 +238,7 @@ input[type="checkbox"] + span{
 #SortAuctions {
     margin: 0 0 10px;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    box-shadow: 0 0 2px rgba(0,0,0,.4);
 }
 
 #SortAuctions .column {
