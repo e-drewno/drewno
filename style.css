@@ -373,6 +373,14 @@ input[type="checkbox"] + span{
     font-weight: bold;
 }
 
+#Pagination ul li a.next:after, #Pagination ul li a.last:after{
+    content: '»'
+}
+
+#Pagination ul li a.prev:before, #Pagination ul li a.first:before{
+    content: '«'
+}
+
 #Pagination span{
     font-size: 85%;
     color: #666;

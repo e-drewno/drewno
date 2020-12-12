@@ -1,3 +1,6 @@
+// ilość wyświetlanych aukcji na stronie
+const _LICZBA_AUKCJI = 15;
+
 // pseudo baza
 let db = [],
     regions = [],
@@ -5,15 +8,7 @@ let db = [],
     inspectorates = [],
     manualSearched = [];
 
-let filters = {
-    "rdlps": [], 
-    "inspectorates": [],
-    "types": [],
-    "commercialGroups": [],
-    "assortments": [],
-    "others": [],
-    "actions" : {"page": "", "sort" : {}}
-  }
+let filters = {};
       
 $(document).ready(function() {
 
@@ -171,46 +166,55 @@ $(document).ready(function() {
 
     // wyświetlanie wyników
     let showResults = () => {
-      // json do symulowania pobierania danych
+      // json do symulowania pobierania danych z pseudoaukcjami
       fetch('./test-auctions.json')
       .then(response => response.json())
-      .then(() => {
-        let formElements = form[0].elements; 
-        let resetButton = $('#ResetButton');
-        if(!resetButton.length){
-          resetButton = $(document.createElement('a'));
-          resetButton.attr('id', 'ResetButton');
-          resetButton.text('Wyczyść');
-          resetButton.bind('click', function(e){
-            console.log(e);
-            resetForm();
-            manualSearched = [];
+      .then((auction) => {
+
+        // liczby do paginacji (raczej z php)
+        let auctionsCount = 0;
+        auction.forEach(region => {
+          region.forEach(auction => {
+            auctionsCount++;
           })
-          $('.form-header').append(resetButton);
-        } 
-  
+        });
+        let formElements = form[0].elements; 
+        let pagesNumber = auctionsCount / _LICZBA_AUKCJI;
+        
         for (let i=0; i<formElements.length; i++){
           let el = formElements[i];
           if( (el.checked && (el.type == 'checkbox' || el.type == 'radio')) ||
             ( el.value && (el.type == 'number' || el.type == 'text' || el.type == 'date' || el.type == 'search')) ){
             if(el.parentNode.classList.value !== 'heading'){
               if(el.name == 'inspectorates[]'){
-                filters['inspectorates'].push(el.value);
+                if(!filters['inspectorates'].includes(el.value)){
+                  filters['inspectorates'].push(el.value)
+                }
               }
               else if(el.name == 'rdlps[]'){    
-                filters['rdlps'].push(el.value);
+                if(!filters['rdlps'].includes(el.value)){
+                  filters['rdlps'].push(el.value)
+                }
               }
               else if(el.name == 'types[]'){
-                filters['types'].push(el.value);
+                if(!filters['types'].includes(el.value)){
+                  filters['types'].push(el.value)
+                }
               }
               else if(el.name == 'commercialGroups[]'){
-                filters['commercialGroups'].push(el.value);
+                if(!filters['commercialGroup'].includes(el.value)){
+                  filters['commercialGroup'].push(el.value)
+                }
               }
               else if(el.name == 'assortments[]'){
-                filters['assortments'].push(el.value);
+                if(!filters['assortments'].includes(el.value)){
+                  filters['assortments'].push(el.value)
+                }
               }
               else{
-                filters['others'].push(`{${el.id} : ${el.value}}`);
+                if(!filters['others'].includes(`{${el.id} : ${el.value}}`)){
+                  filters['others'].push(`{${el.id} : ${el.value}}`)
+                }
               }
               if($(el).hasClass('manual-searched')){
                 manualSearched.push(el.value);
@@ -219,20 +223,44 @@ $(document).ready(function() {
           }
         }
         generateNewDatalist();
+
+        // jeśli jest aktywny jakiś filtr
         if(filters['rdlps'].length || filters['inspectorates'].length || filters['types'].length 
         || filters['commercialGroups'].length || filters['assortments'].length || filters['others'].length){
           // zapytanie do bazy
           console.log(filters);
+          let resetButton = $('#ResetButton');
+          if(!resetButton.length){
+            resetButton = $(document.createElement('a'));
+            resetButton.attr('id', 'ResetButton');
+            resetButton.text('Wyczyść');
+            resetButton.bind('click', function(e){
+              console.log(e);
+              resetForm();
+              manualSearched = [];
+              clearFilters();
+            })
+            $('.form-header').append(resetButton);
+          } 
         }
+        // jeśli jest sortowanie
         else if(filters['actions']['sort']['column'].length || filters['actions']['sort']['order'].length){
-          console.log(filters);
+          if($('#resetButton').lenght){
+            resetButton.remove();
+          }
         }
+        // jeśli jest wybór strony
+        else if(filters['actions']['page']['current'].length || filters['actions']['page']['expected'].length){
+          if($('#resetButton').lenght){
+            resetButton.remove();
+          }
+        }
+        // jeśli brak zaznaczeń i sortowań
         else{
           // zapytanie do bazy
-          console.log('Pokaż najnowsze');
-          resetButton.remove();
-        } 
-        console.log(filters);       
+          clearFilters();
+          console.log('Pokaż najnowsze. Brak filtrów i sortowań');
+        }   
       })   
     }
 
@@ -382,6 +410,9 @@ $(document).ready(function() {
 
     // generowanie nadleśnictw po wybraniu rdlp
     let showInspectorates = (checkedInputs) => {
+      if(!checkedInputs.length){
+        clearFilters();
+      }
       const inspectoratesContainer = $('#FilterInspectorate');
       inspectoratesContainer.html('');
       if(checkedInputs.length){
@@ -499,6 +530,7 @@ $(document).ready(function() {
     .then(() => fillRegionFilter())
     .then(() => createInspectoratesSearch());
 
+    // uzupełnianie regionów i rdlp z bazy
     let fillRegionFilter = () => {
       let filterRegion = document.getElementById('FilterRegion');
 
@@ -527,6 +559,7 @@ $(document).ready(function() {
           console.log(e);
           clickHeading(e);
           let checkedInputs = $('#FilterRegion input:checked');
+          console.log(checkedInputs);
           showInspectorates(checkedInputs);
         });
         regionLabel.appendTo(filterGroup);
@@ -576,5 +609,44 @@ $(document).ready(function() {
         })
       })
     }
+
+    let goToPage = (currentPage, expectedPage) => {
+      filters['actions']['page']['current'] = currentPage;
+      filters['actions']['page']['expected'] = expectedPage;
+      showResults();
+    }
+
+    $('#Pagination ul li a').bind('click', function(e){
+      e.preventDefault();
+      let current = $('#Pagination ul li a.active').text();
+      let expected = $(e.target).text();
+      console.log(current);
+      console.log(expected);
+      goToPage(current, expected);
+    })
+
+    let clearFilters = () => {
+      filters = {
+        "rdlps": [],
+        "inspectorates": [],
+        "types": [],
+        "commercialGroups": [],
+        "assortments": [],
+        "others": [],
+        "actions": {
+          "page": {
+            "current": "", "expected": ""
+          },
+          "sort": {
+            "column": "",
+            "order": ""
+          }
+        }
+      }
+    }
+
+    clearFilters();
   }
 }); 
+
+
