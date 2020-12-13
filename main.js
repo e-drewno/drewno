@@ -25,7 +25,7 @@ $(document).ready(function() {
     let sort = (column, order) => {
       filters['actions']['sort']['column'] = column;
       filters['actions']['sort']['order'] = order;
-      showResults();
+      showResults('sort');
     }
 
     // sortowanie wyników kolumnami
@@ -128,7 +128,7 @@ $(document).ready(function() {
     // akcja dla kliknięcia w zapis wyników wyszukiwania
     $('#SafeSearch').bind('click', function(e) {
       console.log(e);
-      showResults();
+      showResults('filter');
       observeAndPopup(e, 'search');
     });
   
@@ -165,7 +165,8 @@ $(document).ready(function() {
     }
 
     // wyświetlanie wyników
-    let showResults = () => {
+    let showResults = (type) => {
+      console.log(type);
       // json do symulowania pobierania danych z pseudoaukcjami
       fetch('./test-auctions.json')
       .then(response => response.json())
@@ -248,12 +249,14 @@ $(document).ready(function() {
           if($('#resetButton').lenght){
             resetButton.remove();
           }
+          console.log(filters);
         }
         // jeśli jest wybór strony
         else if(filters['actions']['page']['current'].length || filters['actions']['page']['expected'].length){
           if($('#resetButton').lenght){
             resetButton.remove();
           }
+          console.log(filters);
         }
         // jeśli brak zaznaczeń i sortowań
         else{
@@ -286,7 +289,7 @@ $(document).ready(function() {
             $(this)[0].checked = false;
           });
         }
-        showResults();
+        showResults('filter');
       }
       else{
         return false;
@@ -303,19 +306,19 @@ $(document).ready(function() {
     form.bind('submit' ,function(e){
       console.log(e);
       e.preventDefault();
-      showResults();
+      showResults('summary');
     });
 
     // zbindowane akcje do filtrów niegenerowanych w trakcie
     $('input[type="text"], input[type="number"], input[type="date"]').bind('input', function(e){
       console.log(e);
-      showResults();
+      showResults('filter');
     });
 
     $('input[type="checkbox"]').bind('click', function(e){
       console.log(e);
       if(!$(e.currentTarget).parent().hasClass('heading') && !$(e.currentTarget).parent().hasClass('double-heading')){
-        showResults();
+        showResults('filter');
       }
      
     });
@@ -389,15 +392,15 @@ $(document).ready(function() {
                 // usuwanie z tablicy ręcznych wyszukiwań
                 manualSearched = manualSearched.filter(item => item !== value);
                 $(e.currentTarget).remove();
-                showResults();
+                showResults('filter');
               })
               e.target.value = '';
-              showResults();
+              showResults('filter');
             }
           }
           else if(!value.length){
             clearTimeout(waitAMoment);
-            showResults();
+            showResults('filter');
           }
           else{
             clearTimeout(waitAMoment);
@@ -497,7 +500,7 @@ $(document).ready(function() {
                   filterInput.appendTo(inspLabel);
                   inspLabel.bind('click', function(e){
                     console.log(e);
-                    showResults();
+                    showResults('filter');
                   })
                   let spanLabel = $(document.createElement('span'));
                   spanLabel.html(inspectorate);
@@ -584,7 +587,7 @@ $(document).ready(function() {
               if(e.target.type == 'checkbox'){
                 let checkedInputs = $('#FilterRegion input:checked');
               showInspectorates(checkedInputs);
-              showResults();
+              showResults('filter');
               }
               
             });
@@ -613,7 +616,7 @@ $(document).ready(function() {
     let goToPage = (currentPage, expectedPage) => {
       filters['actions']['page']['current'] = currentPage;
       filters['actions']['page']['expected'] = expectedPage;
-      showResults();
+      showResults('page');
     }
 
     $('#Pagination ul li a').bind('click', function(e){
