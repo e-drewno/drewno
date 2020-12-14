@@ -295,6 +295,7 @@ input[type="checkbox"] + span{
 
 #Auctions{
     font-size: 11px;
+    position: relative;
 }
 
 #Auctions .row{
