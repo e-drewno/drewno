@@ -167,104 +167,122 @@ $(document).ready(function() {
     // wyświetlanie wyników
     let showResults = (type) => {
       console.log(type);
-      // json do symulowania pobierania danych z pseudoaukcjami
-      fetch('./test-auctions.json')
-      .then(response => response.json())
-      .then((auction) => {
-
-        // liczby do paginacji (raczej z php)
-        let auctionsCount = 0;
-        auction.forEach(region => {
-          region.forEach(auction => {
-            auctionsCount++;
-          })
-        });
-        let formElements = form[0].elements; 
-        let pagesNumber = auctionsCount / _LICZBA_AUKCJI;
-        
-        for (let i=0; i<formElements.length; i++){
-          let el = formElements[i];
-          if( (el.checked && (el.type == 'checkbox' || el.type == 'radio')) ||
-            ( el.value && (el.type == 'number' || el.type == 'text' || el.type == 'date' || el.type == 'search')) ){
-            if(el.parentNode.classList.value !== 'heading'){
-              if(el.name == 'inspectorates[]'){
-                if(!filters['inspectorates'].includes(el.value)){
-                  filters['inspectorates'].push(el.value)
-                }
-              }
-              else if(el.name == 'rdlps[]'){    
-                if(!filters['rdlps'].includes(el.value)){
-                  filters['rdlps'].push(el.value)
-                }
-              }
-              else if(el.name == 'types[]'){
-                if(!filters['types'].includes(el.value)){
-                  filters['types'].push(el.value)
-                }
-              }
-              else if(el.name == 'commercialGroups[]'){
-                if(!filters['commercialGroup'].includes(el.value)){
-                  filters['commercialGroup'].push(el.value)
-                }
-              }
-              else if(el.name == 'assortments[]'){
-                if(!filters['assortments'].includes(el.value)){
-                  filters['assortments'].push(el.value)
-                }
-              }
-              else{
-                if(!filters['others'].includes(`{${el.id} : ${el.value}}`)){
-                  filters['others'].push(`{${el.id} : ${el.value}}`)
-                }
-              }
-              if($(el).hasClass('manual-searched')){
-                manualSearched.push(el.value);
-              }
-            };
+      let loading = $(document.createElement('div'));
+      loading.addClass('loading');
+      // czas odpalanie loadera
+      let loadingTimeout = setTimeout(function(){
+        loading.appendTo(auctions).css('opacity', 0)
+        .animate(
+          { opacity: 1 },
+          { queue: false, duration: 'slow' }
+        );
+      }, 500);
+      
+      // pseudo oczekiwanie na wyniki (na dole klamry zamykające teżdo usunięcia)
+      setTimeout(function(){
+        // json do symulowania pobierania danych z pseudoaukcjami
+        fetch('./test-auctions.json')
+        .then(response => response.json())
+        .then((auction) => {
+          clearTimeout(loadingTimeout);
+          if($('.loading').length){
+            $('.loading').remove();
           }
-        }
-        generateNewDatalist();
-
-        // jeśli jest aktywny jakiś filtr
-        if(filters['rdlps'].length || filters['inspectorates'].length || filters['types'].length 
-        || filters['commercialGroups'].length || filters['assortments'].length || filters['others'].length){
-          // zapytanie do bazy
-          console.log(filters);
-          let resetButton = $('#ResetButton');
-          if(!resetButton.length){
-            resetButton = $(document.createElement('a'));
-            resetButton.attr('id', 'ResetButton');
-            resetButton.text('Wyczyść');
-            resetButton.bind('click', function(e){
-              console.log(e);
-              resetForm();
-              manualSearched = [];
-              clearFilters();
+          // liczby do paginacji (raczej z php)
+          let auctionsCount = 0;
+          auction.forEach(region => {
+            region.forEach(auction => {
+              auctionsCount++;
             })
-            $('.form-header').append(resetButton);
-          } 
-        }
-        // jeśli jest sortowanie
-        else if(filters['actions']['sort']['column'].length || filters['actions']['sort']['order'].length){
-          if($('#resetButton').lenght){
-            resetButton.remove();
+          });
+          let formElements = form[0].elements; 
+          let pagesNumber = auctionsCount / _LICZBA_AUKCJI;
+          
+          for (let i=0; i<formElements.length; i++){
+            let el = formElements[i];
+            if( (el.checked && (el.type == 'checkbox' || el.type == 'radio')) ||
+              ( el.value && (el.type == 'number' || el.type == 'text' || el.type == 'date' || el.type == 'search')) ){
+              if(el.parentNode.classList.value !== 'heading'){
+                if(el.name == 'inspectorates[]'){
+                  if(!filters['inspectorates'].includes(el.value)){
+                    filters['inspectorates'].push(el.value)
+                  }
+                }
+                else if(el.name == 'rdlps[]'){    
+                  if(!filters['rdlps'].includes(el.value)){
+                    filters['rdlps'].push(el.value)
+                  }
+                }
+                else if(el.name == 'types[]'){
+                  if(!filters['types'].includes(el.value)){
+                    filters['types'].push(el.value)
+                  }
+                }
+                else if(el.name == 'commercialGroups[]'){
+                  if(!filters['commercialGroup'].includes(el.value)){
+                    filters['commercialGroup'].push(el.value)
+                  }
+                }
+                else if(el.name == 'assortments[]'){
+                  if(!filters['assortments'].includes(el.value)){
+                    filters['assortments'].push(el.value)
+                  }
+                }
+                else{
+                  if(!filters['others'].includes(`{${el.id} : ${el.value}}`)){
+                    filters['others'].push(`{${el.id} : ${el.value}}`)
+                  }
+                }
+                if($(el).hasClass('manual-searched')){
+                  manualSearched.push(el.value);
+                }
+              };
+            }
           }
-          console.log(filters);
-        }
-        // jeśli jest wybór strony
-        else if(filters['actions']['page']['current'].length || filters['actions']['page']['expected'].length){
-          if($('#resetButton').lenght){
-            resetButton.remove();
+          generateNewDatalist();
+
+          // jeśli jest aktywny jakiś filtr
+          if(filters['rdlps'].length || filters['inspectorates'].length || filters['types'].length 
+          || filters['commercialGroups'].length || filters['assortments'].length || filters['others'].length){
+            // zapytanie do bazy
+            console.log(filters);
+            let resetButton = $('#ResetButton');
+            if(!resetButton.length){
+              resetButton = $(document.createElement('a'));
+              resetButton.attr('id', 'ResetButton');
+              resetButton.text('Wyczyść');
+              resetButton.bind('click', function(e){
+                console.log(e);
+                resetForm();
+                manualSearched = [];
+                clearFilters();
+              })
+              $('.form-header').append(resetButton);
+            } 
           }
-          console.log(filters);
-        }
-        // jeśli brak zaznaczeń i sortowań
-        else{
-          // zapytanie do bazy
-          clearFilters();
-          console.log('Pokaż najnowsze. Brak filtrów i sortowań');
-        }   
-      })   
+          // jeśli jest sortowanie
+          else if(filters['actions']['sort']['column'].length || filters['actions']['sort']['order'].length){
+            if($('#resetButton').lenght){
+              resetButton.remove();
+            }
+            console.log(filters);
+          }
+          // jeśli jest wybór strony
+          else if(filters['actions']['page']['current'].length || filters['actions']['page']['expected'].length){
+            if($('#resetButton').lenght){
+              resetButton.remove();
+            }
+            console.log(filters);
+          }
+          // jeśli brak zaznaczeń i sortowań
+          else{
+            // zapytanie do bazy
+            clearFilters();
+            console.log('Pokaż najnowsze. Brak filtrów i sortowań');
+          }   
+        })  
+      // pseudo oczekiwanie na wyniki klamry zamykające (też do usunięcia) 
+      }, 1500);
     }
 
     let resetForm = () => {

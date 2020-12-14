@@ -427,6 +427,56 @@ footer {
     z-index: 9;
 }
 
+.loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,.6);
+}
+
+.loading:after {
+    content: url(spinner_icon.svg);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spinner 3s linear infinite;
+}
+
+
+@keyframes spinner{
+    0%{
+        transform: rotate(0deg);
+    }
+    12.5%{
+        transform: rotate(45deg);
+    }
+    25%{
+        transform: rotate(90deg);
+    }
+    37.5%{
+        transform: rotate(135deg);
+    }
+    50%{
+        transform: rotate(180deg);
+    }
+    62.5%{
+        transform: rotate(225deg);
+    }
+    75%{
+        transform: rotate(270deg);
+    }
+    87.5%{
+        transform: rotate(315deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
 /* login page */
 .form-container {
     max-width: 600px;
