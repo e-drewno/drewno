@@ -128,7 +128,6 @@ $(document).ready(function() {
     // akcja dla kliknięcia w zapis wyników wyszukiwania
     $('#SafeSearch').bind('click', function(e) {
       console.log(e);
-      showResults('filter');
       observeAndPopup(e, 'search');
     });
   
@@ -256,6 +255,7 @@ $(document).ready(function() {
                 resetForm();
                 manualSearched = [];
                 clearFilters();
+                resetButton.remove();
               })
               $('.form-header').append(resetButton);
             } 
