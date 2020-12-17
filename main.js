@@ -523,10 +523,6 @@ $(document).ready(function () {
                     'name': 'inspectorates[]'
                   });
                   filterInput.appendTo(inspLabel);
-                  inspLabel.bind('click', function (e) {
-                    console.log(e);
-                    showResults('filter');
-                  })
                   let spanLabel = $(document.createElement('span'));
                   spanLabel.html(inspectorate);
                   spanLabel.appendTo(inspLabel);
@@ -536,6 +532,12 @@ $(document).ready(function () {
                   else {
                     moreContainer.append(inspLabel);
                   }
+
+                  inspLabel.bind('click', function (e) {
+                    console.log(e);
+                    console.log(e.target.tagName);
+                    showResults('filter');
+                  })
                 })
                 moreContainer.appendTo(filterGroup);
               }
