@@ -82,9 +82,13 @@ body:not(.logged) #UserPanel{
 #Filters, #UserPanel{
     background-color: #fff;
     margin: 0 0 10px;
-    padding: 10px 30px 30px; 
+    padding: 10px 10px 20px; 
     font-size: 14px;
     border: 1px solid #ededed;
+}
+
+#UserPanel > div {
+    margin: 4px 0 !important;
 }
 
 #ResetButton{
@@ -96,15 +100,27 @@ body:not(.logged) #UserPanel{
     margin-top: 15px;
 }
 
-#Filters .filter > label:after{
+#UserPanel .observed-searches:not(.empty) h4:after ,#Filters .filter > label:after{
     content: url(close-icon.svg);
+    position: absolute;
     width: 12px;
     height: 12px;
-    float: right;
-    margin-top: 3px;
+    right: 5px;
+    top: 7px;
 }
 
-#Filters .filter:not(.open) > label:after{
+#UserPanel .observed-searches:not(.empty) h4:after{
+    right: 22px !important;
+}
+
+a.observed-search {
+    display: block;
+    font-size: 11px;
+    position: relative;
+    padding: 5px 0;
+}
+
+#UserPanel div.observed-searches:not(.open):not(.empty) h4:after, #Filters .filter:not(.open) > label:after{
     transform: rotate(180deg);
 }
 
@@ -136,8 +152,8 @@ body:not(.logged) #UserPanel{
     padding-left: 15px;
 }
 
-#Filters .filter > label {
-    font-size: 12px;
+#UserPanel h4, #Filters .filter > label {
+    font-size: 11px;
     display: block;
     margin: 0;
     letter-spacing: 1px;
@@ -147,6 +163,22 @@ body:not(.logged) #UserPanel{
     cursor: pointer;
     background: #d4d4d4;
     text-transform: uppercase;
+    position: relative;
+}
+
+#UserPanel .observed-searches:not(.empty) h4 span.counter, a.observed-search.modified span.counter {
+    background-color: #a00;
+}
+
+#UserPanel h4 span.counter , a.observed-search span.counter{
+    position: absolute;
+    right: 2px;
+    background-color: #aaa;
+    border-radius: 50%;
+    color: #fff;
+    width: 16px;
+    height: 16px;
+    text-align: center;
 }
 
 .filter-group{
@@ -154,16 +186,11 @@ body:not(.logged) #UserPanel{
     padding: 10px;
 }
 
-/* 
-#FilterInspectorate .filter-group.hidden label:nth-child(n+7) {
-    display: none;
-} */
-
-#FilterInspectorate .filter-group .more-container{
+#FilterInspectorate .filter-group .more-container, #UserPanel .more-container{
     display: none;
 }
 
-#FilterInspectorate .filter-group .show-more{
+#FilterInspectorate .filter-group .show-more, #UserPanel .show-more{
     color: #000;
     float: right;
     display: block;
@@ -210,7 +237,7 @@ input[type="checkbox"] + span{
     padding: 0 20px 40px;
 }
 
-#SafeSearch {
+#SaveSearch {
     border: 1px solid #bbb;
     border-radius: 3px;
     padding: 10px 60px 10px 10px;
@@ -225,8 +252,8 @@ input[type="checkbox"] + span{
     margin-bottom: 10px;
 }
 
-#SafeSearch.observed {
-    border: none;
+#SaveSearch.observed {
+    border: 1px solid #aaa;
     border-radius: 3px;
     padding: 10px 60px 10px 10px;
     cursor: pointer;

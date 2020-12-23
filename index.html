@@ -27,9 +27,28 @@
         <div id="Sidebar">
             <div id="UserPanel">
                 <h2>Witaj, Eustachy!</h2>
-                <h3><a href="#">Profil</a></h3>
-                <a href="#">Obserwowane wyszukiwania</a>
-                <a href="#">Obserwowane aukcje</a>
+                <div><h4>Profil</h4></div>
+                <div class="observed-searches empty">
+                    <h4>Obserwowane wyszukiwania<span class="counter">0</span> </h4>           
+                </div>
+                <div class="observed-searches open">
+                    <h4>Obserwowane wyszukiwania<span class="counter">6</span></h4>
+                    <div class="observed-search-container">
+                        <a data-search="1" href="#" class="observed-search modified">Wyszukiwanie 1<span class="counter">2</span></a>
+                        <a data-search="2" href="#" class="observed-search">Wyszukiwanie 2<span class="counter">0</span></a>
+                        <a data-search="3" href="#" class="observed-search modified">Wyszukiwanie 3<span class="counter">6</span></a>
+                        <a data-search="4" href="#" class="observed-search modified">Wyszukiwanie 4<span class="counter">1</span></a>
+                        <a data-search="5" href="#" class="observed-search">Wyszukiwanie 5<span class="counter">0</span></a>
+                        <!-- jeśli powyżej 5 kontener z klasami more-container hidden i przycisk z klasą observed-search -->
+                        <div class="more-container hidden">
+                            <a data-search="6" href="#" class="observed-search modified">Wyszukiwanie 6<span class="counter">10</span></a>
+                        </div>
+                        <a class="show-more">+ więcej</a>
+                    </div>
+                </div>
+                <div class="observed-auctions">
+                    <h4>Obserwowane aukcje<span class="counter">1</span> </h4>
+                </div>
             </div>
             <form method="POST" id="Filters">
                 <div class="form-header">
@@ -288,7 +307,7 @@
 
         <div id="Main">
             <div id="TableAuctions">
-                <button id="SafeSearch">Obserwuj wyszukiwanie</button>
+                <button id="SaveSearch">Obserwuj wyszukiwanie</button>
                 <div id="SortAuctions">
                     <div class="column" data-type="LP"><span>LP.</span></div>
                     <div class="column" data-type="RDLP"><span>RDLP</span></div>
@@ -574,6 +593,291 @@
                     </div>
                     <div class="row" data-region="Region 1" data-id="15">
                         <div class="column"><span>15</span></div>
+                        <div class="column"><span>Szczecin</span></div>
+                        <div class="column"><span>Nadleśnictwo Trzebież</span></div>
+                        <div class="column"><span>1030200577</span></div>
+                        <div class="column"><span>S_S2A_OP SO</span></div>
+                        <div class="column"><span>2020-12-03
+                                09:59:00</span></div>
+                        <div class="column"><span>25</span></div>
+                        <div class="column"><span>1/1</span></div>
+                        <div class="column"><span>125</span></div>
+                        <div class="column"><span>125</span></div>
+                        <div class="column"><span>16 godz</span></div>
+                        <div class="column"><span><a
+                                    href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                    target="_blank">Link</a></span></div>
+                        <div class="column"><button class="observe"></button></div>
+                        <div class="column"><span>2 min</span></div>
+                    </div>
+                    <div class="row" data-region="Region 1" data-id="16">
+                        <div class="column"><span>16</span></div>
+                        <div class="column"><span>Szczecinek</span></div>
+                        <div class="column"><span>Zespół Składnic Lasów Państwowych w Białogardzie</span></div>
+                        <div class="column"><span>1175201350</span></div>
+                        <div class="column"><span>W_STANDARD DB</span></div>
+                        <div class="column"><span>2020-12-03
+                                07:01:00</span></div>
+                        <div class="column"><span>30</span></div>
+                        <div class="column"><span>0/0</span></div>
+                        <div class="column"><span>1314</span></div>
+                        <div class="column"><span></span></div>
+                        <div class="column"><span>13 godz</span></div>
+                        <div class="column"><span><a
+                                    href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                    target="_blank">Link</a></span></div>
+                        <div class="column"><button class="observe"></button></div>
+                        <div class="column"><span>10 dni</span></div>
+                    </div>
+                    <div class="row" data-region="Region 1" data-id="17">
+                        <div class="column"><span>17</span></div>
+                        <div class="column"><span>Szczecinek</span></div>
+                        <div class="column"><span>Zespół Składnic Lasów Państwowych w Białogardzie</span></div>
+                        <div class="column"><span>1175201351</span></div>
+                        <div class="column"><span>W_STANDARD DB</span></div>
+                        <div class="column"><span>2020-12-03
+                                07:23:00</span></div>
+                        <div class="column"><span>17</span></div>
+                        <div class="column"><span>0/0</span></div>
+                        <div class="column"><span>1247</span></div>
+                        <div class="column"><span></span></div>
+                        <div class="column"><span>14 godz</span></div>
+                        <div class="column"><span><a
+                                    href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                    target="_blank">Link</a></span></div>
+                        <div class="column"><button class="observe"></button></div>
+                        <div class="column"><span>8 dni</span></div>
+                    </div>
+                    <div class="row" data-region="Region 1" data-id="18">
+                        <div class="column"><span>18</span></div>
+                        <div class="column"><span>Szczecinek</span></div>
+                        <div class="column"><span>Zespół Składnic Lasów Państwowych w Białogardzie</span></div>
+                        <div class="column"><span>1175201352</span></div>
+                        <div class="column"><span>W_STANDARD DB</span></div>
+                        <div class="column"><span>2020-12-03
+                                07:27:00</span></div>
+                        <div class="column"><span>18</span></div>
+                        <div class="column"><span>0/0</span></div>
+                        <div class="column"><span>1128</span></div>
+                        <div class="column"><span></span></div>
+                        <div class="column"><span>14 godz</span></div>
+                        <div class="column"><span><a
+                                    href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                    target="_blank">Link</a></span></div>
+                        <div class="column"><button class="observe"></button></div>
+                        <div class="column"><span>5 dni</span></div>
+                    </div>
+                    <div class="row" data-region="Region 1" data-id="19">
+                        <div class="column"><span>19</span></div>
+                        <div class="column"><span>Szczecinek</span></div>
+                        <div class="column"><span>Zespół Składnic Lasów Państwowych w Białogardzie</span></div>
+                        <div class="column"><span>1175201353</span></div>
+                        <div class="column"><span>W_STANDARD DB</span></div>
+                        <div class="column"><span>2020-12-03
+                                07:45:00</span></div>
+                        <div class="column"><span>20</span></div>
+                        <div class="column"><span>0/0</span></div>
+                        <div class="column"><span>877</span></div>
+                        <div class="column"><span></span></div>
+                        <div class="column"><span>14 godz</span></div>
+                        <div class="column"><span><a
+                                    href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                    target="_blank">Link</a></span></div>
+                        <div class="column"><button class="observe"></button></div>
+                        <div class="column"><span>2 dni</span></div>
+                    </div>
+                    <div class="row" data-region="Region 1" data-id="20">
+                        <div class="column"><span>20</span></div>
+                        <div class="column"><span>Szczecinek</span></div>
+                        <div class="column"><span>Zespół Składnic Lasów Państwowych w Białogardzie</span></div>
+                        <div class="column"><span>1175201354</span></div>
+                        <div class="column"><span>W_STANDARD DB</span></div>
+                        <div class="column"><span>2020-12-03
+                                07:51:00</span></div>
+                        <div class="column"><span>10</span></div>
+                        <div class="column"><span>0/0</span></div>
+                        <div class="column"><span>1083</span></div>
+                        <div class="column"><span></span></div>
+                        <div class="column"><span>14 godz</span></div>
+                        <div class="column"><span><a
+                                    href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                    target="_blank">Link</a></span></div>
+                        <div class="column"><button class="observe"></button></div>
+                        <div class="column"><span>24 godz</span></div>
+                    </div>
+                    <div class="row" data-region="Region 1" data-id="21">
+                        <div class="column"><span>21</span></div>
+                        <div class="column"><span>Szczecinek</span></div>
+                        <div class="column"><span>Zespół Składnic Lasów Państwowych w Białogardzie</span></div>
+                        <div class="column"><span>1175201355</span></div>
+                        <div class="column"><span>W_STANDARD DB</span></div>
+                        <div class="column"><span>2020-12-03
+                                08:01:00</span></div>
+                        <div class="column"><span>12</span></div>
+                        <div class="column"><span>0/0</span></div>
+                        <div class="column"><span>1155</span></div>
+                        <div class="column"><span></span></div>
+                        <div class="column"><span>14 godz</span></div>
+                        <div class="column"><span><a
+                                    href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                    target="_blank">Link</a></span></div>
+                        <div class="column"><button class="observe"></button></div>
+                        <div class="column"><span>19 godz</span></div>
+                    </div>
+                    <div class="row" data-region="Region 1" data-id="22">
+                        <div class="column"><span>22</span></div>
+                        <div class="column"><span>Szczecinek</span></div>
+                        <div class="column"><span>Zespół Składnic Lasów Państwowych w Białogardzie</span></div>
+                        <div class="column"><span>1175201356</span></div>
+                        <div class="column"><span>W_STANDARD DB</span></div>
+                        <div class="column"><span>2020-12-03
+                                08:05:00</span></div>
+                        <div class="column"><span>20</span></div>
+                        <div class="column"><span>0/0</span></div>
+                        <div class="column"><span>1169</span></div>
+                        <div class="column"><span></span></div>
+                        <div class="column"><span>14 godz</span></div>
+                        <div class="column"><span><a
+                                    href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                    target="_blank">Link</a></span></div>
+                        <div class="column"><button class="observe"></button></div>
+                        <div class="column"><span>11 godz</span></div>
+                    </div>
+                    <div class="row" data-region="Region 1" data-id="23">
+                        <div class="column"><span>23</span></div>
+                        <div class="column"><span>Szczecinek</span></div>
+                        <div class="column"><span>Zespół Składnic Lasów Państwowych w Białogardzie</span></div>
+                        <div class="column"><span>1175201357</span></div>
+                        <div class="column"><span>W_STANDARD DB</span></div>
+                        <div class="column"><span>2020-12-03
+                                08:11:00</span></div>
+                        <div class="column"><span>21</span></div>
+                        <div class="column"><span>0/0</span></div>
+                        <div class="column"><span>1212</span></div>
+                        <div class="column"><span></span></div>
+                        <div class="column"><span>14 godz</span></div>
+                        <div class="column"><span><a
+                                    href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                    target="_blank">Link</a></span></div>
+                        <div class="column"><button class="observe"></button></div>
+                        <div class="column"><span>7 godz</span></div>
+                    </div>
+                    <div class="row" data-region="Region 1" data-id="24">
+                        <div class="column"><span>24</span></div>
+                        <div class="column"><span>Szczecinek</span></div>
+                        <div class="column"><span>Zespół Składnic Lasów Państwowych w Białogardzie</span></div>
+                        <div class="column"><span>1175201358</span></div>
+                        <div class="column"><span>W_STANDARD DB</span></div>
+                        <div class="column"><span>2020-12-03
+                                08:17:00</span></div>
+                        <div class="column"><span>20</span></div>
+                        <div class="column"><span>0/0</span></div>
+                        <div class="column"><span>1202</span></div>
+                        <div class="column"><span></span></div>
+                        <div class="column"><span>14 godz</span></div>
+                        <div class="column"><span><a
+                                    href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                    target="_blank">Link</a></span></div>
+                        <div class="column"><button class="observe"></button></div>
+                        <div class="column"><span>6 godz</span></div>
+                    </div>
+                    <div class="row" data-region="Region 1" data-id="25">
+                        <div class="column"><span>25</span></div>
+                        <div class="column"><span>Toruń</span></div>
+                        <div class="column"><span>Nadleśnictwo Trzebciny</span></div>
+                        <div class="column"><span>1228200994</span></div>
+                        <div class="column"><span>S_S2A SW</span></div>
+                        <div class="column"><span>2020-12-03
+                                09:01:00</span></div>
+                        <div class="column"><span>115</span></div>
+                        <div class="column"><span>0/0</span></div>
+                        <div class="column"><span>153</span></div>
+                        <div class="column"><span></span></div>
+                        <div class="column"><span>15 godz</span></div>
+                        <div class="column"><span><a
+                                    href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                    target="_blank">Link</a></span></div>
+                        <div class="column"><button class="observe"></button></div>
+                        <div class="column"><span>5 godz</span></div>
+                    </div>
+                    <div class="row" data-region="Region 1" data-id="26">
+                        <div class="column"><span>26</span></div>
+                        <div class="column"><span>Toruń</span></div>
+                        <div class="column"><span>Nadleśnictwo Trzebciny</span></div>
+                        <div class="column"><span>1228200995</span></div>
+                        <div class="column"><span>S_S2A LP</span></div>
+                        <div class="column"><span>2020-12-03
+                                09:03:00</span></div>
+                        <div class="column"><span>7</span></div>
+                        <div class="column"><span>0/0</span></div>
+                        <div class="column"><span>103</span></div>
+                        <div class="column"><span></span></div>
+                        <div class="column"><span>15 godz</span></div>
+                        <div class="column"><span><a
+                                    href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                    target="_blank">Link</a></span></div>
+                        <div class="column"><button class="observe"></button></div>
+                        <div class="column"><span>2 godz</span></div>
+                    </div>
+                    <div class="row" data-region="Region 1" data-id="27">
+                        <div class="column"><span>27</span></div>
+                        <div class="column"><span>Toruń</span></div>
+                        <div class="column"><span>Nadleśnictwo Trzebciny</span></div>
+                        <div class="column"><span>1228200996</span></div>
+                        <div class="column"><span>W_WDP BK</span></div>
+                        <div class="column"><span>2020-12-03
+                                09:05:00</span></div>
+                        <div class="column"><span>3</span></div>
+                        <div class="column"><span>1/1</span></div>
+                        <div class="column"><span>132</span></div>
+                        <div class="column"><span>132</span></div>
+                        <div class="column"><span>15 godz</span></div>
+                        <div class="column"><span><a
+                                    href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                    target="_blank">Link</a></span></div>
+                        <div class="column"><button class="observe"></button></div>
+                        <div class="column"><span>1 godz</span></div>
+                    </div>
+                    <div class="row" data-region="Region 1" data-id="28">
+                        <div class="column"><span>28</span></div>
+                        <div class="column"><span>Toruń</span></div>
+                        <div class="column"><span>Nadleśnictwo Trzebciny</span></div>
+                        <div class="column"><span>1228200997</span></div>
+                        <div class="column"><span>W_STANDARD DBC</span></div>
+                        <div class="column"><span>2020-12-03
+                                09:07:00</span></div>
+                        <div class="column"><span>5</span></div>
+                        <div class="column"><span>0/0</span></div>
+                        <div class="column"><span>322</span></div>
+                        <div class="column"><span></span></div>
+                        <div class="column"><span>15 godz</span></div>
+                        <div class="column"><span><a
+                                    href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                    target="_blank">Link</a></span></div>
+                        <div class="column"><button class="observe"></button></div>
+                        <div class="column"><span>39 min</span></div>
+                    </div>
+                    <div class="row" data-region="Region 1" data-id="29">
+                        <div class="column"><span>29</span></div>
+                        <div class="column"><span>Toruń</span></div>
+                        <div class="column"><span>Nadleśnictwo Trzebciny</span></div>
+                        <div class="column"><span>1228200998</span></div>
+                        <div class="column"><span>W_STANDARD OL</span></div>
+                        <div class="column"><span>2020-12-03
+                                09:11:00</span></div>
+                        <div class="column"><span>3</span></div>
+                        <div class="column"><span>1/1</span></div>
+                        <div class="column"><span>185</span></div>
+                        <div class="column"><span>185</span></div>
+                        <div class="column"><span>15 godz</span></div>
+                        <div class="column"><span><a
+                                    href="https://www.e-drewno.pl/stock/?product=stock&amp;module=auctions&amp;action=showAuctions&amp;options=all&amp;region=1&amp;page=1"
+                                    target="_blank">Link</a></span></div>
+                        <div class="column"><button class="observe"></button></div>
+                        <div class="column"><span>8 min</span></div>
+                    </div>
+                    <div class="row" data-region="Region 1" data-id="30">
+                        <div class="column"><span>30</span></div>
                         <div class="column"><span>Szczecin</span></div>
                         <div class="column"><span>Nadleśnictwo Trzebież</span></div>
                         <div class="column"><span>1030200577</span></div>

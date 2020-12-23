@@ -9,7 +9,27 @@ let db = [],
   inspectorates = [],
   manualSearched = [];
 
-let filters = {};
+let params = {
+  "filters": {
+    "rdlps": [],
+    "inspectorates": [],
+    "types": [],
+    "commercialGroups": [],
+    "assortments": [],
+    "others": []
+  },
+  "actions": {
+    "page": {
+      "current": "", "expected": ""
+    },
+    "sort": {
+      "column": "", "order": ""
+    },
+    "show": {
+      "type": "", "params" : ""
+    }
+  }
+}
 
 $(document).ready(function () {
 
@@ -43,8 +63,8 @@ $(document).ready(function () {
     let form = $('#Filters');
 
     let sort = (column, order) => {
-      filters['actions']['sort']['column'] = column;
-      filters['actions']['sort']['order'] = order;
+      params['actions']['sort']['column'] = column;
+      params['actions']['sort']['order'] = order;
       showResults('sort');
     }
 
@@ -124,8 +144,7 @@ $(document).ready(function () {
         }
         let button = $(document.createElement('button'));
         popup.append(button);
-        button.bind('click', function (e) {
-          console.log(e);
+        button.bind('click', function (e) {    
           $('#Popup').fadeOut(function () {
             $(this).remove();
           });
@@ -141,26 +160,44 @@ $(document).ready(function () {
 
     // akcja dla kliknięcia gwiazdki obserwowanych aukcji
     $('.observe').bind('click', function (e) {
-      console.log(e);
       observeAndPopup(e, 'auction');
+      if($('.logged').length){
+        $(this).hasClass('observed')? showResults('removeObserved') : showResults('addToObserved', $(e.target).parent().parent().attr('data-id'));
+      }
     });
 
     // akcja dla kliknięcia w zapis wyników wyszukiwania
-    $('#SafeSearch').bind('click', function (e) {
-      console.log(e);
+    $('#SaveSearch').bind('click', function (e) {
       observeAndPopup(e, 'search');
+      if($('.logged').length){
+        $(this).hasClass('observed')? showResults('removeSaved') : showResults('addToSaved');
+      }
     });
 
     // zwijanie/rozwijanie filtra + ikona
     $('.filter > label').bind('click', function (e) {
-      console.log(e);
       $(this).parent().toggleClass('open');
       $(this).next('.filter-content').slideToggle('slow');
     });
 
+    // zwijanie/rozwijanie obserwowane + ikona
+    $('.observed-searches:not(.empty) h4').bind('click', function (e) {
+      $(this).parent().toggleClass('open');
+      $(this).next('.observed-search-container').slideToggle('slow');
+    });
+
+    // wyświetl zapisane wyszukiwanie
+    $('.observed-search').bind('click', function (e) {
+      showResults('showSaved', e.target.attributes['data-search'].value);
+    });
+
+    // wyświetl obserwowane aukcje
+    $('.observed-auctions').bind('click', function (e) {
+      showResults('showObserved');
+    });
+
     //tymczasowe do testów logowania się
     $('.item-menu a:contains("Logowanie / Rejestracja")').bind('click', function (e) {
-      console.log(e);
       if ($('.logged').length) {
         $(this).text('Logowanie / Rejestracja');
         $('body').removeClass('logged');
@@ -184,8 +221,9 @@ $(document).ready(function () {
     }
 
     // wyświetlanie wyników
-    let showResults = (type) => {
-      console.log(type);
+    let showResults = (type, param) => {
+      params['actions']['show']['type'] = type;
+      params['actions']['show']['params'] = param;
     
       let formElements = form[0].elements;
 
@@ -195,33 +233,33 @@ $(document).ready(function () {
           (el.value && (el.type == 'number' || el.type == 'text' || el.type == 'date' || el.type == 'search'))) {
           if (el.parentNode.classList.value !== 'heading') {
             if (el.name == 'inspectorates[]') {
-              if (!filters['inspectorates'].includes(el.value)) {
-                filters['inspectorates'].push(el.value)
+              if (!params['filters']['inspectorates'].includes(el.value)) {
+                params['filters']['inspectorates'].push(el.value)
               }
             }
             else if (el.name == 'rdlps[]') {
-              if (!filters['rdlps'].includes(el.value)) {
-                filters['rdlps'].push(el.value)
+              if (!params['filters']['rdlps'].includes(el.value)) {
+                params['filters']['rdlps'].push(el.value)
               }
             }
             else if (el.name == 'types[]') {
-              if (!filters['types'].includes(el.value)) {
-                filters['types'].push(el.value)
+              if (!params['filters']['types'].includes(el.value)) {
+                params['filters']['types'].push(el.value)
               }
             }
             else if (el.name == 'commercialGroups[]') {
-              if (!filters['commercialGroup'].includes(el.value)) {
-                filters['commercialGroup'].push(el.value)
+              if (!params['filters']['commercialGroup'].includes(el.value)) {
+                params['filters']['commercialGroup'].push(el.value)
               }
             }
             else if (el.name == 'assortments[]') {
-              if (!filters['assortments'].includes(el.value)) {
-                filters['assortments'].push(el.value)
+              if (!params['filters']['assortments'].includes(el.value)) {
+                params['filters']['assortments'].push(el.value)
               }
             }
             else {
-              if (!filters['others'].includes(`{${el.id} : ${el.value}}`)) {
-                filters['others'].push(`{${el.id} : ${el.value}}`)
+              if (!params['filters']['others'].includes(`{${el.id} : ${el.value}}`)) {
+                params['filters']['others'].push(`{${el.id} : ${el.value}}`)
               }
             }
             if ($(el).hasClass('manual-searched')) {
@@ -232,17 +270,23 @@ $(document).ready(function () {
       }
       generateNewDatalist();
 
+      // jeśli jest sortowanie
+      if (params['actions']['sort']['column'].length || params['actions']['sort']['order'].length) {
+        if ($('#resetButton').lenght) {
+          resetButton.remove();
+        }
+      }
+      
       // jeśli jest aktywny jakiś filtr
-      if (filters['rdlps'].length || filters['inspectorates'].length || filters['types'].length
-        || filters['commercialGroups'].length || filters['assortments'].length || filters['others'].length) {
+      if (params['filters']['rdlps'].length || params['filters']['inspectorates'].length || params['filters']['types'].length
+        || params['filters']['commercialGroups'].length || params['filters']['assortments'].length || params['filters']['others'].length) {
 
         let resetButton = $('#ResetButton');
         if (!resetButton.length) {
           resetButton = $(document.createElement('a'));
           resetButton.attr('id', 'ResetButton');
           resetButton.text('Wyczyść');
-          resetButton.bind('click', function (e) {
-            console.log(e);
+          resetButton.bind('click', function (e) { 
             resetForm();
             manualSearched = [];
             clearFilters();
@@ -251,19 +295,7 @@ $(document).ready(function () {
           $('.form-header').append(resetButton);
         }
       }
-      // jeśli jest sortowanie
-      else if (filters['actions']['sort']['column'].length || filters['actions']['sort']['order'].length) {
-        if ($('#resetButton').lenght) {
-          resetButton.remove();
-        }
-      }
-      // jeśli jest wybór strony
-      else if (filters['actions']['page']['current'].length || filters['actions']['page']['expected'].length) {
-        if ($('#resetButton').lenght) {
-          resetButton.remove();
-        }
-      }
-      // jeśli brak zaznaczeń i sortowań
+      // jeśli brak zaznaczeń
       else {
         clearFilters();
       }
@@ -277,12 +309,12 @@ $(document).ready(function () {
             { opacity: 1 },
             { queue: false, duration: 'slow' }
           );
-      }, 500);
+      }, 5);
 
-      fetchApi(_URL, JSON.stringify(filters))
+      fetchApi(_URL, JSON.stringify(params))
         .then(response => {
-          filters = JSON.parse(response.data);
-          console.log("response.data: ", filters);
+          params = JSON.parse(response.data);
+          console.log("response.data: ", params);
         })
         .then( () => {
           clearTimeout(loadingTimeout);
@@ -294,7 +326,7 @@ $(document).ready(function () {
 
     let resetForm = () => {
       form[0].reset();
-      showResults();
+      showResults('resetFilters');
       createInspectoratesSearch();
     }
 
@@ -323,29 +355,25 @@ $(document).ready(function () {
 
     // zaznaczanie wszystkich checkboksów z kilku podgrup (w stylu wszystkie aktualnie dostępne) lub z jednej podgrupy
     $('.double-heading, .heading').bind('click', function (e) {
-      console.log(e);
       clickHeading(e);
     });
 
     // wyłączone wysyłanie formularza
-    form.bind('submit', function (e) {
-      console.log(e);
+    form.bind('submit', function (e) {  
       e.preventDefault();
       showResults('summary');
     });
 
     // zbindowane akcje do filtrów niegenerowanych w trakcie
     $('input[type="text"], input[type="number"], input[type="date"]').bind('input', function (e) {
-      console.log(e);
+    
       showResults('filter');
     });
 
     $('input[type="checkbox"]').bind('click', function (e) {
-      console.log(e);
       if (!$(e.currentTarget).parent().hasClass('heading') && !$(e.currentTarget).parent().hasClass('double-heading')) {
         showResults('filter');
       }
-
     });
 
     // przyklejanie sortowalnego nagłówka do górnej krawędzi
@@ -393,7 +421,7 @@ $(document).ready(function () {
       });
       search.appendTo(filterGroup);
       search.bind('input', function (e) {
-        console.log(e);
+      
         let value = e.target.value;
         let waitAMoment = setTimeout(function () {
           if (value == e.target.value) {
@@ -413,12 +441,12 @@ $(document).ready(function () {
               searchInput.prependTo(searchLabel);
               searchLabel.appendTo(searchContainer);
               searchLabel.bind('click', function (e) {
-                console.log(e);
+              
                 // usuwanie z tablicy ręcznych wyszukiwań
                 manualSearched = manualSearched.filter(item => item !== value);
                 $(e.currentTarget).remove();
                 showResults('filter');
-              })
+              });
               e.target.value = '';
               showResults('filter');
             }
@@ -456,7 +484,6 @@ $(document).ready(function () {
               'class': 'heading'
             });
             rdlpLabel.bind('click', function (e) {
-              console.log(e);
               clickHeading(e);
             });
           }
@@ -482,7 +509,6 @@ $(document).ready(function () {
           showMoreButton.text(buttonText);
           showMoreButton.addClass('show-more');
           showMoreButton.bind('click', function (e) {
-            console.log(e);
             e.preventDefault();
             let moreContainer = $(this).prev();
             if (moreContainer.hasClass('hidden')) {
@@ -503,7 +529,7 @@ $(document).ready(function () {
                 );
               showMoreButton.text('+ więcej')
             }
-          })
+          });
 
           $(db).each((index, region) => {
             region['RDLPs'].forEach(rdlp => {
@@ -533,11 +559,10 @@ $(document).ready(function () {
                     moreContainer.append(inspLabel);
                   }
 
-                  inspLabel.bind('click', function (e) {
-                    console.log(e);
+                  inspLabel.bind('click', function (e) {                  
                     console.log(e.target.tagName);
                     showResults('filter');
-                  })
+                  });
                 })
                 moreContainer.appendTo(filterGroup);
               }
@@ -586,7 +611,6 @@ $(document).ready(function () {
         spanLabel.html('Region ' + regionNumber);
         spanLabel.appendTo(regionLabel);
         regionLabel.bind('click', function (e) {
-          console.log(e);
           clickHeading(e);
           let checkedInputs = $('#FilterRegion input:checked');
           console.log(checkedInputs);
@@ -616,7 +640,6 @@ $(document).ready(function () {
                 showInspectorates(checkedInputs);
                 showResults('filter');
               }
-
             });
             let spanLabel = $(document.createElement('span'));
             spanLabel.html(rdlpName);
@@ -641,8 +664,8 @@ $(document).ready(function () {
     }
 
     let goToPage = (currentPage, expectedPage) => {
-      filters['actions']['page']['current'] = currentPage;
-      filters['actions']['page']['expected'] = expectedPage;
+      params['actions']['page']['current'] = currentPage;
+      params['actions']['page']['expected'] = expectedPage;
       showResults('page');
     }
 
@@ -653,29 +676,16 @@ $(document).ready(function () {
       console.log(current);
       console.log(expected);
       goToPage(current, expected);
-    })
+    });
 
     let clearFilters = () => {
-      filters = {
-        "rdlps": [],
-        "inspectorates": [],
-        "types": [],
-        "commercialGroups": [],
-        "assortments": [],
-        "others": [],
-        "actions": {
-          "page": {
-            "current": "", "expected": ""
-          },
-          "sort": {
-            "column": "",
-            "order": ""
-          }
-        }
-      }
+      params["filters"]["rdlps"] = [];
+      params["filters"]["inspectorates"] = [];
+      params["filters"]["types"] = [];
+      params["filters"]["commercialGroups"] = [];
+      params["filters"]["assortments"] = [];
+      params["filters"]["others"] = [];
     }
-
-    clearFilters();
   }
 });
 
