@@ -250,6 +250,7 @@ $(document).ready(function () {
       param ? $('#actionParams').val(param) : $('#actionParams').val('');
       $('#actionType').val(type);
 
+
       if(param === 'removeSaved'){
         $('body').removeClass('active-saved');
 
@@ -281,8 +282,8 @@ $(document).ready(function () {
               }
             }
             else if (el.name == 'commercialGroups[]') {
-              if (!params['filters']['commercialGroup'].includes(el.value)) {
-                params['filters']['commercialGroup'].push(el.value)
+              if (!params['filters']['commercialGroups'].includes(el.value)) {
+                params['filters']['commercialGroups'].push(el.value)
               }
             }
             else if (el.name == 'assortments[]') {
