@@ -70,6 +70,23 @@ a, button, input{
     margin: 0 0 25px 20px;
 }
 
+button#Refresh {
+    background-color: #007aa9;
+    color: #fff;
+    width: 100%;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    padding: 10px 40px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    background-image: url(refresh-icon.svg);
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: left 10px center;
+    margin-bottom: 10px;
+}
+
 body:not(.logged) #UserPanel{
     display: none;
 }
@@ -113,11 +130,28 @@ body:not(.logged) #UserPanel{
     right: 22px !important;
 }
 
-a.observed-search {
+#UserPanel .observed-auctions.new-auctions .counter{
+    background-color: #2a2;
+}
+
+a.observed-search, .th-name, .observed-info {
     display: block;
     font-size: 11px;
     position: relative;
     padding: 5px 0;
+}
+
+.th-new-count{
+    position: absolute;
+    right: 2px;
+}
+
+.th-name, .th-new-count{
+    font-weight: bold;
+}
+
+a.observed-search.active{
+    font-weight: bold;
 }
 
 #UserPanel div.observed-searches:not(.open):not(.empty) h4:after, #Filters .filter:not(.open) > label:after{
@@ -278,6 +312,10 @@ input[type="checkbox"] + span{
     text-align: center;
 }
 
+#SortAuctions .column.unsortable{
+    cursor: default;
+}
+
 #SortAuctions .column:not(:last-of-type), #Auctions .column{
     border-right: 1px solid rgba(0,0,0,.08);
 }
@@ -418,7 +456,11 @@ input[type="checkbox"] + span{
     font-size: 12px;
 }
 
-#Popup button {
+#Popup input[type="text"]{
+    margin-top: 20px;
+}
+
+#Popup #ExitPopup {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -429,6 +471,24 @@ input[type="checkbox"] + span{
     background-position: center;
     background-size: 100%;
     border: none;
+}
+
+#Popup #SaveName{
+    background-color: #007aa9;
+    color: #fff;
+    width: 100%;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    padding: 10px 40px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+#Popup #SaveName:disabled{
+    background-color: #637a83;
+    cursor: default;
 }
 
 footer {

@@ -25,17 +25,23 @@
     </header>
     <div id="Content">
         <div id="Sidebar">
+            <button id="Refresh">Odśwież wyniki</button>
             <div id="UserPanel">
                 <h2>Witaj, Eustachy!</h2>
                 <div><h4>Profil</h4></div>
                 <div class="observed-searches empty">
-                    <h4>Obserwowane wyszukiwania<span class="counter">0</span> </h4>           
+                    <h4>Obserwowane wyszukiwania<span class="counter">0</span> </h4>     
+                    <div class="observed-search-container">
+                        <div class="th-name">Nazwa<span class="th-new-count">Nowe</span></div>
+                        <div class="observed-info">Brak dodanych wyszukiwań</div>
+                    </div>      
                 </div>
                 <div class="observed-searches open">
                     <h4>Obserwowane wyszukiwania<span class="counter">6</span></h4>
                     <div class="observed-search-container">
+                        <div class="th-name">Nazwa<span class="th-new-count">Nowe</span></div>
                         <a data-search="1" href="#" class="observed-search modified">Wyszukiwanie 1<span class="counter">2</span></a>
-                        <a data-search="2" href="#" class="observed-search">Wyszukiwanie 2<span class="counter">0</span></a>
+                        <a data-search="2" href="#" class="observed-search active">Wyszukiwanie 2<span class="counter">0</span></a>
                         <a data-search="3" href="#" class="observed-search modified">Wyszukiwanie 3<span class="counter">6</span></a>
                         <a data-search="4" href="#" class="observed-search modified">Wyszukiwanie 4<span class="counter">1</span></a>
                         <a data-search="5" href="#" class="observed-search">Wyszukiwanie 5<span class="counter">0</span></a>
@@ -46,11 +52,11 @@
                         <a class="show-more">+ więcej</a>
                     </div>
                 </div>
-                <div class="observed-auctions">
+                <div class="observed-auctions new-auctions">
                     <h4>Obserwowane aukcje<span class="counter">1</span> </h4>
                 </div>
             </div>
-            <form method="POST" id="Filters">
+            <form method="GET" id="Filters">
                 <div class="form-header">
                     <h2>Filtruj</h2>
                 </div>
@@ -299,8 +305,13 @@
                             <input type="date" id="FilterMaxReceiptDate" name="FilterMaxReceiptDate" value="" min="2020-12-04" name="FilterMaxReceiptDate">
                         </label>
                     </div>
-
                 </div>
+                <input type="hidden" id="sortColumn" name="sortColumn">
+                <input type="hidden" id="sortOrder" name="sortOrder">
+                <input type="hidden" id="currentPage" name="currentPage">
+                <input type="hidden" id="expectedPage" name="expectedPage">
+                <input type="hidden" id="actionType" name="actionType">
+                <input type="hidden" id="actionParams" name="actionParams">
                 <input type="submit" hidden="true">
             </form>
         </div>
@@ -309,7 +320,7 @@
             <div id="TableAuctions">
                 <button id="SaveSearch">Obserwuj wyszukiwanie</button>
                 <div id="SortAuctions">
-                    <div class="column" data-type="LP"><span>LP.</span></div>
+                    <div class="column unsortable" data-type="LP"><span>LP.</span></div>
                     <div class="column" data-type="RDLP"><span>RDLP</span></div>
                     <div class="column" data-type="Inspectorate"><span>Nadleśnictwo</span></div>
                     <div class="column" data-type="AuctionNumber"><span>Nr aukcji</span></div>
@@ -320,7 +331,7 @@
                     <div class="column" data-type="OpenPrice"><span>Cena otwarcia netto</span></div>
                     <div class="column" data-type="WinNow"><span>Teraz wygrywa</span></div>
                     <div class="column" data-type="TimeToEnd"><span>Do końca pozostało</span></div>
-                    <div class="column" data-type="Link"><span>Link e-drewno</span></div>
+                    <div class="column unsortable" data-type="Link"><span>Link e-drewno</span></div>
                     <div class="column" data-type="Observe"><span>Obserwuj</span></div>
                     <div class="column" data-type="AddedTime"><span>Czas dodania</span></div>
                 </div>

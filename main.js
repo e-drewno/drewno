@@ -7,6 +7,7 @@ let db = [],
   regions = [],
   rdlps = [],
   inspectorates = [],
+  inspNames = [],
   manualSearched = [];
 
 let params = {
@@ -36,25 +37,6 @@ $(document).ready(function () {
   // skrypt strony głównej - można rozdzielić na poszczególne podstrony
   if ($('.home'.length)) {
 
-    let fetchApi = async (url, data) => {
-      const response = await fetch(url, {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        redirect: 'follow',
-        referrerPolicy: 'no-referrer',
-        body: JSON.stringify(data)
-      })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-      return response.json();
-    }
     const sortHeader = $('#SortAuctions');
     const auctions = $('#Auctions');
     const tableAuctions = $('#TableAuctions');
@@ -68,8 +50,13 @@ $(document).ready(function () {
       showResults('sort');
     }
 
+    // odświeżanie wyników
+    $('#Refresh').bind('click', function (e) {
+      showResults('refresh');
+    })
+
     // sortowanie wyników kolumnami
-    $('#SortAuctions > .column').bind('click', (function (e) {
+    $('#SortAuctions > .column:not(.unsortable)').bind('click', (function (e) {
       if ($('.active-sort').length) {
         $('.active-sort').removeClass('active-sort');
       }
@@ -85,6 +72,8 @@ $(document).ready(function () {
         order = 'desc';
       }
       $(this).addClass(order);
+      $('#sortColumn').val(type);
+      $('#sortOrder').val(order);
       sort(type, order);
     }));
 
@@ -94,18 +83,77 @@ $(document).ready(function () {
       if ($('#Popup').length) {
         $('#Popup').remove();
       }
+
+      let showPopup = (popup, type) => {
+        if(type === 'autoclose'){
+           // animacja popupa
+          $(popup).hide().appendTo('body').css('opacity', 0)
+          .slideDown('slow')
+          .animate(
+            { opacity: 1 },
+            { queue: false, duration: 'slow' }
+          );
+
+          setTimeout(function () {
+            $(popup).fadeOut(function () {
+              $(this).remove();
+            });
+          }, 5000);
+        }
+        else{
+          let button = $(document.createElement('button'));
+          button.attr('id', 'ExitPopup');
+          popup.append(button);
+          button.bind('click', function (e) {    
+            $('#Popup').fadeOut(function () {
+              $(this).remove();
+            });
+          });
+          $(popup).hide().appendTo('body').css('opacity', 0)
+          .slideDown('slow')
+          .animate(
+            { opacity: 1 },
+            { queue: false, duration: 'slow' }
+          );
+        }
+      }
+
       let popup = $(document.createElement('div'));
       popup.attr('id', 'Popup');
-      // popup wyświetlany tylko dla zalogowanych z automatycznym znikaniem
       if ($('.logged').length) {
         if (type === 'search') {
           if (element.hasClass('observed')) {
             element.removeClass('observed');
             popup.html("Usunięto kryteria wyszukiwania.<br> Zarządzanie obserwowanymi wyszukiwaniami znajdują się w panelu użytkownika w zakładce <b>OBSERWOWANE WYSZUKIWANIA</b>")
+            showPopup(popup, 'autoclose');
+            showResults('savedSearch', 'removeSaved');
           }
-          else {
+          else{
             element.addClass('observed');
-            popup.html("Dodano kryteria wyszukiwań do obserwowanych.<br> Zarządzanie obserwowanymi wyszukiwaniami znajdują się w panelu użytkownika w zakładce <b>OBSERWOWANE WYSZUKIWANIA</b>");
+            let popupContent = $(document.createElement('div'));
+            let popupText = 'Wpisz nazwę obserwowanego wyszukiwania';
+            let saveNameInput = $(document.createElement('input'));
+            saveNameInput.attr('type', 'text');
+            let submitButton = $(document.createElement('button'));
+            submitButton.attr('id','SaveName')
+            submitButton.text('Zapisz');
+            submitButton.attr('disabled', true)
+            let saveName = '';
+            saveNameInput.on('input', (e) => {
+              saveName = e.currentTarget.value;
+              saveName.length ? submitButton.attr('disabled', false) : submitButton.attr('disabled', true);
+            })
+            submitButton.on('click', () => {
+              $('#Popup').fadeOut(function () {
+                $(this).remove();
+              });
+              showResults('savedSearch', 'addToSaved');
+            });
+            popupContent.append(popupText);
+            popupContent.append(saveNameInput);
+            popupContent.append(submitButton);
+            popup.append(popupContent);
+            showPopup(popup);
           }
         }
         else if (type === 'auction') {
@@ -118,21 +166,8 @@ $(document).ready(function () {
             parent.addClass('observed');
             popup.html("<p>Dodano aukcję do obserwowanych.</p><p>Zarządzanie obserwowanymi aukcjami znajduje się w panelu użytkownika w zakładce <a href=\"#\">OBSERWOWANE AUKCJE</a>.");
           }
+          showPopup(popup, 'autoclose');
         }
-
-        // animacja popupa
-        $(popup).hide().appendTo('body').css('opacity', 0)
-          .slideDown('slow')
-          .animate(
-            { opacity: 1 },
-            { queue: false, duration: 'slow' }
-          );
-
-        setTimeout(function () {
-          $(popup).fadeOut(function () {
-            $(this).remove();
-          });
-        }, 5000);
       }
       // popup dla niezalogowanych
       else {
@@ -142,36 +177,21 @@ $(document).ready(function () {
         else if (type === 'auction') {
           popup.html("<p>Aby dodać aukcję do obserwowanych <a href=\"#\">zaloguj się</a></p><p>Dzięki tej opcji będziesz orzymywać powiadomienia o zmianach w aukcji (pojawienie się nowej oferty w aukcji, zmiana ceny)<br>Otrzymasz również powiadomienie przed zakończeniem aukcji, aby jej nie przegapić.");
         }
-        let button = $(document.createElement('button'));
-        popup.append(button);
-        button.bind('click', function (e) {    
-          $('#Popup').fadeOut(function () {
-            $(this).remove();
-          });
-        });
-        $(popup).hide().appendTo('body').css('opacity', 0)
-          .slideDown('slow')
-          .animate(
-            { opacity: 1 },
-            { queue: false, duration: 'slow' }
-          );
+        showPopup(popup);
       }
     }
 
     // akcja dla kliknięcia gwiazdki obserwowanych aukcji
     $('.observe').bind('click', function (e) {
-      observeAndPopup(e, 'auction');
       if($('.logged').length){
         $(this).hasClass('observed')? showResults('removeObserved') : showResults('addToObserved', $(e.target).parent().parent().attr('data-id'));
       }
+      observeAndPopup(e, 'auction');
     });
 
     // akcja dla kliknięcia w zapis wyników wyszukiwania
     $('#SaveSearch').bind('click', function (e) {
       observeAndPopup(e, 'search');
-      if($('.logged').length){
-        $(this).hasClass('observed')? showResults('removeSaved') : showResults('addToSaved');
-      }
     });
 
     // zwijanie/rozwijanie filtra + ikona
@@ -213,9 +233,10 @@ $(document).ready(function () {
       if ($('#SearchResults').length) {
         $('#SearchResults').html('');
       }
-      inspectorates.filter(x => !manualSearched.includes(x)).forEach(insp => {
+      inspectorates.filter(inspectorate => !manualSearched.includes(inspectorate.name)).forEach(insp => {
         let option = $(document.createElement('option'));
-        option.val(insp);
+        option.val(insp.name);
+        option.attr('data-id', insp.id);
         option.appendTo($('#SearchResults'));
       });
     }
@@ -224,6 +245,16 @@ $(document).ready(function () {
     let showResults = (type, param) => {
       params['actions']['show']['type'] = type;
       params['actions']['show']['params'] = param;
+      param ? $('#actionParams').val(param) : $('#actionParams').val('');
+      $('#actionType').val(type);
+
+      if(param === 'removeSaved'){
+        $('body').removeClass('active-saved');
+
+      }
+      else if(param === 'addToSaved'){ 
+        $('body').addClass('active-saved')
+      };
     
       let formElements = form[0].elements;
 
@@ -262,8 +293,8 @@ $(document).ready(function () {
                 params['filters']['others'].push(`{${el.id} : ${el.value}}`)
               }
             }
-            if ($(el).hasClass('manual-searched')) {
-              manualSearched.push(el.value);
+            if ($(el).hasClass('manual-searched')) {   
+              manualSearched.indexOf(el.value) < 0 ? manualSearched.push(el.value) : false;
             }
           };
         }
@@ -311,17 +342,16 @@ $(document).ready(function () {
           );
       }, 5);
 
-      fetchApi(_URL, JSON.stringify(params))
-        .then(response => {
-          params = JSON.parse(response.data);
-          console.log("response.data: ", params);
-        })
-        .then( () => {
-          clearTimeout(loadingTimeout);
-          if ($('.loading').length) {
-            $('.loading').remove();
-          }
-        });
+      fetch(form.serialize(), {
+          method: 'get'
+      })
+      .then((response) => {
+        console.log(response);
+        clearTimeout(loadingTimeout);
+        if ($('.loading').length) {
+          $('.loading').remove();
+        };
+      });
     }
 
     let resetForm = () => {
@@ -359,10 +389,10 @@ $(document).ready(function () {
     });
 
     // wyłączone wysyłanie formularza
-    form.bind('submit', function (e) {  
-      e.preventDefault();
-      showResults('summary');
-    });
+    // form.bind('submit', function (e) {  
+    //   e.preventDefault();
+    //   showResults('summary');
+    // });
 
     // zbindowane akcje do filtrów niegenerowanych w trakcie
     $('input[type="text"], input[type="number"], input[type="date"]').bind('input', function (e) {
@@ -414,18 +444,21 @@ $(document).ready(function () {
       });
       let results = $(document.createElement('datalist'));
       results.attr('id', 'SearchResults');
-      inspectorates.filter(x => !manualSearched.includes(x)).forEach(insp => {
+ 
+      inspectorates.filter(inspectorate => !manualSearched.includes(inspectorate.name)).forEach(insp => {
+        inspNames.push(insp.name);
         let option = $(document.createElement('option'));
-        option.val(insp);
+        option.val(insp.name);
+        option.attr('data-id', insp.id);
         option.appendTo(results);
       });
       search.appendTo(filterGroup);
-      search.bind('input', function (e) {
       
+      search.bind('input', function (e) {
         let value = e.target.value;
         let waitAMoment = setTimeout(function () {
           if (value == e.target.value) {
-            if (inspectorates.includes(value)) {
+            if (inspNames.includes(value)) {
               let searchLabel = $(document.createElement('label'));
               searchLabel.attr('for', value);
               let searchInput = $(document.createElement('input'));
@@ -474,6 +507,7 @@ $(document).ready(function () {
       if (checkedInputs.length) {
         checkedInputs.each((index, inspectorate) => {
           let labelName = inspectorate.id;
+          let inspectorateId = inspectorate.value;
           let filterGroup = $(document.createElement('div'));
           filterGroup.addClass('filter-group hidden');
           let rdlpLabel = $(document.createElement('label'));
@@ -496,7 +530,7 @@ $(document).ready(function () {
             // dodany "Sub-" żeby nie kolidował z rdlp z filtra regiony
             'id': 'Sub-' + labelName,
             'type': 'checkbox',
-            'value': labelName,
+            'value': inspectorateId,
             'name': 'rdlpInInspectorates[]'
           });
           filterInput.appendTo(rdlpLabel);
@@ -539,18 +573,18 @@ $(document).ready(function () {
                 rdlp['Inspectorates'].forEach((insp, i) => {
                   let inspLabel = $(document.createElement('label'));
                   let inspectorate = insp;
-                  inspLabel.attr('for', inspectorate);
+                  inspLabel.attr('for', inspectorate.name);
 
                   let filterInput = $(document.createElement('input'));
                   filterInput.attr({
-                    'id': inspectorate,
+                    'id': inspectorate.name,
                     'type': 'checkbox',
-                    'value': inspectorate,
+                    'value': inspectorate.id,
                     'name': 'inspectorates[]'
                   });
                   filterInput.appendTo(inspLabel);
                   let spanLabel = $(document.createElement('span'));
-                  spanLabel.html(inspectorate);
+                  spanLabel.html(inspectorate.name);
                   spanLabel.appendTo(inspLabel);
                   if (i < 5) {
                     inspLabel.appendTo(filterGroup);
@@ -560,7 +594,6 @@ $(document).ready(function () {
                   }
 
                   inspLabel.bind('click', function (e) {                  
-                    console.log(e.target.tagName);
                     showResults('filter');
                   });
                 })
@@ -577,8 +610,7 @@ $(document).ready(function () {
       }
     }
 
-    // pobieranie pseudobazy
-    fetch('./drewno.json')
+    fetch('./getRdlps.json')
       .then(response => response.json())
       .then(arr => db = arr)
       .then(() => createTables())
@@ -598,13 +630,13 @@ $(document).ready(function () {
         let regionLabel = $(document.createElement('label'));
         regionLabel.attr({
           'class': 'heading',
-          'for': 'Region' + regionNumber
+          'for': 'Region-' + regionNumber
         });
         let filterInput = $(document.createElement('input'));
         filterInput.attr({
-          'id': 'Region' + regionNumber,
+          'id': 'Region-' + regionNumber,
           'type': 'checkbox',
-          'value': 'Region' + regionNumber
+          'value': regionNumber
         });
         filterInput.appendTo(regionLabel);
         let spanLabel = $(document.createElement('span'));
@@ -613,7 +645,6 @@ $(document).ready(function () {
         regionLabel.bind('click', function (e) {
           clickHeading(e);
           let checkedInputs = $('#FilterRegion input:checked');
-          console.log(checkedInputs);
           showInspectorates(checkedInputs);
         });
         regionLabel.appendTo(filterGroup);
@@ -624,13 +655,14 @@ $(document).ready(function () {
           rdlps.forEach(rdlp => {
             let rdlpLabel = $(document.createElement('label'));
             let rdlpName = rdlp['RDLP'];
+            let rdlpID = rdlp['ID'];
             rdlpLabel.attr('for', rdlpName);
 
             let filterInput = $(document.createElement('input'));
             filterInput.attr({
               'id': rdlpName,
               'type': 'checkbox',
-              'value': rdlpName,
+              'value': rdlpID,
               'name': 'rdlps[]'
             });
             filterInput.appendTo(rdlpLabel);
@@ -663,19 +695,15 @@ $(document).ready(function () {
       })
     }
 
-    let goToPage = (currentPage, expectedPage) => {
-      params['actions']['page']['current'] = currentPage;
-      params['actions']['page']['expected'] = expectedPage;
-      showResults('page');
-    }
-
     $('#Pagination ul li a').bind('click', function (e) {
       e.preventDefault();
-      let current = $('#Pagination ul li a.active').text();
-      let expected = $(e.target).text();
-      console.log(current);
-      console.log(expected);
-      goToPage(current, expected);
+      let currentPage = $('#Pagination ul li a.active').text();
+      let expectedPage = $(e.target).text();
+      params['actions']['page']['current'] = currentPage;
+      params['actions']['page']['expected'] = expectedPage;
+      $('#currentPage').val(currentPage);
+      $('#expectedPage').val(expectedPage);
+      showResults('page');
     });
 
     let clearFilters = () => {
