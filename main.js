@@ -127,7 +127,7 @@ $(document).ready(function () {
             element.removeClass('observed');
             popup.html("Usunięto kryteria wyszukiwania.<br> Zarządzanie obserwowanymi wyszukiwaniami znajdują się w panelu użytkownika w zakładce <b>OBSERWOWANE WYSZUKIWANIA</b>")
             showPopup(popup, 'autoclose');
-            showResults('savedSearch', 'removeSaved');
+            showResults('removeSaved', $('#actionParams').val());
           }
           else{
             element.addClass('observed');
@@ -149,7 +149,7 @@ $(document).ready(function () {
               $('#Popup').fadeOut(function () {
                 $(this).remove();
               });
-              showResults('savedSearch', 'addToSaved');
+              showResults('addToSaved', saveName);
             });
             popupContent.append(popupText);
             popupContent.append(saveNameInput);
