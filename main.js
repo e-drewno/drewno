@@ -123,6 +123,7 @@ $(document).ready(function () {
       if ($('.logged').length) {
         if (type === 'search') {
           if (element.hasClass('observed')) {
+            element.text('Obserwowuj wyszukiwanie');
             element.removeClass('observed');
             popup.html("Usunięto kryteria wyszukiwania.<br> Zarządzanie obserwowanymi wyszukiwaniami znajdują się w panelu użytkownika w zakładce <b>OBSERWOWANE WYSZUKIWANIA</b>")
             showPopup(popup, 'autoclose');
@@ -130,6 +131,7 @@ $(document).ready(function () {
           }
           else{
             element.addClass('observed');
+            element.text('Usuń z obserwowanych');
             let popupContent = $(document.createElement('div'));
             let popupText = 'Wpisz nazwę obserwowanego wyszukiwania';
             let saveNameInput = $(document.createElement('input'));
