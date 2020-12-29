@@ -235,7 +235,7 @@ $(document).ready(function () {
       if ($('#SearchResults').length) {
         $('#SearchResults').html('');
       }
-      inspectorates.filter(inspectorate => !manualSearched.includes(inspectorate.name)).forEach(insp => {
+      inspectorates.filter(inspectorate => !manualSearched.includes(inspectorate.id)).forEach(insp => {
         let option = $(document.createElement('option'));
         option.val(insp.name);
         option.attr('data-id', insp.id);
@@ -345,7 +345,9 @@ $(document).ready(function () {
           );
       }, 5);
 
-      fetch(form.serialize(), {
+      console.log(form.serialize());
+
+      fetch('?'+ form.serialize(), {
           method: 'get'
       })
       .then((response) => {
@@ -448,7 +450,7 @@ $(document).ready(function () {
       let results = $(document.createElement('datalist'));
       results.attr('id', 'SearchResults');
  
-      inspectorates.filter(inspectorate => !manualSearched.includes(inspectorate.name)).forEach(insp => {
+      inspectorates.filter(inspectorate => !manualSearched.includes(inspectorate.id)).forEach(insp => {
         inspNames.push(insp.name);
         let option = $(document.createElement('option'));
         option.val(insp.name);
@@ -462,6 +464,12 @@ $(document).ready(function () {
         let waitAMoment = setTimeout(function () {
           if (value == e.target.value) {
             if (inspNames.includes(value)) {
+              let inspectorate = value;
+              inspectorates.filter(insp => {
+                if(insp.name === value){
+                  inspectorate = insp.id;
+                }
+              });
               let searchLabel = $(document.createElement('label'));
               searchLabel.attr('for', value);
               let searchInput = $(document.createElement('input'));
@@ -471,7 +479,7 @@ $(document).ready(function () {
                 'name': 'inspectorates[]',
                 'checked': 'checked',
                 'class': 'manual-searched',
-                'value': value
+                'value': inspectorate
               });
               searchLabel.text(value);
               searchInput.prependTo(searchLabel);
