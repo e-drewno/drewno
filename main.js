@@ -1,36 +1,37 @@
-// ilość wyświetlanych aukcji na stronie
-const _LICZBA_AUKCJI = 15;
-const _URL = 'test_pseudo_api.php';
-
 // pseudo baza
 let db = [],
   regions = [],
   rdlps = [],
   inspectorates = [],
   inspNames = [],
-  manualSearched = [];
+  manualSearched = [],
+  params = {
+    "FilterEnd": "",
+    "FilterMaxPrice": "",
+    "FilterMaxQtyMin": "",
+    "FilterMaxQuantity": "",
+    "FilterMaxReceiptDate": "",
+    "FilterMaxStartPrice": "",
+    "FilterMinPrice": "",
+    "FilterMinQtyMin": "",
+    "FilterMinQuantity": "",
+    "FilterMinStartPrice": "",
+    "FilterReceiptDate": "",
+    "FilterStart": "",
+    "actionParams": "",
+    "actionType": "",
+    "ajaxRequest": "",
+    "assortments[]": [],
+    "commercialGroups[]": [],
+    "currentPage": "",
+    "expectedPage": "",
+    "inspectorates[]": [],
+    "rdlps[]": [],
+    "sortColumn": "",
+    "sortOrder": "",
+    "types[]": []
+  };
 
-let params = {
-  "filters": {
-    "rdlps": [],
-    "inspectorates": [],
-    "types": [],
-    "commercialGroups": [],
-    "assortments": [],
-    "others": []
-  },
-  "actions": {
-    "page": {
-      "current": "", "expected": ""
-    },
-    "sort": {
-      "column": "", "order": ""
-    },
-    "show": {
-      "type": "", "params": ""
-    }
-  }
-}
 
 $(document).ready(function () {
 
@@ -45,8 +46,8 @@ $(document).ready(function () {
     let form = $('#Filters');
 
     let sort = (column, order) => {
-      params['actions']['sort']['column'] = column;
-      params['actions']['sort']['order'] = order;
+      params['sortColumn'] = column;
+      params['sortOrder'] = order;
       showResults('sort');
     }
 
@@ -245,8 +246,7 @@ $(document).ready(function () {
 
     // wyświetlanie wyników
     let showResults = (type, param) => {
-      params['actions']['show']['type'] = type;
-      params['actions']['show']['params'] = param;
+      clearFilters();
       param ? $('#actionParams').val(param) : $('#actionParams').val('');
       $('#actionType').val(type);
 
@@ -260,61 +260,25 @@ $(document).ready(function () {
       };
 
       let formElements = form[0].elements;
+      let activeFilters = false;
 
       for (let i = 0; i < formElements.length; i++) {
         let el = formElements[i];
-        if ((el.checked && (el.type == 'checkbox' || el.type == 'radio')) ||
-          (el.value && (el.type == 'number' || el.type == 'text' || el.type == 'date' || el.type == 'search'))) {
+        if (el.checked && (el.type == 'checkbox'||  el.type == 'radio'))  {
           if (el.parentNode.classList.value !== 'heading') {
-            if (el.name == 'inspectorates[]') {
-              if (!params['filters']['inspectorates'].includes(el.value)) {
-                params['filters']['inspectorates'].push(el.value)
-              }
-            }
-            else if (el.name == 'rdlps[]') {
-              if (!params['filters']['rdlps'].includes(el.value)) {
-                params['filters']['rdlps'].push(el.value)
-              }
-            }
-            else if (el.name == 'types[]') {
-              if (!params['filters']['types'].includes(el.value)) {
-                params['filters']['types'].push(el.value)
-              }
-            }
-            else if (el.name == 'commercialGroups[]') {
-              if (!params['filters']['commercialGroups'].includes(el.value)) {
-                params['filters']['commercialGroups'].push(el.value)
-              }
-            }
-            else if (el.name == 'assortments[]') {
-              if (!params['filters']['assortments'].includes(el.value)) {
-                params['filters']['assortments'].push(el.value)
-              }
-            }
-            else {
-              if (!params['filters']['others'].includes(`{${el.id} : ${el.value}}`)) {
-                params['filters']['others'].push(`{${el.id} : ${el.value}}`)
-              }
-            }
-            if ($(el).hasClass('manual-searched')) {
-              manualSearched.indexOf(el.value) < 0 ? manualSearched.push(el.value) : false;
-            }
+            params[el.name].push(el.value);
+            activeFilters = true;
           };
+        }
+        else if(el.value && (el.type == 'number' || el.type == 'text' || el.type == 'date' || el.type == 'hidden')) {
+          params[el.name] = el.value;
+          activeFilters = true;
         }
       }
       generateNewDatalist();
 
-      // jeśli jest sortowanie
-      if (params['actions']['sort']['column'].length || params['actions']['sort']['order'].length) {
-        if ($('#resetButton').lenght) {
-          resetButton.remove();
-        }
-      }
-
       // jeśli jest aktywny jakiś filtr
-      if (params['filters']['rdlps'].length || params['filters']['inspectorates'].length || params['filters']['types'].length
-        || params['filters']['commercialGroups'].length || params['filters']['assortments'].length || params['filters']['others'].length) {
-
+      if (activeFilters) {
         let resetButton = $('#ResetButton');
         if (!resetButton.length) {
           resetButton = $(document.createElement('a'));
@@ -329,9 +293,8 @@ $(document).ready(function () {
           $('.form-header').append(resetButton);
         }
       }
-      // jeśli brak zaznaczeń
-      else {
-        clearFilters();
+      else{
+        resetButton.remove();
       }
 
       let loading = $(document.createElement('div'));
@@ -348,13 +311,20 @@ $(document).ready(function () {
       fetch('?' + form.serialize(), {
         method: 'get'
       })
-        .then((response) => {
-          console.log(response);
-          clearTimeout(loadingTimeout);
-          if ($('.loading').length) {
-            $('.loading').remove();
-          };
-        });
+      .then((response) => {
+        console.log(response);
+        clearTimeout(loadingTimeout);
+        if ($('.loading').length) {
+          $('.loading').remove();
+        };
+      });
+
+      $('.observe').bind('click', function (e) {
+        if ($('.logged').length) {
+          $(this).hasClass('observed') ? showResults('removeObserved') : showResults('addToObserved', $(e.target).parent().parent().attr('data-id'));
+        }
+        observeAndPopup(e, 'auction');
+      });
     }
 
     let resetForm = () => {
@@ -608,7 +578,7 @@ $(document).ready(function () {
                   }
 
                   inspLabel.bind('click', function (e) {
-                    if(e.target.type == 'checkbox'){
+                    if (e.target.type == 'checkbox') {
                       showResults('filter');
                     }
                   });
@@ -626,12 +596,58 @@ $(document).ready(function () {
       }
     }
 
+    // pobieranie parametrów get - wersja dłuższa dla IE
+    let getAllUrlParams = (url) => {
+      let queryString = url ? url.split('?')[1] : decodeURI(window.location.search.slice(1));
+      const obj = {};
+
+      if (queryString) {
+        queryString = queryString.split('#')[0];
+
+        // poszczególne łańcuchy query
+        const arr = queryString.split('&');
+
+        for (let i = 0; i < arr.length; i++) {
+          // oddzielanie kluczy od wartości
+          const a = arr[i].split('=');
+          let paramName = a[0];
+          let paramValue = typeof (a[1]) === 'undefined' ? true : a[1];
+          // jeśli klucz jest tablicą
+          if (paramName.match(/\[(\d+)?\]$/)) {
+            let key = paramName;
+            if (!obj[key]) obj[key] = [];
+            if (paramName.match(/\[\d+\]$/)) {
+              let index = /\[(\d+)\]/.exec(paramName)[1];
+              obj[key][index] = paramValue;
+            } else {
+              obj[key].push(paramValue);
+            }
+          } else {
+            if (!obj[paramName]) {
+              obj[paramName] = paramValue;
+            } else if (obj[paramName] && typeof obj[paramName] === 'string') {
+              obj[paramName] = [obj[paramName]];
+              obj[paramName].push(paramValue);
+            } else {
+              obj[paramName].push(paramValue);
+            }
+          }
+        }
+      }
+      for (let o in obj) {
+        if (o && o.length) params[o] = obj[o];
+      }
+    }
+
     fetch('./getRdlps.json')
       .then(response => response.json())
       .then(arr => db = arr)
       .then(() => createTables())
       .then(() => fillRegionFilter())
-      .then(() => createInspectoratesSearch());
+      .then(() => createInspectoratesSearch())
+      .then(() => {
+        getAllUrlParams();
+      })
 
     // uzupełnianie regionów i rdlp z bazy
     let fillRegionFilter = () => {
@@ -715,22 +731,40 @@ $(document).ready(function () {
       e.preventDefault();
       let currentPage = $('#Pagination ul li a.active').text();
       let expectedPage = $(e.target).text();
-      params['actions']['page']['current'] = currentPage;
-      params['actions']['page']['expected'] = expectedPage;
+      params['currentPage'] = currentPage;
+      params['expectedPage'] = expectedPage;
       $('#currentPage').val(currentPage);
       $('#expectedPage').val(expectedPage);
       showResults('page');
     });
 
     let clearFilters = () => {
-      params["filters"]["rdlps"] = [];
-      params["filters"]["inspectorates"] = [];
-      params["filters"]["types"] = [];
-      params["filters"]["commercialGroups"] = [];
-      params["filters"]["assortments"] = [];
-      params["filters"]["others"] = [];
+      params = {
+        "FilterEnd": "",
+        "FilterMaxPrice": "",
+        "FilterMaxQtyMin": "",
+        "FilterMaxQuantity": "",
+        "FilterMaxReceiptDate": "",
+        "FilterMaxStartPrice": "",
+        "FilterMinPrice": "",
+        "FilterMinQtyMin": "",
+        "FilterMinQuantity": "",
+        "FilterMinStartPrice": "",
+        "FilterReceiptDate": "",
+        "FilterStart": "",
+        "actionParams": "",
+        "actionType": "",
+        "ajaxRequest": "",
+        "assortments[]": [],
+        "commercialGroups[]": [],
+        "currentPage": "",
+        "expectedPage": "",
+        "inspectorates[]": [],
+        "rdlps[]": [],
+        "sortColumn": "",
+        "sortOrder": "",
+        "types[]": []
+      };
     }
   }
 });
-
-
