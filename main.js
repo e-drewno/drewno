@@ -27,7 +27,7 @@ let params = {
       "column": "", "order": ""
     },
     "show": {
-      "type": "", "params" : ""
+      "type": "", "params": ""
     }
   }
 }
@@ -85,14 +85,14 @@ $(document).ready(function () {
       }
 
       let showPopup = (popup, type) => {
-        if(type === 'autoclose'){
-           // animacja popupa
+        if (type === 'autoclose') {
+          // animacja popupa
           $(popup).hide().appendTo('body').css('opacity', 0)
-          .slideDown('slow')
-          .animate(
-            { opacity: 1 },
-            { queue: false, duration: 'slow' }
-          );
+            .slideDown('slow')
+            .animate(
+              { opacity: 1 },
+              { queue: false, duration: 'slow' }
+            );
 
           setTimeout(function () {
             $(popup).fadeOut(function () {
@@ -100,21 +100,21 @@ $(document).ready(function () {
             });
           }, 5000);
         }
-        else{
+        else {
           let button = $(document.createElement('button'));
           button.attr('id', 'ExitPopup');
           popup.append(button);
-          button.bind('click', function (e) {    
+          button.bind('click', function (e) {
             $('#Popup').fadeOut(function () {
               $(this).remove();
             });
           });
           $(popup).hide().appendTo('body').css('opacity', 0)
-          .slideDown('slow')
-          .animate(
-            { opacity: 1 },
-            { queue: false, duration: 'slow' }
-          );
+            .slideDown('slow')
+            .animate(
+              { opacity: 1 },
+              { queue: false, duration: 'slow' }
+            );
         }
       }
 
@@ -129,7 +129,7 @@ $(document).ready(function () {
             showPopup(popup, 'autoclose');
             showResults('removeSaved', $('#actionParams').val());
           }
-          else{
+          else {
             element.addClass('observed');
             element.text('Usuń z obserwowanych');
             let popupContent = $(document.createElement('div'));
@@ -137,7 +137,7 @@ $(document).ready(function () {
             let saveNameInput = $(document.createElement('input'));
             saveNameInput.attr('type', 'text');
             let submitButton = $(document.createElement('button'));
-            submitButton.attr('id','SaveName')
+            submitButton.attr('id', 'SaveName')
             submitButton.text('Zapisz');
             submitButton.attr('disabled', true)
             let saveName = '';
@@ -185,8 +185,8 @@ $(document).ready(function () {
 
     // akcja dla kliknięcia gwiazdki obserwowanych aukcji
     $('.observe').bind('click', function (e) {
-      if($('.logged').length){
-        $(this).hasClass('observed')? showResults('removeObserved') : showResults('addToObserved', $(e.target).parent().parent().attr('data-id'));
+      if ($('.logged').length) {
+        $(this).hasClass('observed') ? showResults('removeObserved') : showResults('addToObserved', $(e.target).parent().parent().attr('data-id'));
       }
       observeAndPopup(e, 'auction');
     });
@@ -251,14 +251,14 @@ $(document).ready(function () {
       $('#actionType').val(type);
 
 
-      if(param === 'removeSaved'){
+      if (param === 'removeSaved') {
         $('body').removeClass('active-saved');
 
       }
-      else if(param === 'addToSaved'){ 
+      else if (param === 'addToSaved') {
         $('body').addClass('active-saved')
       };
-    
+
       let formElements = form[0].elements;
 
       for (let i = 0; i < formElements.length; i++) {
@@ -296,7 +296,7 @@ $(document).ready(function () {
                 params['filters']['others'].push(`{${el.id} : ${el.value}}`)
               }
             }
-            if ($(el).hasClass('manual-searched')) {   
+            if ($(el).hasClass('manual-searched')) {
               manualSearched.indexOf(el.value) < 0 ? manualSearched.push(el.value) : false;
             }
           };
@@ -310,7 +310,7 @@ $(document).ready(function () {
           resetButton.remove();
         }
       }
-      
+
       // jeśli jest aktywny jakiś filtr
       if (params['filters']['rdlps'].length || params['filters']['inspectorates'].length || params['filters']['types'].length
         || params['filters']['commercialGroups'].length || params['filters']['assortments'].length || params['filters']['others'].length) {
@@ -320,7 +320,7 @@ $(document).ready(function () {
           resetButton = $(document.createElement('a'));
           resetButton.attr('id', 'ResetButton');
           resetButton.text('Wyczyść');
-          resetButton.bind('click', function (e) { 
+          resetButton.bind('click', function (e) {
             resetForm();
             manualSearched = [];
             clearFilters();
@@ -345,18 +345,16 @@ $(document).ready(function () {
           );
       }, 5);
 
-      console.log(form.serialize());
-
-      fetch('?'+ form.serialize(), {
-          method: 'get'
+      fetch('?' + form.serialize(), {
+        method: 'get'
       })
-      .then((response) => {
-        console.log(response);
-        clearTimeout(loadingTimeout);
-        if ($('.loading').length) {
-          $('.loading').remove();
-        };
-      });
+        .then((response) => {
+          console.log(response);
+          clearTimeout(loadingTimeout);
+          if ($('.loading').length) {
+            $('.loading').remove();
+          };
+        });
     }
 
     let resetForm = () => {
@@ -393,16 +391,21 @@ $(document).ready(function () {
       clickHeading(e);
     });
 
-    // wyłączone wysyłanie formularza
-    // form.bind('submit', function (e) {  
-    //   e.preventDefault();
-    //   showResults('summary');
-    // });
-
     // zbindowane akcje do filtrów niegenerowanych w trakcie
     $('input[type="text"], input[type="number"], input[type="date"]').bind('input', function (e) {
-    
-      showResults('filter');
+      let value = e.target.value;
+      let waitAMoment = setTimeout(function () {
+        if (value == e.target.value) {
+          showResults('filter');
+        }
+        else if (!value.length) {
+          clearTimeout(waitAMoment);
+          showResults('filter');
+        }
+        else {
+          clearTimeout(waitAMoment);
+        }
+      }, 2000);
     });
 
     $('input[type="checkbox"]').bind('click', function (e) {
@@ -449,7 +452,7 @@ $(document).ready(function () {
       });
       let results = $(document.createElement('datalist'));
       results.attr('id', 'SearchResults');
- 
+
       inspectorates.filter(inspectorate => !manualSearched.includes(inspectorate.id)).forEach(insp => {
         inspNames.push(insp.name);
         let option = $(document.createElement('option'));
@@ -458,7 +461,7 @@ $(document).ready(function () {
         option.appendTo(results);
       });
       search.appendTo(filterGroup);
-      
+
       search.bind('input', function (e) {
         let value = e.target.value;
         let waitAMoment = setTimeout(function () {
@@ -466,7 +469,7 @@ $(document).ready(function () {
             if (inspNames.includes(value)) {
               let inspectorate = value;
               inspectorates.filter(insp => {
-                if(insp.name === value){
+                if (insp.name === value) {
                   inspectorate = insp.id;
                 }
               });
@@ -485,7 +488,7 @@ $(document).ready(function () {
               searchInput.prependTo(searchLabel);
               searchLabel.appendTo(searchContainer);
               searchLabel.bind('click', function (e) {
-              
+
                 // usuwanie z tablicy ręcznych wyszukiwań
                 manualSearched = manualSearched.filter(item => item !== value);
                 $(e.currentTarget).remove();
@@ -604,8 +607,10 @@ $(document).ready(function () {
                     moreContainer.append(inspLabel);
                   }
 
-                  inspLabel.bind('click', function (e) {                  
-                    showResults('filter');
+                  inspLabel.bind('click', function (e) {
+                    if(e.target.type == 'checkbox'){
+                      showResults('filter');
+                    }
                   });
                 })
                 moreContainer.appendTo(filterGroup);
