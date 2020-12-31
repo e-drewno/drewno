@@ -183,15 +183,7 @@ $(document).ready(function () {
         showPopup(popup);
       }
     }
-
-    // akcja dla kliknięcia gwiazdki obserwowanych aukcji
-    $('.observe').bind('click', function (e) {
-      if ($('.logged').length) {
-        $(this).hasClass('observed') ? showResults('removeObserved') : showResults('addToObserved', $(e.target).parent().parent().attr('data-id'));
-      }
-      observeAndPopup(e, 'auction');
-    });
-
+    
     // akcja dla kliknięcia w zapis wyników wyszukiwania
     $('#SaveSearch').bind('click', function (e) {
       observeAndPopup(e, 'search');
@@ -319,12 +311,8 @@ $(document).ready(function () {
         };
       });
 
-      $('.observe').bind('click', function (e) {
-        if ($('.logged').length) {
-          $(this).hasClass('observed') ? showResults('removeObserved') : showResults('addToObserved', $(e.target).parent().parent().attr('data-id'));
-        }
-        observeAndPopup(e, 'auction');
-      });
+      observedStarsEvent();
+      pagination();
     }
 
     let resetForm = () => {
@@ -698,9 +686,9 @@ $(document).ready(function () {
       .then(() => createTables())
       .then(() => fillRegionFilter())
       .then(() => createInspectoratesSearch())
-      .then(() => {
-        getAllUrlParams();
-      })
+      .then(() => getAllUrlParams())
+      .then(() => observedStarsEvent())
+      .then(() => pagination())
 
     // uzupełnianie regionów i rdlp z bazy
     let fillRegionFilter = () => {
@@ -778,18 +766,33 @@ $(document).ready(function () {
           })
         })
       })
-    }
+    }   
 
-    $('#Pagination ul li a').bind('click', function (e) {
-      e.preventDefault();
-      let currentPage = $('#Pagination ul li a.active').text();
-      let expectedPage = $(e.target).text();
-      params['currentPage'] = currentPage;
-      params['expectedPage'] = expectedPage;
-      $('#currentPage').val(currentPage);
-      $('#expectedPage').val(expectedPage);
-      showResults('page');
-    });
+    // akcja dla kliknięcia gwiazdki obserwowanych aukcji
+    let observedStarsEvent = () => {
+      $('.observe').unbind('click');
+      $('.observe').bind('click', function (e) {
+        console.log(e);
+        if ($('.logged').length) {
+          $(this).parent().parent().hasClass('observed') ? showResults('removeObserved') : showResults('addToObserved', $(e.target).parent().parent().attr('data-id'));
+        }
+        observeAndPopup(e, 'auction');
+      });
+    }
+    
+    let pagination = () => {
+      $('#Pagination ul li a').unbind('click');
+      $('#Pagination ul li a').bind('click', function (e) {
+        e.preventDefault();
+        let currentPage = $('#Pagination ul li a.active').text();
+        let expectedPage = $(e.target).text();
+        params['currentPage'] = currentPage;
+        params['expectedPage'] = expectedPage;
+        $('#currentPage').val(currentPage);
+        $('#expectedPage').val(expectedPage);
+        showResults('page');
+      });
+    }
 
     let clearFilters = () => {
       params = {
