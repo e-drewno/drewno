@@ -204,7 +204,7 @@ a.observed-search.active{
     background-color: #a00;
 }
 
-#UserPanel h4 span.counter , a.observed-search span.counter{
+#UserPanel h4 span.counter , a.observed-search span.counter, .observed-info span.counter{
     position: absolute;
     right: 2px;
     background-color: #aaa;

@@ -679,7 +679,6 @@ $(document).ready(function () {
             }
             else{
               for(let p = 0; p < obj[o].length; p++){
-                console.log(`input[name="${o}"][value="${obj[o][p]}"]`);
                 $(`input[name="${o}"][value="${obj[o][p]}"]`)[0].checked = true;
               }
             }

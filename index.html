@@ -33,7 +33,7 @@
                     <h4>Obserwowane wyszukiwania<span class="counter">0</span> </h4>     
                     <div class="observed-search-container">
                         <div class="th-name">Nazwa<span class="th-new-count">Nowe</span></div>
-                        <div class="observed-info">Brak dodanych wyszukiwań</div>
+                        <div class="observed-info">Brak dodanych wyszukiwań<span class="counter">0</span></div>
                     </div>      
                 </div>
                 <div class="observed-searches open">
@@ -284,11 +284,11 @@
                     <div id="FilterDate" class="filter-content dates">
                         <label for="FilterStart">
                             <span>Data zakończenia od</span>
-                            <input type="date" id="FilterStart" name="FilterStart" value=""  name="FilterStart">
+                            <input type="date" min="1997-01-01" max="2030-12-31" id="FilterStart" name="FilterStart" value=""  name="FilterStart">
                         </label>
                         <label for="FilterEnd">
                             <span>Data zakończenia do</span>
-                            <input type="date" id="FilterEnd" name="FilterEnd" value=""  name="FilterEnd">
+                            <input type="date" min="1997-01-01" max="2030-12-31" id="FilterEnd" name="FilterEnd" value=""  name="FilterEnd">
                         </label>
                     </div>
                 </div>
@@ -298,11 +298,11 @@
                     <div id="FilterReceiptDate" class="filter-content dates">
                         <label for="FilterReceiptDate">
                             <span>Termin odbioru od</span>
-                            <input type="date" id="FilterReceiptDate" name="FilterReceiptDate" value=""  name="FilterReceiptDate">
+                            <input type="date" min="1997-01-01" max="2030-12-31" id="FilterReceiptDate" name="FilterReceiptDate" value=""  name="FilterReceiptDate">
                         </label>
                         <label for="FilterMaxReceiptDate">
                             <span>Termin odbioru do</span>
-                            <input type="date" id="FilterMaxReceiptDate" name="FilterMaxReceiptDate" value=""  name="FilterMaxReceiptDate">
+                            <input type="date" min="1997-01-01" max="2030-12-31" id="FilterMaxReceiptDate" name="FilterMaxReceiptDate" value=""  name="FilterMaxReceiptDate">
                         </label>
                     </div>
                 </div>
