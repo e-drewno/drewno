@@ -483,6 +483,7 @@ $(document).ready(function () {
 
     // generowanie nadleśnictw po wybraniu rdlp
     let showInspectorates = (checkedInputs) => {
+      console.log(checkedInputs);
       if (!checkedInputs.length) {
         clearFilters();
       }
@@ -597,8 +598,8 @@ $(document).ready(function () {
     }
 
     // pobieranie parametrów get - wersja dłuższa dla IE
-    let getAllUrlParams = (url) => {
-      let queryString = url ? url.split('?')[1] : decodeURI(window.location.search.slice(1));
+    let getAllUrlParams = () => {
+      let queryString = decodeURI(window.location.search.slice(1));
       const obj = {};
 
       if (queryString) {
@@ -635,8 +636,61 @@ $(document).ready(function () {
         }
       }
       for (let o in obj) {
-        if (o && o.length) params[o] = obj[o];
+        if (o && o.length){
+          params[o] = obj[o];
+          console.log(o);
+          if(typeof obj[o] === 'object'){
+            if(o === 'rdlps[]'){
+              for(let p = 0; p < obj[o].length; p++){
+                $(`input[name="${o}"][value="${obj[o][p]}"]`)[0].checked = true;
+              }
+              showInspectorates($('#FilterRegion input:checked'));
+            }
+            else if(params['rdlps[]'].length === 0 && o === 'inspectorates[]'){
+              
+              let searchContainer = $('#FilterInspectorate');
+              if ($('#FilterInspectorate .filter-group').length) {
+                searchContainer.html('');
+              }
+              createInspectoratesSearch();
+              for(let p = 0; p < obj[o].length; p++){
+                let inspectorateName; 
+                inspectorates.filter(i => {
+                  if(i.id === parseInt(obj[o][p])){
+                    inspectorateName = i.name;
+                  }
+                });
+                let searchLabel = $(document.createElement('label'));
+                searchLabel.attr('for', inspectorateName);
+                let searchInput = $(document.createElement('input'));
+                searchInput.attr({
+                  'id': inspectorateName,
+                  'type': 'checkbox',
+                  'name': 'inspectorates[]',
+                  'checked': 'checked',
+                  'class': 'manual-searched',
+                  'value': obj[o][p]
+                });
+                searchLabel.text(inspectorateName);
+                searchInput.prependTo(searchLabel);
+                searchLabel.appendTo(searchContainer);
+                //$(`input[name="${o}"][value="${obj[o][p]}"]`)[0].checked = true;
+              }
+            }
+            else{
+              for(let p = 0; p < obj[o].length; p++){
+                console.log(`input[name="${o}"][value="${obj[o][p]}"]`);
+                $(`input[name="${o}"][value="${obj[o][p]}"]`)[0].checked = true;
+              }
+            }
+          }
+          else{
+            $(`input[name="${o}"]`).val(obj[o]);
+          }
+        } 
       }
+      const clearUrl = window.location.href.replace(window.location.search,'');
+      window.history.pushState({}, document.title, clearUrl);
     }
 
     fetch('./getRdlps.json')
