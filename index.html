@@ -319,7 +319,14 @@
 
         <div id="Main">
             <div id="TableAuctions">
-                <button id="SaveSearch">Obserwuj wyszukiwanie</button>
+                <div id="SaveSearchContainer">
+                    <h4>Obserwowane wyszukiwania</h4>
+                    <div id="SaveSearchName" data-search="2">
+                        <span id="SaveSearchNameSpan" contenteditable="false"></span>
+                        <button id="EditSearchName"></button>
+                    </div>
+                    <button id="SaveSearch">Obserwuj wyszukiwanie</button>
+                </div>
                 <div id="SortAuctions">
                     <div class="column unsortable" data-type="LP"><span>LP.</span></div>
                     <div class="column" data-type="RDLP"><span>RDLP</span></div>

@@ -123,16 +123,14 @@ $(document).ready(function () {
       popup.attr('id', 'Popup');
       if ($('.logged').length) {
         if (type === 'search') {
-          if (element.hasClass('observed')) {
+          if (element.parent().hasClass('observed')) {
             element.text('Obserwowuj wyszukiwanie');
-            element.removeClass('observed');
+            element.parent().removeClass('observed');
             popup.html("Usunięto kryteria wyszukiwania.<br> Zarządzanie obserwowanymi wyszukiwaniami znajdują się w panelu użytkownika w zakładce <b>OBSERWOWANE WYSZUKIWANIA</b>")
             showPopup(popup, 'autoclose');
             showResults('removeSaved', $('#actionParams').val());
           }
           else {
-            element.addClass('observed');
-            element.text('Usuń z obserwowanych');
             let popupContent = $(document.createElement('div'));
             let popupText = 'Wpisz nazwę obserwowanego wyszukiwania';
             let saveNameInput = $(document.createElement('input'));
@@ -147,10 +145,14 @@ $(document).ready(function () {
               saveName.length ? submitButton.attr('disabled', false) : submitButton.attr('disabled', true);
             })
             submitButton.on('click', () => {
+              element.parent().addClass('observed');
+              element.text('Usuń z obserwowanych');
               $('#Popup').fadeOut(function () {
                 $(this).remove();
               });
+              $('#SaveSearchName span').text(saveName);
               showResults('addToSaved', saveName);
+              editSearch();
             });
             popupContent.append(popupText);
             popupContent.append(saveNameInput);
@@ -767,6 +769,26 @@ $(document).ready(function () {
         })
       })
     }   
+
+    let editSearch = (id) => {
+      let saveSearchContainer = $('#SaveSearchName');
+      let editButton = $('#EditSearchName');
+      editButton.unbind('click');
+      editButton.bind('click', function (e){
+        let searchNameSpan = $('#SaveSearchNameSpan');
+        searchNameSpan.attr('contenteditable', true).focus();
+        editButton.fadeOut();
+        let saveButton = $(document.createElement('button'));
+        saveButton.attr('id', 'SaveEditSearchName');
+        saveButton.on('click', function (e){
+          $(this).remove();
+          searchNameSpan.attr('contenteditable', false);
+          editButton.fadeIn();
+          showResults('editSearchName', searchNameSpan.text());
+        });
+        saveSearchContainer.append(saveButton);
+      })
+    }
 
     // akcja dla kliknięcia gwiazdki obserwowanych aukcji
     let observedStarsEvent = () => {
