@@ -41,6 +41,7 @@ $(document).ready(function () {
     const sortHeader = $('#SortAuctions');
     const auctions = $('#Auctions');
     const tableAuctions = $('#TableAuctions');
+    const mainContainer = $('#Main');
     // wymiar dla nagłówka sortującego
     sortHeader.width(auctions.width());
     let form = $('#Filters');
@@ -177,10 +178,10 @@ $(document).ready(function () {
       // popup dla niezalogowanych
       else {
         if (type === 'search') {
-          popup.html("Aby dodać do obserwowanych <a href=\"#\">zaloguj się</a>. Nie masz konta? <a href=\"#\">Zarejestruj się</a>.");
+          popup.html('Aby dodać do obserwowanych <a class="login-button" href=\"#\">zaloguj się</a>. Nie masz konta? <a href=\"#\">Zarejestruj się</a>.');
         }
         else if (type === 'auction') {
-          popup.html("<p>Aby dodać aukcję do obserwowanych <a href=\"#\">zaloguj się</a></p><p>Dzięki tej opcji będziesz orzymywać powiadomienia o zmianach w aukcji (pojawienie się nowej oferty w aukcji, zmiana ceny)<br>Otrzymasz również powiadomienie przed zakończeniem aukcji, aby jej nie przegapić.");
+          popup.html('<p>Aby dodać aukcję do obserwowanych <a class="login-button" href=\"#\">zaloguj się</a></p><p>Dzięki tej opcji będziesz orzymywać powiadomienia o zmianach w aukcji (pojawienie się nowej oferty w aukcji, zmiana ceny)<br>Otrzymasz również powiadomienie przed zakończeniem aukcji, aby jej nie przegapić.');
         }
         showPopup(popup);
       }
@@ -208,10 +209,51 @@ $(document).ready(function () {
       showResults('showSaved', e.target.attributes['data-search'].value);
     });
 
+    // wyświetl Ustawienia powiadomień email
+    $('.notifications-settings').bind('click', function (e) {
+      showResults('notificationsSettings');
+    });
+
     // wyświetl obserwowane aukcje
     $('.observed-auctions').bind('click', function (e) {
       showResults('showObserved');
     });
+
+    $('#Return').bind('click', function (e) {
+      resetForm();
+    });
+
+    $('.login-button').bind('click', function (e) {
+      let loginPopupContainer = $(document.createElement('div'));
+      loginPopupContainer.attr('id', 'Popup');
+      let formBody = `
+      <form id="LoginForm" action="" method="post">
+        <input type="email" autocomplete="username" class="form-control" name="email" value="" placeholder="E-mail" required="">
+       <input type="password" autocomplete="current-password" class="form-control" name="password" placeholder="Hasło" required="">
+       <div class="form-check">
+          <input type="checkbox" class="form-check-input" name="remember" value="1">
+          Zapamiętaj mnie
+        </div>
+        <a href="/register">Zarejestruj się</a>
+        <a href="/passwordRecover">Zapomiałeś hasła?</a>
+        <button type="submit" id="LoginButton">Zaloguj się</button>
+      </form>`
+      loginPopupContainer.html(formBody);
+      let button = $(document.createElement('button'));
+      button.attr('id', 'ExitPopup');
+      loginPopupContainer.append(button);
+      button.bind('click', function (e) {
+        $('#Popup').fadeOut(function () {
+          $(this).remove();
+        });
+      });
+      $(loginPopupContainer).hide().appendTo('body').css('opacity', 0)
+        .slideDown('slow')
+        .animate(
+          { opacity: 1 },
+          { queue: false, duration: 'slow' }
+      );
+    })
 
     //tymczasowe do testów logowania się
     $('.item-menu a:contains("Logowanie / Rejestracja")').bind('click', function (e) {
@@ -315,6 +357,7 @@ $(document).ready(function () {
 
       observedStarsEvent();
       pagination();
+      showResultsButton();
     }
 
     let resetForm = () => {
@@ -365,7 +408,7 @@ $(document).ready(function () {
         else {
           clearTimeout(waitAMoment);
         }
-      }, 2000);
+      }, 1200);
     });
 
     $('input[type="checkbox"]').bind('click', function (e) {
@@ -377,6 +420,7 @@ $(document).ready(function () {
     // przyklejanie sortowalnego nagłówka do górnej krawędzi
     $(window).bind('scroll', function (e) {
       fixedSortHeader();
+      showResultsButton();
     });
 
     // ustawianie szerokości sortowalnego nagłówka
@@ -391,6 +435,27 @@ $(document).ready(function () {
       }
       else {
         sortHeader.removeClass('fixed');
+      }
+    }
+
+    // przycisk scroll top pokaż wyniki
+    let showResultsButton = () => {
+      let resultsButton = $('#ResultsButton');
+      if(window.scrollY >= tableAuctions.innerHeight()){
+        if(resultsButton.length === 0){
+          resultsButton = $(document.createElement('button'));
+          resultsButton.attr('id', 'ResultsButton');
+          resultsButton.text('Zobacz wyniki')
+          resultsButton.bind('click', function (e) {
+            $('html, body').animate({scrollTop:0}, 600, 'swing', function() { 
+              resultsButton.remove();
+           });
+          })
+          mainContainer.append(resultsButton);
+        } 
+      }
+      else{
+        resultsButton.remove();
       }
     }
 
@@ -691,6 +756,7 @@ $(document).ready(function () {
       .then(() => getAllUrlParams())
       .then(() => observedStarsEvent())
       .then(() => pagination())
+      .then(() => showResultsButton())
 
     // uzupełnianie regionów i rdlp z bazy
     let fillRegionFilter = () => {

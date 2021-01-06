@@ -68,23 +68,33 @@ a, button, input{
 
 #Sidebar {
     margin: 0 0 25px 20px;
+    padding-top: 5px;
 }
 
-button#Refresh {
-    background-color: #007aa9;
+button#Refresh, button#Return {
+    font-size: 12px;
     color: #fff;
     width: 100%;
     border: 1px solid #bbb;
     border-radius: 3px;
-    padding: 10px 40px;
+    padding: 10px 35px;
     cursor: pointer;
     text-transform: uppercase;
     font-weight: bold;
-    background-image: url(refresh-icon.svg);
-    background-size: 20px;
+    background-size: 16px;
     background-repeat: no-repeat;
     background-position: left 10px center;
     margin-bottom: 10px;
+}
+
+button#Refresh {
+    background-color: #007aa9;
+    background-image: url(refresh-icon.svg);
+}
+
+button#Return {
+    background-color: #66767c;
+    background-image: url(return-icon.svg);
 }
 
 body:not(.logged) #UserPanel{
@@ -117,6 +127,23 @@ body:not(.logged) #UserPanel{
     margin-top: 15px;
 }
 
+#JumpToAuctionButton{
+    background-color: #007aa9;
+    color: #fff;
+    width: 100%;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    padding: 10px 40px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
 #UserPanel .observed-searches:not(.empty) h4:after ,#Filters .filter > label:after{
     content: url(close-icon.svg);
     position: absolute;
@@ -129,6 +156,11 @@ body:not(.logged) #UserPanel{
 #UserPanel .observed-searches:not(.empty) h4:after{
     right: 22px !important;
 }
+
+#UserPanel .observed-searches:not(.empty) .observed-search-container{
+    display: none;
+}
+
 
 #UserPanel .observed-auctions.new-auctions .counter{
     background-color: #2a2;
@@ -405,6 +437,14 @@ input[type="checkbox"] + span{
     border-radius: 2px;
 }
 
+#Auctions .row.observed-new{
+    background-color: #e5ffe7;
+}
+
+#Auctions .row.filter-new{
+    background-color: #ffe6e7;
+}
+
 #Auctions .row:hover{
     background-color: #e9e9e97a;
 }
@@ -487,6 +527,27 @@ input[type="checkbox"] + span{
     color: #666;
 }
 
+#ResultsButton{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    font-size: 12px;
+    color: #fff;
+    background-color: #007aa9;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    padding: 10px 35px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-position: left 10px center;
+    margin-bottom: 10px;
+    background-image: url(show-results-icon.svg);
+}
+
 #Popup {
     position: fixed;
     top: 100px;
@@ -535,6 +596,28 @@ input[type="checkbox"] + span{
     background-color: #637a83;
     cursor: default;
 }
+
+#LoginForm {
+    margin-top: 20px;
+}
+
+#LoginForm input {
+    margin-bottom: 10px;
+}
+
+#LoginForm #LoginButton{
+    font-size: 12px;
+    color: #fff;
+    background-color: #007aa9;
+    width: 100%;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    padding: 10px 35px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 10px;
+}    
 
 footer {
     background: #333;
@@ -598,18 +681,4 @@ footer {
     100%{
         transform: rotate(360deg);
     }
-}
-
-/* login page */
-.form-container {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.login form{
-    background-color: #fff;
-    box-shadow: 0 3px 3px rgba(0,0,0,.075);
-    border: 1px solid rgba(0,0,0,.125);
-    border-radius: 3px;
-    padding: 40px;
 }

@@ -20,15 +20,20 @@
                 <li class="item-menu"><a href="#">O nas</a></li>
                 <li class="item-menu"><a href="#">Kontakt</a></li>
                 <li class="item-menu"><a href="#">Logowanie / Rejestracja</a></li>
+                <li class="item-menu"><a class="login-button" href="#">Zaloguj</a></li>
             </ul>
         </nav>
     </header>
     <div id="Content">
         <div id="Sidebar">
             <button id="Refresh">Odśwież wyniki</button>
+            <button id="Return">Wróć do wszystkich wyników</button>
             <div id="UserPanel">
                 <h2>Witaj, Eustachy!</h2>
                 <div><h4>Profil</h4></div>
+                <div class="notifications-settings">
+                    <h4>Ustawienia powiadomień email</h4>  
+                </div>
                 <div class="observed-searches empty">
                     <h4>Obserwowane wyszukiwania<span class="counter">0</span> </h4>     
                     <div class="observed-search-container">
@@ -36,7 +41,7 @@
                         <div class="observed-info">Brak dodanych wyszukiwań<span class="counter">0</span></div>
                     </div>      
                 </div>
-                <div class="observed-searches open">
+                <div class="observed-searches">
                     <h4>Obserwowane wyszukiwania<span class="counter">6</span></h4>
                     <div class="observed-search-container">
                         <div class="th-name">Nazwa<span class="th-new-count">Nowe</span></div>
@@ -45,11 +50,7 @@
                         <a data-search="3" href="#" class="observed-search modified">Wyszukiwanie 3<span class="counter">6</span></a>
                         <a data-search="4" href="#" class="observed-search modified">Wyszukiwanie 4<span class="counter">1</span></a>
                         <a data-search="5" href="#" class="observed-search">Wyszukiwanie 5<span class="counter">0</span></a>
-                        <!-- jeśli powyżej 5 kontener z klasami more-container hidden i przycisk z klasą observed-search -->
-                        <div class="more-container hidden">
-                            <a data-search="6" href="#" class="observed-search modified">Wyszukiwanie 6<span class="counter">10</span></a>
-                        </div>
-                        <a class="show-more">+ więcej</a>
+                        <a data-search="6" href="#" class="observed-search modified">Wyszukiwanie 6<span class="counter">10</span></a>
                     </div>
                 </div>
                 <div class="observed-auctions new-auctions">
@@ -306,6 +307,15 @@
                         </label>
                     </div>
                 </div>
+                <div class="filter">
+                    <label for="FilterJumpToAuction">Skocz do aukcji</label>
+                    <div id="FilterJumpToAuction" class="filter-content">
+                        <div class="filter-group">
+                            <input id="JumpToAuction" type="text" name="JumpToAuction" placeholder="Nr aukcji">
+                            <button id="JumpToAuctionButton" type="submit">Idź</button>
+                        </div>
+                    </div>
+                </div>
                 <input type="hidden" id="sortColumn" name="sortColumn">
                 <input type="hidden" id="sortOrder" name="sortOrder">
                 <input type="hidden" id="currentPage" name="currentPage">
@@ -344,7 +354,7 @@
                     <div class="column" data-type="AddedTime"><span>Czas dodania</span></div>
                 </div>
                 <div id="Auctions">
-                    <div class="row" data-region="Region 1" data-id="1">
+                    <div class="row observed-new" data-region="Region 1" data-id="1">
                         <div class="column"><span>1</span></div>
                         <div class="column"><span>Szczecinek</span></div>
                         <div class="column"><span>Zespół Składnic Lasów Państwowych w Białogardzie</span></div>
@@ -363,7 +373,7 @@
                         <div class="column"><button class="observe"></button></div>
                         <div class="column"><span>10 dni</span></div>
                     </div>
-                    <div class="row" data-region="Region 1" data-id="2">
+                    <div class="row filter-new" data-region="Region 1" data-id="2">
                         <div class="column"><span>2</span></div>
                         <div class="column"><span>Szczecinek</span></div>
                         <div class="column"><span>Zespół Składnic Lasów Państwowych w Białogardzie</span></div>
@@ -914,27 +924,28 @@
                         <div class="column"><button class="observe"></button></div>
                         <div class="column"><span>2 min</span></div>
                     </div>
+                    <div id="Pagination">
+                        <ul>
+                            <li><a class="first">Pierwsza</a></li>
+                            <li><a class="prev">Poprzednia</a></li>
+                            <li><a>7</a></li>
+                            <li><a>8</a></li>
+                            <li><a>9</a></li>
+                            <li><a>10</a></li>
+                            <li><a>11</a></li>
+                            <li><a>12</a></li>
+                            <li><a>13</a></li>
+                            <li><a>14</a></li>
+                            <li><a class="active">15 z 17</a></li>
+                            <li><a class="next">Następna</a></li>
+                            <li><a class="last">Ostatnia</a></li>
+                        </ul>
+                        <span class="result-count">Znaleziono 949 aukcji</span>
+                    </div>
                 </div>
             </div>
         </div>
-        <div id="Pagination">
-            <ul>
-                <li><a class="first">Pierwsza</a></li>
-                <li><a class="prev">Poprzednia</a></li>
-                <li><a>7</a></li>
-                <li><a>8</a></li>
-                <li><a>9</a></li>
-                <li><a>10</a></li>
-                <li><a>11</a></li>
-                <li><a>12</a></li>
-                <li><a>13</a></li>
-                <li><a>14</a></li>
-                <li><a class="active">15 z 17</a></li>
-                <li><a class="next">Następna</a></li>
-                <li><a class="last">Ostatnia</a></li>
-            </ul>
-            <span class="result-count">Znaleziono 949 aukcji</span>
-        </div>
+       
     </div>
     <footer>Designed by Ferdynand</footer>
     <script src="main.js"></script>
