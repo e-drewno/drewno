@@ -322,8 +322,6 @@ $(document).ready(function () {
           resetButton.text('Wyczyść');
           resetButton.bind('click', function (e) {
             resetForm();
-            manualSearched = [];
-            clearFilters();
             resetButton.remove();
           })
           $('.form-header').append(resetButton);
@@ -344,7 +342,26 @@ $(document).ready(function () {
           );
       }, 5);
 
-      fetch('http://drewno2.mbif.pl/?' + form.serialize(), {
+      // do przetestowania
+      // let url = 'http://drewno2.mbif.pl/?' + form.serialize();
+
+      // $('#Auctions').html('').load(url, function( response, status, xhr ) {
+      //   console.log(response);
+      //   console.log(status);
+      //   console.log(xhr)
+      //   if ( status == "error" ){
+      //     throw Error(status);
+      //   }
+      //   clearTimeout(loadingTimeout);
+      //   if ($('.loading').length) {
+      //     $('.loading').remove();
+      //   };
+      // })
+      // .catch(function(error) {
+      //   console.log(error);
+      // });
+
+      fetch('?' + form.serialize(), {
         method: 'get'
         //, mode: 'no-cors' 
       })
@@ -368,9 +385,11 @@ $(document).ready(function () {
     }
 
     let resetForm = () => {
+      manualSearched = [];
+      clearFilters();
       form[0].reset();
-      showResults('resetFilters');
       createInspectoratesSearch();
+      showResults('resetFilters');
     }
 
     //zaznaczanie wszystkich checkboksów z grupy
