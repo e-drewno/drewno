@@ -344,15 +344,22 @@ $(document).ready(function () {
           );
       }, 5);
 
-      fetch('?' + form.serialize(), {
+      fetch('http://drewno2.mbif.pl/?' + form.serialize(), {
         method: 'get'
+        //, mode: 'no-cors' 
       })
       .then((response) => {
         console.log(response);
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
         clearTimeout(loadingTimeout);
         if ($('.loading').length) {
           $('.loading').remove();
         };
+      })
+      .catch(function(error) {
+        console.log(error);
       });
 
       observedStarsEvent();
