@@ -144,7 +144,7 @@ body:not(.logged) #UserPanel{
     margin-top: 10px;
 }
 
-#UserPanel .observed-searches:not(.empty) h4:after ,#Filters .filter > label:after{
+#UserPanel .observed-searches h4:after ,#Filters .filter > label:after{
     content: url(close-icon.svg);
     position: absolute;
     width: 12px;
@@ -153,11 +153,11 @@ body:not(.logged) #UserPanel{
     top: 7px;
 }
 
-#UserPanel .observed-searches:not(.empty) h4:after{
+#UserPanel .observed-searches h4:after{
     right: 22px !important;
 }
 
-#UserPanel .observed-searches:not(.empty) .observed-search-container{
+#UserPanel .observed-searches .observed-search-container{
     display: none;
 }
 
@@ -186,7 +186,7 @@ a.observed-search.active{
     font-weight: bold;
 }
 
-#UserPanel div.observed-searches:not(.open):not(.empty) h4:after, #Filters .filter:not(.open) > label:after{
+#UserPanel div.observed-searches:not(.open) h4:after, #Filters .filter:not(.open) > label:after{
     transform: rotate(180deg);
 }
 

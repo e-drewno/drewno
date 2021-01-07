@@ -125,15 +125,20 @@ $(document).ready(function () {
       if ($('.logged').length) {
         if (type === 'search') {
           if (element.parent().hasClass('observed')) {
-            element.text('Obserwowuj wyszukiwanie');
+            element.text('Obserwuj wyszukiwanie');
             element.parent().removeClass('observed');
             popup.html("Usunięto kryteria wyszukiwania.<br> Zarządzanie obserwowanymi wyszukiwaniami znajdują się w panelu użytkownika w zakładce <b>OBSERWOWANE WYSZUKIWANIA</b>")
             showPopup(popup, 'autoclose');
             showResults('removeSaved', $('#actionParams').val());
           }
           else {
+            const elementId = el.target.id;
             let popupContent = $(document.createElement('div'));
-            let popupText = 'Wpisz nazwę obserwowanego wyszukiwania';
+            let popupText = elementId === 'SaveSearch' ? 'Wpisz nazwę obserwowanego wyszukiwania' : 'Zmień nazwę wyszukiwania';
+            let oldName = '';
+            if(elementId === 'EditSearchName'){
+              oldName = $('#SaveSearchName span').text();
+            }
             let saveNameInput = $(document.createElement('input'));
             saveNameInput.attr('type', 'text');
             let submitButton = $(document.createElement('button'));
@@ -146,14 +151,19 @@ $(document).ready(function () {
               saveName.length ? submitButton.attr('disabled', false) : submitButton.attr('disabled', true);
             })
             submitButton.on('click', () => {
-              element.parent().addClass('observed');
-              element.text('Usuń z obserwowanych');
               $('#Popup').fadeOut(function () {
                 $(this).remove();
               });
               $('#SaveSearchName span').text(saveName);
-              showResults('addToSaved', saveName);
-              editSearch();
+              if(elementId === 'SaveSearch'){
+                element.parent().addClass('observed');
+                element.text('Usuń z obserwowanych');
+                showResults('addToSaved', saveName);
+                editSearch();
+              }
+              else{
+                showResults('editSaved', [oldName, saveName]);
+              }
             });
             popupContent.append(popupText);
             popupContent.append(saveNameInput);
@@ -192,6 +202,14 @@ $(document).ready(function () {
       observeAndPopup(e, 'search');
     });
 
+    let editSearch = (id) => {
+      let editButton = $('#EditSearchName');
+      editButton.unbind('click');
+      editButton.bind('click', function (e){
+        observeAndPopup(e, 'search');
+      });
+    }
+
     // zwijanie/rozwijanie filtra + ikona
     $('.filter > label').bind('click', function (e) {
       $(this).parent().toggleClass('open');
@@ -199,7 +217,7 @@ $(document).ready(function () {
     });
 
     // zwijanie/rozwijanie obserwowane + ikona
-    $('.observed-searches:not(.empty) h4').bind('click', function (e) {
+    $('.observed-searches h4').bind('click', function (e) {
       $(this).parent().toggleClass('open');
       $(this).next('.observed-search-container').slideToggle('slow');
     });
@@ -343,14 +361,26 @@ $(document).ready(function () {
       }, 5);
 
       // do przetestowania
-      // let url = 'http://drewno2.mbif.pl/?' + form.serialize();
+      let url = 'http://drewno2.mbif.pl/?' + form.serialize();
 
-      // $('#Auctions').html('').load(url, function( response, status, xhr ) {
+      $('#Auctions').html('').load(url, function( response, status ) {
+        if ( status == "error" ){
+          throw Error(status);
+        }
+        clearTimeout(loadingTimeout);
+        if ($('.loading').length) {
+          $('.loading').remove();
+        };
+      });
+
+      // fetch('?' + form.serialize(), {
+      //   method: 'get'
+      //   //, mode: 'no-cors' 
+      // })
+      // .then((response) => {
       //   console.log(response);
-      //   console.log(status);
-      //   console.log(xhr)
-      //   if ( status == "error" ){
-      //     throw Error(status);
+      //   if (!response.ok) {
+      //     throw Error(response.statusText);
       //   }
       //   clearTimeout(loadingTimeout);
       //   if ($('.loading').length) {
@@ -360,24 +390,6 @@ $(document).ready(function () {
       // .catch(function(error) {
       //   console.log(error);
       // });
-
-      fetch('?' + form.serialize(), {
-        method: 'get'
-        //, mode: 'no-cors' 
-      })
-      .then((response) => {
-        console.log(response);
-        if (!response.ok) {
-          throw Error(response.statusText);
-        }
-        clearTimeout(loadingTimeout);
-        if ($('.loading').length) {
-          $('.loading').remove();
-        };
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
 
       observedStarsEvent();
       pagination();
@@ -461,6 +473,12 @@ $(document).ready(function () {
       }
       else {
         sortHeader.removeClass('fixed');
+      }
+      if(window.scrollY >= tableAuctions.innerHeight()){
+        sortHeader.fadeOut();
+      }
+      else{
+        sortHeader.fadeIn();
       }
     }
 
@@ -861,26 +879,6 @@ $(document).ready(function () {
         })
       })
     }   
-
-    let editSearch = (id) => {
-      let saveSearchContainer = $('#SaveSearchName');
-      let editButton = $('#EditSearchName');
-      editButton.unbind('click');
-      editButton.bind('click', function (e){
-        let searchNameSpan = $('#SaveSearchNameSpan');
-        searchNameSpan.attr('contenteditable', true).focus();
-        editButton.fadeOut();
-        let saveButton = $(document.createElement('button'));
-        saveButton.attr('id', 'SaveEditSearchName');
-        saveButton.on('click', function (e){
-          $(this).remove();
-          searchNameSpan.attr('contenteditable', false);
-          editButton.fadeIn();
-          showResults('editSearchName', searchNameSpan.text());
-        });
-        saveSearchContainer.append(saveButton);
-      })
-    }
 
     // akcja dla kliknięcia gwiazdki obserwowanych aukcji
     let observedStarsEvent = () => {
